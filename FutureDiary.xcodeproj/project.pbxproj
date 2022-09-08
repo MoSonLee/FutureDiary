@@ -12,6 +12,14 @@
 		770DF6D528CA650500349D55 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 770DF6D428CA650500349D55 /* RxRelay */; };
 		770DF6D728CA650500349D55 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 770DF6D628CA650500349D55 /* RxSwift */; };
 		770DF6D928CA65F500349D55 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6D828CA65F500349D55 /* HomeViewModel.swift */; };
+		770DF6DB28CA676E00349D55 /* SideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6DA28CA676E00349D55 /* SideMenuNavigationController.swift */; };
+		770DF6DD28CA68B300349D55 /* CurrentDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6DC28CA68B300349D55 /* CurrentDiaryViewController.swift */; };
+		770DF6DF28CA68BE00349D55 /* FutureDiaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6DE28CA68BE00349D55 /* FutureDiaryController.swift */; };
+		770DF6E128CA68FB00349D55 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6E028CA68FB00349D55 /* SettingViewController.swift */; };
+		770DF6E328CA6A1900349D55 /* CurrentDiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6E228CA6A1900349D55 /* CurrentDiaryViewModel.swift */; };
+		770DF6E528CA6A2700349D55 /* FutureDiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6E428CA6A2700349D55 /* FutureDiaryViewModel.swift */; };
+		770DF6E728CA6A2F00349D55 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6E628CA6A2F00349D55 /* SettingViewModel.swift */; };
+		770DF6EB28CA6BF900349D55 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */; };
 		779DA61328CA62BB00561000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DA61228CA62BB00561000 /* AppDelegate.swift */; };
 		779DA61528CA62BB00561000 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DA61428CA62BB00561000 /* SceneDelegate.swift */; };
 		779DA61728CA62BB00561000 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DA61628CA62BB00561000 /* HomeViewController.swift */; };
@@ -21,6 +29,14 @@
 
 /* Begin PBXFileReference section */
 		770DF6D828CA65F500349D55 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		770DF6DA28CA676E00349D55 /* SideMenuNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuNavigationController.swift; sourceTree = "<group>"; };
+		770DF6DC28CA68B300349D55 /* CurrentDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDiaryViewController.swift; sourceTree = "<group>"; };
+		770DF6DE28CA68BE00349D55 /* FutureDiaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureDiaryController.swift; sourceTree = "<group>"; };
+		770DF6E028CA68FB00349D55 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		770DF6E228CA6A1900349D55 /* CurrentDiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDiaryViewModel.swift; sourceTree = "<group>"; };
+		770DF6E428CA6A2700349D55 /* FutureDiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureDiaryViewModel.swift; sourceTree = "<group>"; };
+		770DF6E628CA6A2F00349D55 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		779DA60F28CA62BB00561000 /* FutureDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FutureDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		779DA61228CA62BB00561000 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		779DA61428CA62BB00561000 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +61,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		770DF6E828CA6BC600349D55 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		770DF6E928CA6BD200349D55 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				779DA61628CA62BB00561000 /* HomeViewController.swift */,
+				770DF6DA28CA676E00349D55 /* SideMenuNavigationController.swift */,
+				770DF6DC28CA68B300349D55 /* CurrentDiaryViewController.swift */,
+				770DF6DE28CA68BE00349D55 /* FutureDiaryController.swift */,
+				770DF6E028CA68FB00349D55 /* SettingViewController.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		779DA60628CA62BB00561000 = {
 			isa = PBXGroup;
 			children = (
@@ -87,7 +123,8 @@
 		779DA62728CA632000561000 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				779DA61628CA62BB00561000 /* HomeViewController.swift */,
+				770DF6E928CA6BD200349D55 /* ViewModel */,
+				770DF6E828CA6BC600349D55 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -95,7 +132,6 @@
 		779DA62828CA632A00561000 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				770DF6D828CA65F500349D55 /* HomeViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -103,6 +139,10 @@
 		779DA62928CA633100561000 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				770DF6D828CA65F500349D55 /* HomeViewModel.swift */,
+				770DF6E228CA6A1900349D55 /* CurrentDiaryViewModel.swift */,
+				770DF6E428CA6A2700349D55 /* FutureDiaryViewModel.swift */,
+				770DF6E628CA6A2F00349D55 /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -196,9 +236,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				779DA61728CA62BB00561000 /* HomeViewController.swift in Sources */,
+				770DF6DF28CA68BE00349D55 /* FutureDiaryController.swift in Sources */,
 				779DA61328CA62BB00561000 /* AppDelegate.swift in Sources */,
+				770DF6E128CA68FB00349D55 /* SettingViewController.swift in Sources */,
+				770DF6DD28CA68B300349D55 /* CurrentDiaryViewController.swift in Sources */,
+				770DF6E528CA6A2700349D55 /* FutureDiaryViewModel.swift in Sources */,
 				779DA61528CA62BB00561000 /* SceneDelegate.swift in Sources */,
+				770DF6DB28CA676E00349D55 /* SideMenuNavigationController.swift in Sources */,
+				770DF6E728CA6A2F00349D55 /* SettingViewModel.swift in Sources */,
+				770DF6E328CA6A1900349D55 /* CurrentDiaryViewModel.swift in Sources */,
 				770DF6D928CA65F500349D55 /* HomeViewModel.swift in Sources */,
+				770DF6EB28CA6BF900349D55 /* HomeCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,7 +314,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -320,7 +368,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
