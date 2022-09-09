@@ -7,12 +7,15 @@
 
 import UIKit
 
+import RealmSwift
+import Toast
+
 final class CurrentDiaryViewController: UIViewController {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
     private let appearance = UINavigationBarAppearance()
     
-    lazy var currentTitleTextField = UITextField()
+    private let currentTitleTextField = UITextField()
     
     lazy var currentContentTextView: UITextView = {
         let view = UITextView()
@@ -25,6 +28,11 @@ final class CurrentDiaryViewController: UIViewController {
         view.delegate = self
         return view
     }()
+    
+    private let localRealm = try! Realm()
+    private let respository = DiaryRepository()
+    var diaryTasks: Diary?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,15 +74,26 @@ final class CurrentDiaryViewController: UIViewController {
         appearance.backgroundColor = UIColor.systemIndigo
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .done, target: self, action: #selector(dismissView))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(method))
-        self.navigationController?.navigationBar.topItem?.title = "현재"
-        self.navigationItem.leftBarButtonItem?.tintColor = .white
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(addCurrentDiary))
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationItem.title = "현재"
         self.navigationItem.rightBarButtonItem?.tintColor = .white
     }
     
-    @objc private func dismissView() {
-        self.dismiss(animated: true)
+    @objc private func addCurrentDiary() {
+        guard let titleText = currentTitleTextField.text else { return }
+        
+        do {
+            try localRealm.write {
+                let task = Diary(diaryTitle: titleText, diaryContent: currentContentTextView.text, diaryDate: Date())
+                localRealm.add(task)
+            }
+            
+        } catch let error {
+            view.makeToast("오류가 발생했습니다. 다시 시도해주세요")
+            print(error)
+        }
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
 

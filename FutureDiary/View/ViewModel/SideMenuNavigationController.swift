@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SideMenuViewController: UIViewController {
+final class SideMenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,11 +16,10 @@ class SideMenuViewController: UIViewController {
     }
     
     private func setConfigure() {
-        
+        view.backgroundColor = .systemGray
     }
     
     private func setConstraints() {
         
     }
-    
 }

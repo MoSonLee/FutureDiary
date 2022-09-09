@@ -7,20 +7,33 @@
 
 import UIKit
 
+import RealmSwift
 import RxCocoa
 import RxSwift
 import SideMenu
 
 final class HomeViewController: UIViewController {
     
-    lazy var collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
-    private lazy var bottomView = UIView()
-    private lazy var moveToHomeDiaryButton = UIButton()
-    private lazy var moveToFutureDiaryButton = UIButton()
+    private let bottomView = UIView()
+    private let moveToHomeDiaryButton = UIButton()
+    private let moveToFutureDiaryButton = UIButton()
     private let appearance = UINavigationBarAppearance()
-    
     private let viewModel = HomeViewModel()
+    private let repository = DiaryRepository()
+    private let localRealm = try! Realm()
+    
+    private var diaryTask: Results<Diary>! {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchRealm()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +45,23 @@ final class HomeViewController: UIViewController {
         moveToFutureDiaryButton.addTarget(self, action: #selector(moveToFutureDiary), for: .touchUpInside)
     }
     
+    private func fetchRealm() {
+        diaryTask = repository.fetch(today: Date())
+        collectionView.reloadData()
+    }
+    
     private func setConfigure() {
         collectionView.collectionViewLayout = setCollectionViewLayout()
-        
         collectionView.register(
             HomeCollectionViewCell.self,
             forCellWithReuseIdentifier: HomeCollectionViewCell.identifider)
+    }
+    
+    @objc private func setSideMenu() {
+        let menu = SideMenuNavigationController(rootViewController: SideMenuViewController())
+        menu.leftSide = true
+        menu.blurEffectStyle = .dark
+        present(menu, animated: true, completion: nil)
     }
     
     private func setConstraints() {
@@ -92,7 +116,7 @@ final class HomeViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
-        self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.circle"), style: .done, target: self, action: #selector(method))
+        self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.circle"), style: .done, target: self, action: #selector(setSideMenu))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .done, target: self, action: #selector(method))
         self.navigationController?.navigationBar.topItem?.title = "FURY"
         self.navigationItem.leftBarButtonItem?.tintColor = .white
@@ -110,28 +134,24 @@ final class HomeViewController: UIViewController {
     
     @objc func moveToCurrnetDiary() {
         let vc = CurrentDiaryViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalTransitionStyle = .crossDissolve
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func moveToFutureDiary() {
         let vc = FutureDiaryController()
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalTransitionStyle = .crossDissolve
-        nav.modalPresentationStyle = .overFullScreen
-        self.present(nav, animated: true)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+        diaryTask.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
+        cell.currentTitleTextLabel.text = diaryTask[indexPath.row].diaryTitle
+        cell.currentTextView.text = diaryTask[indexPath.row].diaryContent
         return cell
     }
 }

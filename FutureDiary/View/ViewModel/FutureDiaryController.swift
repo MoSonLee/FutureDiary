@@ -11,8 +11,8 @@ final class FutureDiaryController: UIViewController {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
     private let appearance = UINavigationBarAppearance()
-    
-    lazy var futureTitleTextField = UITextField()
+    private let futureTitleTextField = UITextField()
+    private let datePicker = UIDatePicker()
     
     lazy var futureContentTextView: UITextView = {
         let view = UITextView()
@@ -25,8 +25,6 @@ final class FutureDiaryController: UIViewController {
         view.delegate = self
         return view
     }()
-    
-    lazy var datePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,9 +70,9 @@ final class FutureDiaryController: UIViewController {
         appearance.backgroundColor = UIColor.systemRed
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .done, target: self, action: #selector(dismissView))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(method))
-        self.navigationController?.navigationBar.topItem?.title = "미래"
+        self.navigationItem.title = "미래"
+        self.navigationController?.navigationBar.tintColor = .white
         self.navigationItem.leftBarButtonItem?.tintColor = .white
         self.navigationItem.rightBarButtonItem?.tintColor = .white
     }
