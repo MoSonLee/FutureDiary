@@ -9,13 +9,17 @@ import UIKit
 
 import RealmSwift
 import Toast
+import RxSwift
+import RxCocoa
+import RxRelay
 
 final class CurrentDiaryViewController: UIViewController {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
     private let appearance = UINavigationBarAppearance()
+    private let doneButton = UIBarButtonItem()
     
-    private let currentTitleTextField = UITextField()
+    private let currentTitleTextField = FuryTextField()
     
     lazy var currentContentTextView: UITextView = {
         let view = UITextView()
@@ -29,9 +33,22 @@ final class CurrentDiaryViewController: UIViewController {
         return view
     }()
     
-    private let localRealm = try! Realm()
-    private let respository = DiaryRepository()
-    var diaryTasks: Diary?
+    private let viewModel = CurrentDiaryViewModel()
+    private let disposdeBag = DisposeBag()
+    
+    private lazy var input = CurrentDiaryViewModel.Input(
+        doneButtonTap: doneButton.rx.tap
+            .withLatestFrom(
+                Observable.combineLatest(
+                    currentTitleTextField.rx.text.orEmpty,
+                    currentContentTextView.rx.text.orEmpty
+                ) {($0, $1)}
+            )
+            .asSignal(onErrorJustReturn: ("", ""))
+        
+    )
+    
+    private lazy var output = viewModel.transform(input: input)
     
     
     override func viewDidLoad() {
@@ -39,6 +56,7 @@ final class CurrentDiaryViewController: UIViewController {
         setConfigure()
         setConstraints()
         setNavigation()
+        bind()
     }
     
     private func setConfigure() {
@@ -48,7 +66,7 @@ final class CurrentDiaryViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        currentTitleTextField.placeholder = "    제목을 입력해주세요"
+        currentTitleTextField.placeholder = "제목을 입력해주세요"
         currentTitleTextField.layer.borderWidth = 1
         currentTitleTextField.layer.borderColor = UIColor.white.withAlphaComponent(0.7).cgColor
         currentContentTextView.backgroundColor = .systemGray
@@ -70,30 +88,38 @@ final class CurrentDiaryViewController: UIViewController {
     }
     
     private func setNavigation() {
+        doneButton.title = "완료"
+        navigationItem.rightBarButtonItem = doneButton
+        
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = UIColor.systemIndigo
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(addCurrentDiary))
+        
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationItem.title = "현재"
         self.navigationItem.rightBarButtonItem?.tintColor = .white
     }
     
-    @objc private func addCurrentDiary() {
-        guard let titleText = currentTitleTextField.text else { return }
+    private func bind() {
+        output.showAlert
+            .emit(onNext: {[weak self] text, isSaved in
+                let alert = UIAlertController(title: text, message: nil, preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
+                    if isSaved {
+                        self?.navigationController?.popToRootViewController(animated: true)
+                    }
+                }
+                alert.addAction(confirmAction)
+                self?.present(alert, animated: true)
+            })
+            .disposed(by: disposdeBag)
         
-        do {
-            try localRealm.write {
-                let task = Diary(diaryTitle: titleText, diaryContent: currentContentTextView.text, diaryDate: Date())
-                localRealm.add(task)
-            }
-            
-        } catch let error {
-            view.makeToast("오류가 발생했습니다. 다시 시도해주세요")
-            print(error)
-        }
-        self.navigationController?.popToRootViewController(animated: true)
+        output.showToast
+            .emit(onNext: {[weak self] text in
+                self?.view.makeToast(text)
+            })
+            .disposed(by: disposdeBag)
     }
 }
 
@@ -110,5 +136,22 @@ extension CurrentDiaryViewController: UITextViewDelegate {
             textView.text = textViewPlaceHolder
             textView.textColor = .lightGray
         }
+    }
+}
+
+class FuryTextField: UITextField {
+    
+    let padding = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+    
+    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+    
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
     }
 }

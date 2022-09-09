@@ -20,6 +20,12 @@
 		770DF6E528CA6A2700349D55 /* FutureDiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6E428CA6A2700349D55 /* FutureDiaryViewModel.swift */; };
 		770DF6E728CA6A2F00349D55 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6E628CA6A2F00349D55 /* SettingViewModel.swift */; };
 		770DF6EB28CA6BF900349D55 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */; };
+		7781264D28CB22A30078CAD6 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7781264C28CB22A30078CAD6 /* Realm */; };
+		7781264F28CB22A30078CAD6 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7781264E28CB22A30078CAD6 /* RealmSwift */; };
+		7781265128CB2BA80078CAD6 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7781265028CB2BA80078CAD6 /* Diary.swift */; };
+		7781265328CB2C310078CAD6 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7781265228CB2C310078CAD6 /* RealmRepository.swift */; };
+		7781265628CB2FB80078CAD6 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 7781265528CB2FB80078CAD6 /* Toast */; };
+		7781265928CB33320078CAD6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7781265828CB33320078CAD6 /* SnapKit */; };
 		779DA61328CA62BB00561000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DA61228CA62BB00561000 /* AppDelegate.swift */; };
 		779DA61528CA62BB00561000 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DA61428CA62BB00561000 /* SceneDelegate.swift */; };
 		779DA61728CA62BB00561000 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DA61628CA62BB00561000 /* HomeViewController.swift */; };
@@ -37,6 +43,8 @@
 		770DF6E428CA6A2700349D55 /* FutureDiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureDiaryViewModel.swift; sourceTree = "<group>"; };
 		770DF6E628CA6A2F00349D55 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		7781265028CB2BA80078CAD6 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
+		7781265228CB2C310078CAD6 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		779DA60F28CA62BB00561000 /* FutureDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FutureDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		779DA61228CA62BB00561000 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		779DA61428CA62BB00561000 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,10 +59,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7781264F28CB22A30078CAD6 /* RealmSwift in Frameworks */,
+				7781265928CB33320078CAD6 /* SnapKit in Frameworks */,
 				770DF6D528CA650500349D55 /* RxRelay in Frameworks */,
 				770DF6D328CA650500349D55 /* RxCocoa in Frameworks */,
 				770DF6D728CA650500349D55 /* RxSwift in Frameworks */,
 				770DF6D028CA64EE00349D55 /* SideMenu in Frameworks */,
+				7781265628CB2FB80078CAD6 /* Toast in Frameworks */,
+				7781264D28CB22A30078CAD6 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +144,8 @@
 		779DA62828CA632A00561000 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7781265028CB2BA80078CAD6 /* Diary.swift */,
+				7781265228CB2C310078CAD6 /* RealmRepository.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -176,6 +190,10 @@
 				770DF6D228CA650500349D55 /* RxCocoa */,
 				770DF6D428CA650500349D55 /* RxRelay */,
 				770DF6D628CA650500349D55 /* RxSwift */,
+				7781264C28CB22A30078CAD6 /* Realm */,
+				7781264E28CB22A30078CAD6 /* RealmSwift */,
+				7781265528CB2FB80078CAD6 /* Toast */,
+				7781265828CB33320078CAD6 /* SnapKit */,
 			);
 			productName = FutureDiary;
 			productReference = 779DA60F28CA62BB00561000 /* FutureDiary.app */;
@@ -208,6 +226,9 @@
 			packageReferences = (
 				770DF6CE28CA64EE00349D55 /* XCRemoteSwiftPackageReference "SideMenu" */,
 				770DF6D128CA650500349D55 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				7781264B28CB22A30078CAD6 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				7781265428CB2FB80078CAD6 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				7781265728CB33320078CAD6 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 779DA61028CA62BB00561000 /* Products */;
 			projectDirPath = "";
@@ -238,6 +259,7 @@
 				779DA61728CA62BB00561000 /* HomeViewController.swift in Sources */,
 				770DF6DF28CA68BE00349D55 /* FutureDiaryController.swift in Sources */,
 				779DA61328CA62BB00561000 /* AppDelegate.swift in Sources */,
+				7781265128CB2BA80078CAD6 /* Diary.swift in Sources */,
 				770DF6E128CA68FB00349D55 /* SettingViewController.swift in Sources */,
 				770DF6DD28CA68B300349D55 /* CurrentDiaryViewController.swift in Sources */,
 				770DF6E528CA6A2700349D55 /* FutureDiaryViewModel.swift in Sources */,
@@ -247,6 +269,7 @@
 				770DF6E328CA6A1900349D55 /* CurrentDiaryViewModel.swift in Sources */,
 				770DF6D928CA65F500349D55 /* HomeViewModel.swift in Sources */,
 				770DF6EB28CA6BF900349D55 /* HomeCollectionViewCell.swift in Sources */,
+				7781265328CB2C310078CAD6 /* RealmRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -474,6 +497,30 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		7781264B28CB22A30078CAD6 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		7781265428CB2FB80078CAD6 /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		7781265728CB33320078CAD6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -496,6 +543,26 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 770DF6D128CA650500349D55 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		7781264C28CB22A30078CAD6 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7781264B28CB22A30078CAD6 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		7781264E28CB22A30078CAD6 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7781264B28CB22A30078CAD6 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		7781265528CB2FB80078CAD6 /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7781265428CB2FB80078CAD6 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+		7781265828CB33320078CAD6 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7781265728CB33320078CAD6 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

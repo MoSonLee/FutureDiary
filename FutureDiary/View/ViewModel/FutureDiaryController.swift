@@ -11,7 +11,7 @@ final class FutureDiaryController: UIViewController {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
     private let appearance = UINavigationBarAppearance()
-    private let futureTitleTextField = UITextField()
+    private let futureTitleTextField = FuryTextField()
     private let datePicker = UIDatePicker()
     
     lazy var futureContentTextView: UITextView = {
@@ -40,7 +40,7 @@ final class FutureDiaryController: UIViewController {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        futureTitleTextField.placeholder = "    제목을 입력해주세요"
+        futureTitleTextField.placeholder = "제목을 입력해주세요"
         futureTitleTextField.layer.borderWidth = 1
         futureTitleTextField.layer.borderColor = UIColor.white.withAlphaComponent(0.7).cgColor
         futureContentTextView.backgroundColor = .systemGray

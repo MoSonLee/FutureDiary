@@ -16,7 +16,6 @@ final class SideMenuViewController: UIViewController {
     }
     
     private func setConfigure() {
-        view.backgroundColor = .systemGray
     }
     
     private func setConstraints() {

@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 
 final class Diary: Object {
+    
     @Persisted var diaryTitle: String
     @Persisted var diaryContent: String?
     @Persisted var diaryDate: Date

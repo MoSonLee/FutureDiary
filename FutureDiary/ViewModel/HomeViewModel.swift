@@ -9,16 +9,7 @@ import Foundation
 
 import RxSwift
 import RxCocoa
-import RxRelay
 
 
 final class HomeViewModel {
-    
-    struct Input {
-        let viewDidLoad: Observable<Void>
-    }
-    
-    struct Output {
-    }
-    
 }

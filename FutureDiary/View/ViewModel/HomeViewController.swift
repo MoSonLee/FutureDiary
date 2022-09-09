@@ -15,13 +15,12 @@ import SideMenu
 final class HomeViewController: UIViewController {
     
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-    
     private let bottomView = UIView()
     private let moveToHomeDiaryButton = UIButton()
     private let moveToFutureDiaryButton = UIButton()
     private let appearance = UINavigationBarAppearance()
     private let viewModel = HomeViewModel()
-    private let repository = DiaryRepository()
+    private let repository = RealmRepository()
     private let localRealm = try! Realm()
     
     private var diaryTask: Results<Diary>! {
@@ -60,7 +59,8 @@ final class HomeViewController: UIViewController {
     @objc private func setSideMenu() {
         let menu = SideMenuNavigationController(rootViewController: SideMenuViewController())
         menu.leftSide = true
-        menu.blurEffectStyle = .dark
+        menu.blurEffectStyle = .systemChromeMaterialDark
+        menu.presentationStyle = .viewSlideOutMenuIn
         present(menu, animated: true, completion: nil)
     }
     
