@@ -14,6 +14,7 @@ final class SettingViewController: UIViewController {
         setConfigure()
         setConstraints()
     }
+    
     private func setConfigure() {
         
     }

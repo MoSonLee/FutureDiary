@@ -34,15 +34,26 @@ final class FutureDiaryController: UIViewController {
     }
     
     private func setConfigure() {
-        view.backgroundColor = .systemGray
         [futureTitleTextField, futureContentTextView, datePicker].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        setViewComponents()
+        setViewComponentsColor()
+    }
+    
+    private func setViewComponents() {
         futureTitleTextField.placeholder = "제목을 입력해주세요"
         futureTitleTextField.layer.borderWidth = 1
-        futureTitleTextField.layer.borderColor = UIColor.white.withAlphaComponent(0.7).cgColor
-        futureContentTextView.backgroundColor = .systemGray
+        futureContentTextView.layer.borderWidth = 1
+        datePicker.layer.borderWidth = 1
+    }
+    
+    private func setViewComponentsColor() {
+        view.backgroundColor = .white
+        futureContentTextView.layer.borderColor = UIColor.black.withAlphaComponent(0.7).cgColor
+        datePicker.layer.borderColor = UIColor.black.withAlphaComponent(0.7).cgColor
+        futureContentTextView.backgroundColor = .white
     }
     
     private func setConstraints() {
@@ -58,7 +69,6 @@ final class FutureDiaryController: UIViewController {
             futureContentTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             futureContentTextView.bottomAnchor.constraint(equalTo: datePicker.topAnchor, constant: -16),
             
-            datePicker.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             datePicker.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             datePicker.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
         ])
@@ -67,20 +77,23 @@ final class FutureDiaryController: UIViewController {
     private func setNavigation() {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(method))
         self.navigationItem.title = "미래"
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationItem.leftBarButtonItem?.tintColor = .white
-        self.navigationItem.rightBarButtonItem?.tintColor = .white
+        setNavigationColor()
+    }
+    
+    private func setNavigationColor() {
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationItem.leftBarButtonItem?.tintColor = .black
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
     private func setDatePicker() {
         datePicker.preferredDatePickerStyle = .compact
         datePicker.datePickerMode = .dateAndTime
         datePicker.minimumDate = Date()
-    
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.timeZone = .autoupdatingCurrent
         datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
-        datePicker.tintColor = .systemIndigo
+        datePicker.tintColor = .black
     }
     
     @objc private func handleDatePicker(_ sender: UIDatePicker) {

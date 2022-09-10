@@ -12,6 +12,7 @@ import RealmSwift
 final class RealmRepository {
     
     private let localRealm = try! Realm()
+    let myDateFormatter = DateFormatter()
     
     func create(diary: Diary, completion: ((Bool) -> Void)) {
         do {
@@ -27,8 +28,13 @@ final class RealmRepository {
     }
     
     func fetch(today: Date) -> Results<Diary>! {
-        //여기서 sorted 앞에 필터
         return localRealm.objects(Diary.self).sorted(byKeyPath: "diaryDate", ascending: false)
+    }
+    
+    func dateFilteredFetch(todayDateString: String) -> Results<Diary>! {
+        return localRealm.objects(Diary.self)
+            .filter("diaryDateToString == %@", todayDateString)
+            .sorted(byKeyPath: "diaryDate", ascending: false)
     }
     
     func delete(item: Diary) {

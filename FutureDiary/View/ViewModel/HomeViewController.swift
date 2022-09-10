@@ -15,12 +15,9 @@ import SideMenu
 final class HomeViewController: UIViewController {
     
     private let viewModel = HomeViewModel()
-    
     private let repository = RealmRepository()
     private let localRealm = try! Realm()
-    
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-    
     private let writeDiaryButton = UIButton()
     private let calendarView = UIView()
     private let datePicker = UIDatePicker()
@@ -45,11 +42,12 @@ final class HomeViewController: UIViewController {
         setNavigation()
         collectionViewRegisterAndDelegate()
         writeDiaryButton.addTarget(self, action: #selector(writeButtonTap), for: .touchUpInside)
-        datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
+        datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
     }
     
     private func fetchRealm() {
-        diaryTask = repository.fetch(today: Date())
+        guard let dateString = dateLabel.text else { return }
+        diaryTask = repository.dateFilteredFetch(todayDateString: dateString)
         collectionView.reloadData()
     }
     
@@ -58,28 +56,27 @@ final class HomeViewController: UIViewController {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
+        setComponentsColor()
+        setComponentsTextAndImage()
+    }
+    
+    private func setComponentsColor() {
         view.backgroundColor = .white
         collectionView.backgroundColor = .white
         writeDiaryButton.tintColor = .black
         calendarView.layer.borderColor = UIColor.black.cgColor
         calendarView.layer.borderWidth = 1
-        
-        dateLabel.text = setDateFormat(date: datePicker.date)
-        
+    }
+    
+    private func setComponentsTextAndImage() {
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 44, weight: .bold, scale: .large)
         let largeBoldDoc = UIImage(systemName: "pencil.circle.fill", withConfiguration: largeConfig)
         writeDiaryButton.setImage(largeBoldDoc, for: .normal)
-        
-        collectionView.collectionViewLayout = setCollectionViewLayout()
-        collectionView.register(
-            HomeCollectionViewCell.self,
-            forCellWithReuseIdentifier: HomeCollectionViewCell.identifider)
+        dateLabel.text = setDateFormatToString(date: datePicker.date)
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            
             dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:  8),
             dateLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             dateLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.25),
@@ -103,6 +100,7 @@ final class HomeViewController: UIViewController {
         collectionView.register(HomeCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: HomeCollectionViewCell.identifider)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.collectionViewLayout = setCollectionViewLayout()
     }
     
     private func setNavigation() {
@@ -112,7 +110,6 @@ final class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "FURY"
         self.navigationItem.leftBarButtonItem?.tintColor = .black
         self.navigationItem.rightBarButtonItem?.tintColor = .black
-        
     }
     
     private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
@@ -124,7 +121,7 @@ final class HomeViewController: UIViewController {
         return layout
     }
     
-    private func setDateFormat(date: Date) -> String {
+    private func setDateFormatToString(date: Date) -> String {
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "yyyy.MM.dd"
         myDateFormatter.locale = Locale(identifier:"ko_KR")
@@ -140,34 +137,34 @@ final class HomeViewController: UIViewController {
         datePicker.timeZone = .autoupdatingCurrent
         datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
-        datePicker.tintColor = .systemIndigo
+        datePicker.tintColor = .black
     }
     
     @objc func writeButtonTap() {
         let alert = UIAlertController(title: "작성하실 일기 종류를 선택해주세요", message: nil, preferredStyle: .actionSheet)
-        
-        let future = UIAlertAction(title: "미래", style: .default , handler:{ _ in
-            let vc = FutureDiaryController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        })
-        
-        let current = UIAlertAction(title: "오늘", style: .default , handler:{ _ in
+
+        let current = UIAlertAction(title: "오늘", style: .default , handler: { _ in
             let vc = CurrentDiaryViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         })
-        
-        let cancel = UIAlertAction(title: "취소", style: .destructive , handler:{ _ in
+        let future = UIAlertAction(title: "미래", style: .default , handler: { _ in
+            let vc = FutureDiaryController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+        let cancel = UIAlertAction(title: "취소", style: .destructive , handler: { _ in
             self.dismiss(animated: true)
         })
-        
-        [future, current, cancel].forEach {
+        [current, future].forEach {
             alert.addAction($0)
+            $0.setValue(UIColor.black, forKey: "titleTextColor")
         }
+        alert.addAction(cancel)
         
         self.present(alert, animated: true)
     }
     
     @objc func showCalendar() {
+        
         if !isChecked {
             setCalendar()
             isChecked = !isChecked
@@ -184,7 +181,8 @@ final class HomeViewController: UIViewController {
     }
     
     @objc func datePickerChanged(picker: UIDatePicker) {
-        dateLabel.text = setDateFormat(date: datePicker.date)
+        dateLabel.text = setDateFormatToString(date: datePicker.date)
+        fetchRealm()
     }
     
     @objc private func setSideMenu() {

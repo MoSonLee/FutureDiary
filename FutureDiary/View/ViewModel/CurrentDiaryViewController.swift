@@ -44,7 +44,6 @@ final class CurrentDiaryViewController: UIViewController {
                 ) {($0, $1)}
             )
             .asSignal(onErrorJustReturn: ("", ""))
-        
     )
     
     private lazy var output = viewModel.transform(input: input)
@@ -59,16 +58,25 @@ final class CurrentDiaryViewController: UIViewController {
     }
     
     private func setConfigure() {
-        view.backgroundColor = .systemGray
         [currentTitleTextField, currentContentTextView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
+        setViewComponents()
+        setComponentsColor()
+    }
+    
+    private func setViewComponents() {
         currentTitleTextField.placeholder = "제목을 입력해주세요"
         currentTitleTextField.layer.borderWidth = 1
-        currentTitleTextField.layer.borderColor = UIColor.white.withAlphaComponent(0.7).cgColor
-        currentContentTextView.backgroundColor = .systemGray
+        currentContentTextView.layer.borderWidth = 1
+    }
+    
+    private func setComponentsColor() {
+        view.backgroundColor = .white
+        currentTitleTextField.layer.borderColor = UIColor.black.withAlphaComponent(0.7).cgColor
+        currentContentTextView.layer.borderColor = UIColor.black.withAlphaComponent(0.7).cgColor
+        currentTitleTextField.textColor = .black
     }
     
     private func setConstraints() {
@@ -88,19 +96,22 @@ final class CurrentDiaryViewController: UIViewController {
     
     private func setNavigation() {
         doneButton.title = "완료"
+        self.navigationItem.title = "현재"
         navigationItem.rightBarButtonItem = doneButton
-        
-        UINavigationBar.appearance().barTintColor = .black
-        UINavigationBar.appearance().tintColor = .white
         UINavigationBar.appearance().isTranslucent = false
         
-        self.navigationItem.title = "현재"
-        self.navigationController?.navigationBar.tintColor = .white
-       
-        self.navigationItem.rightBarButtonItem?.tintColor = .white
+        setNavigationColor()
+    }
+    
+    private func setNavigationColor() {
+        UINavigationBar.appearance().barTintColor = .black
+        UINavigationBar.appearance().tintColor = .black
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
     private func bind() {
+        
         output.showAlert
             .emit(onNext: {[weak self] text, isSaved in
                 let alert = UIAlertController(title: text, message: nil, preferredStyle: .alert)

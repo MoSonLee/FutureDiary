@@ -9,12 +9,12 @@ import UIKit
 
 class HomeCollectionViewCell: UICollectionViewCell {
     
-    var currentTitleTextLabel = UILabel()
-    var currentTextView = UITextView()
-    
     static var identifider: String {
         return "HomeCollectionViewCell"
     }
+    
+    var currentTitleTextLabel = UILabel()
+    var currentTextView = UITextView()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -27,15 +27,18 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     private func setConfigure() {
-        contentView.backgroundColor = .black
         [currentTitleTextLabel, currentTextView].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        
         currentTextView.isEditable = false
         currentTextView.isUserInteractionEnabled = false
-        
+        currentTitleTextLabel.insetsLayoutMarginsFromSafeArea = true
+        setComponentsColor()
+    }
+    
+    private func setComponentsColor() {
+        contentView.backgroundColor = .black
         currentTitleTextLabel.backgroundColor = .white
         currentTextView.backgroundColor = .white
     }
