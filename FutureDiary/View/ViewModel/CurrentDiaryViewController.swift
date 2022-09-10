@@ -16,7 +16,7 @@ import RxRelay
 final class CurrentDiaryViewController: UIViewController {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
-    private let doneButton = UIBarButtonItem()
+    private let saveButton = UIBarButtonItem()
     
     private let currentTitleTextField = FuryTextField()
     
@@ -36,7 +36,7 @@ final class CurrentDiaryViewController: UIViewController {
     private let disposdeBag = DisposeBag()
     
     private lazy var input = CurrentDiaryViewModel.Input(
-        doneButtonTap: doneButton.rx.tap
+        saveButtonTap: saveButton.rx.tap
             .withLatestFrom(
                 Observable.combineLatest(
                     currentTitleTextField.rx.text.orEmpty,
@@ -47,7 +47,6 @@ final class CurrentDiaryViewController: UIViewController {
     )
     
     private lazy var output = viewModel.transform(input: input)
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,9 +94,9 @@ final class CurrentDiaryViewController: UIViewController {
     }
     
     private func setNavigation() {
-        doneButton.title = "완료"
+        saveButton.title = "완료"
         self.navigationItem.title = "현재"
-        navigationItem.rightBarButtonItem = doneButton
+        navigationItem.rightBarButtonItem = saveButton
         UINavigationBar.appearance().isTranslucent = false
         
         setNavigationColor()

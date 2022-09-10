@@ -7,11 +7,19 @@
 
 import UIKit
 
+import RealmSwift
+import Toast
+import RxSwift
+import RxCocoa
+import RxRelay
+
 final class FutureDiaryController: UIViewController {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
     private let futureTitleTextField = FuryTextField()
     private let datePicker = UIDatePicker()
+    private let saveButton = UIBarButtonItem()
+    
     
     lazy var futureContentTextView: UITextView = {
         let view = UITextView()
@@ -25,12 +33,30 @@ final class FutureDiaryController: UIViewController {
         return view
     }()
     
+    private let viewModel = FutureDiaryViewModel()
+    private let disposdeBag = DisposeBag()
+    
+    private lazy var input = FutureDiaryViewModel.Input(
+        saveButtonTap: saveButton.rx.tap
+            .withLatestFrom(
+                Observable.combineLatest(
+                    futureTitleTextField.rx.text.orEmpty,
+                    futureContentTextView.rx.text.orEmpty,
+                    datePicker.rx.date.changed
+                ) {($0, $1, $2)}
+            )
+            .asSignal(onErrorJustReturn: ("", "", Date()))
+    )
+    
+    private lazy var output = viewModel.transform(input: input)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setConfigure()
         setConstraints()
         setNavigation()
         setDatePicker()
+        bind()
     }
     
     private func setConfigure() {
@@ -75,8 +101,10 @@ final class FutureDiaryController: UIViewController {
     }
     
     private func setNavigation() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(method))
+        saveButton.title = "완료"
         self.navigationItem.title = "미래"
+        navigationItem.rightBarButtonItem = saveButton
+        UINavigationBar.appearance().isTranslucent = false
         setNavigationColor()
     }
     
@@ -96,8 +124,29 @@ final class FutureDiaryController: UIViewController {
         datePicker.tintColor = .black
     }
     
+    private func bind() {
+        output.showAlert
+            .emit(onNext: {[weak self] text, isSaved in
+                let alert = UIAlertController(title: text, message: nil, preferredStyle: .alert)
+                let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
+                    if isSaved {
+                        self?.navigationController?.popToRootViewController(animated: true)
+                    }
+                }
+                alert.addAction(confirmAction)
+                self?.present(alert, animated: true)
+            })
+            .disposed(by: disposdeBag)
+        
+        output.showToast
+            .emit(onNext: {[weak self] text in
+                self?.view.makeToast(text)
+            })
+            .disposed(by: disposdeBag)
+    }
+    
     @objc private func handleDatePicker(_ sender: UIDatePicker) {
-        print(sender.date)
+        print(datePicker.rx.date)
     }
     
     @objc private func dismissView() {

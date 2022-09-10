@@ -135,7 +135,7 @@ final class HomeViewController: UIViewController {
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.timeZone = .autoupdatingCurrent
-        datePicker.maximumDate = Date()
+//        datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
         datePicker.tintColor = .black
     }

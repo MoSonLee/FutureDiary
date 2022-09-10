@@ -10,12 +10,10 @@ import Foundation
 import RxCocoa
 import RxSwift
 
-
-
 final class CurrentDiaryViewModel {
     
     struct Input {
-        let doneButtonTap: Signal<(String,String)>
+        let saveButtonTap: Signal<(String,String)>
     }
     
     struct Output {
@@ -24,12 +22,11 @@ final class CurrentDiaryViewModel {
         let dismiss: Signal<Void>
     }
     
-    private let disoiseBag = DisposeBag()
-    
     private let showAlertRelay = PublishRelay<(String, Bool)>()
     private let showToastRelay = PublishRelay<String>()
     private let popVCRelay = PublishRelay<Void>()
     private let respository = RealmRepository()
+    private let disoiseBag = DisposeBag()
     
     private func setDateFormatToString(date: Date) -> String {
         let myDateFormatter = DateFormatter()
@@ -39,7 +36,7 @@ final class CurrentDiaryViewModel {
     }
     
     func transform(input: Input) -> Output {
-        input.doneButtonTap
+        input.saveButtonTap
             .emit(onNext: { [weak self] diary in
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
