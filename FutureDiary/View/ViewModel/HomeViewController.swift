@@ -46,8 +46,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func fetchRealm() {
-        guard let dateString = dateLabel.text else { return }
-        diaryTask = repository.dateFilteredFetch(todayDateString: dateString)
+        diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: datePicker.date)
         collectionView.reloadData()
     }
     
@@ -56,6 +55,7 @@ final class HomeViewController: UIViewController {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        dateLabel.textAlignment = .center
         setComponentsColor()
         setComponentsTextAndImage()
     }
@@ -77,9 +77,8 @@ final class HomeViewController: UIViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:  8),
-            dateLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            dateLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.25),
+            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            dateLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
             calendarView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
             calendarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -135,14 +134,14 @@ final class HomeViewController: UIViewController {
         datePicker.datePickerMode = .date
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.timeZone = .autoupdatingCurrent
-//        datePicker.maximumDate = Date()
+        datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
         datePicker.tintColor = .black
     }
     
     @objc func writeButtonTap() {
         let alert = UIAlertController(title: "작성하실 일기 종류를 선택해주세요", message: nil, preferredStyle: .actionSheet)
-
+        
         let current = UIAlertAction(title: "오늘", style: .default , handler: { _ in
             let vc = CurrentDiaryViewController()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -168,7 +167,7 @@ final class HomeViewController: UIViewController {
         if !isChecked {
             setCalendar()
             isChecked = !isChecked
-            calendarView.setHeight(view.bounds.height * 0.4)
+            calendarView.setHeight(view.bounds.height * 0.5)
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.up.circle"), style: .done, target: self, action: #selector(showCalendar))
         }
         else {
@@ -181,7 +180,7 @@ final class HomeViewController: UIViewController {
     }
     
     @objc func datePickerChanged(picker: UIDatePicker) {
-        dateLabel.text = setDateFormatToString(date: datePicker.date)
+        dateLabel.text = setDateFormatToString(date: picker.date)
         fetchRealm()
     }
     

@@ -30,7 +30,7 @@ final class FutureDiaryViewModel {
     
     private func setDateFormatToString(date: Date) -> String {
         let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "yyyy.MM.dd"
+        myDateFormatter.dateFormat = "yyyy.MM.dd.hh.mm"
         myDateFormatter.locale = Locale(identifier:"ko_KR")
         return myDateFormatter.string(from: date)
     }
@@ -40,9 +40,12 @@ final class FutureDiaryViewModel {
             .emit(onNext: { [weak self] diary in
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
-                } else {
-                    //picker에서 선택한 날짜를 로직을 사용해 여기로 보내줘야함
-                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2, diaryDateToString: self?.setDateFormatToString(date: diary.2) ?? "")
+                }
+                else if self?.setDateFormatToString(date: diary.2) == self?.setDateFormatToString(date: Date()) {
+                    self?.showToastRelay.accept("미래의 시간을 선택해주세요")
+                }
+                else {
+                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2)
                     self?.saveRealm(diary: diaryModel)
                 }
             })
@@ -59,7 +62,7 @@ extension FutureDiaryViewModel {
     private func saveRealm(diary: Diary) {
         respository.create(diary: diary) { isSaved in
             if isSaved {
-                self.showAlertRelay.accept(("저장되었습니다", true))
+                self.showAlertRelay.accept(("미래로 일기를 보내드렸습니다", true))
             } else {
                 self.showToastRelay.accept("오류가 발생했습니다. 다시 시도해주세요")
             }

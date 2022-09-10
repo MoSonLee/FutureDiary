@@ -8,10 +8,10 @@
 import UIKit
 
 import RealmSwift
-import Toast
-import RxSwift
 import RxCocoa
-import RxRelay
+import RxSwift
+import SideMenu
+import Toast
 
 final class CurrentDiaryViewController: UIViewController {
     

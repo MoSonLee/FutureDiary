@@ -8,10 +8,9 @@
 import UIKit
 
 import RealmSwift
-import Toast
-import RxSwift
 import RxCocoa
-import RxRelay
+import RxSwift
+import SideMenu
 
 final class FutureDiaryController: UIViewController {
     
@@ -19,7 +18,6 @@ final class FutureDiaryController: UIViewController {
     private let futureTitleTextField = FuryTextField()
     private let datePicker = UIDatePicker()
     private let saveButton = UIBarButtonItem()
-    
     
     lazy var futureContentTextView: UITextView = {
         let view = UITextView()
@@ -42,7 +40,7 @@ final class FutureDiaryController: UIViewController {
                 Observable.combineLatest(
                     futureTitleTextField.rx.text.orEmpty,
                     futureContentTextView.rx.text.orEmpty,
-                    datePicker.rx.date.changed
+                    datePicker.rx.date
                 ) {($0, $1, $2)}
             )
             .asSignal(onErrorJustReturn: ("", "", Date()))
@@ -95,6 +93,7 @@ final class FutureDiaryController: UIViewController {
             futureContentTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             futureContentTextView.bottomAnchor.constraint(equalTo: datePicker.topAnchor, constant: -16),
             
+            datePicker.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             datePicker.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
             datePicker.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
         ])
@@ -115,10 +114,10 @@ final class FutureDiaryController: UIViewController {
     }
     
     private func setDatePicker() {
-        datePicker.preferredDatePickerStyle = .compact
+        datePicker.preferredDatePickerStyle = .wheels
         datePicker.datePickerMode = .dateAndTime
         datePicker.minimumDate = Date()
-        datePicker.locale = Locale(identifier: "ko-KR")
+        datePicker.locale = Locale(identifier: "ko_KR")
         datePicker.timeZone = .autoupdatingCurrent
         datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
         datePicker.tintColor = .black
