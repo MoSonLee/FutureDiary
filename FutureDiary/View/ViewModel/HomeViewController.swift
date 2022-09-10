@@ -124,6 +124,7 @@ final class HomeViewController: UIViewController {
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "yyyy.MM.dd"
         myDateFormatter.locale = Locale(identifier:"ko_KR")
+        myDateFormatter.timeZone = TimeZone(abbreviation: "KST")
         return myDateFormatter.string(from: datePicker.date)
     }
     

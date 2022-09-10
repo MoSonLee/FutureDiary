@@ -32,6 +32,7 @@ final class FutureDiaryViewModel {
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "yyyy.MM.dd.hh.mm"
         myDateFormatter.locale = Locale(identifier:"ko_KR")
+        myDateFormatter.timeZone = TimeZone(abbreviation: "KST")
         return myDateFormatter.string(from: date)
     }
     
