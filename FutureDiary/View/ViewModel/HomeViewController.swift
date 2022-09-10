@@ -14,14 +14,18 @@ import SideMenu
 
 final class HomeViewController: UIViewController {
     
-    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-    private let bottomView = UIView()
-    private let moveToHomeDiaryButton = UIButton()
-    private let moveToFutureDiaryButton = UIButton()
-    private let appearance = UINavigationBarAppearance()
     private let viewModel = HomeViewModel()
+    
     private let repository = RealmRepository()
     private let localRealm = try! Realm()
+    
+    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    
+    private let writeDiaryButton = UIButton()
+    private let calendarView = UIView()
+    private let datePicker = UIDatePicker()
+    private let dateLabel = UILabel()
+    private var isChecked: Bool = false
     
     private var diaryTask: Results<Diary>! {
         didSet {
@@ -40,8 +44,8 @@ final class HomeViewController: UIViewController {
         setConstraints()
         setNavigation()
         collectionViewRegisterAndDelegate()
-        moveToHomeDiaryButton.addTarget(self, action: #selector(moveToCurrnetDiary), for: .touchUpInside)
-        moveToFutureDiaryButton.addTarget(self, action: #selector(moveToFutureDiary), for: .touchUpInside)
+        writeDiaryButton.addTarget(self, action: #selector(writeButtonTap), for: .touchUpInside)
+        datePicker.addTarget(self, action: #selector(datePickerChanged(picker:)), for: .valueChanged)
     }
     
     private func fetchRealm() {
@@ -50,57 +54,48 @@ final class HomeViewController: UIViewController {
     }
     
     private func setConfigure() {
+        [collectionView, writeDiaryButton, calendarView, dateLabel].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        view.backgroundColor = .white
+        collectionView.backgroundColor = .white
+        writeDiaryButton.tintColor = .black
+        calendarView.layer.borderColor = UIColor.black.cgColor
+        calendarView.layer.borderWidth = 1
+        
+        dateLabel.text = setDateFormat(date: datePicker.date)
+        
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 44, weight: .bold, scale: .large)
+        let largeBoldDoc = UIImage(systemName: "pencil.circle.fill", withConfiguration: largeConfig)
+        writeDiaryButton.setImage(largeBoldDoc, for: .normal)
+        
         collectionView.collectionViewLayout = setCollectionViewLayout()
         collectionView.register(
             HomeCollectionViewCell.self,
             forCellWithReuseIdentifier: HomeCollectionViewCell.identifider)
     }
     
-    @objc private func setSideMenu() {
-        let menu = SideMenuNavigationController(rootViewController: SideMenuViewController())
-        menu.leftSide = true
-        menu.blurEffectStyle = .systemChromeMaterialDark
-        menu.presentationStyle = .viewSlideOutMenuIn
-        present(menu, animated: true, completion: nil)
-    }
-    
     private func setConstraints() {
-        [collectionView, bottomView].forEach {
-            view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        [moveToHomeDiaryButton, moveToFutureDiaryButton].forEach {
-            bottomView.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.tintColor = .white
-        }
-        
-        bottomView.backgroundColor = .systemGray
-        collectionView.backgroundColor = .systemGray
-        
-        bottomView.layer.borderWidth = 0.5
-        bottomView.layer.borderColor = UIColor.white.cgColor
-        
-        moveToHomeDiaryButton.setImage(UIImage(systemName: "paperplane.fill"), for: .normal)
-        moveToFutureDiaryButton.setImage(UIImage(systemName: "tray.full.fill"), for: .normal)
-        
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            
+            dateLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:  8),
+            dateLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            dateLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.25),
+            
+            calendarView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
+            calendarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            calendarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            calendarView.heightAnchor.constraint(equalToConstant: 1),
+            
+            collectionView.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 8),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            bottomView.topAnchor.constraint(equalTo: collectionView.bottomAnchor),
-            bottomView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            bottomView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            bottomView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
-            moveToHomeDiaryButton.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor),
-            moveToHomeDiaryButton.leadingAnchor.constraint(equalTo: bottomView.leadingAnchor, constant: 80),
-            
-            moveToFutureDiaryButton.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor),
-            moveToFutureDiaryButton.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -80)
+            writeDiaryButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -16),
+            writeDiaryButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
         ])
     }
     
@@ -111,35 +106,93 @@ final class HomeViewController: UIViewController {
     }
     
     private func setNavigation() {
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemFill
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.circle"), style: .done, target: self, action: #selector(setSideMenu))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .done, target: self, action: #selector(method))
+        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .done, target: self, action: #selector(showCalendar))
         self.navigationController?.navigationBar.topItem?.title = "FURY"
-        self.navigationItem.leftBarButtonItem?.tintColor = .white
-        self.navigationItem.rightBarButtonItem?.tintColor = .white
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 239/255, green: 210/255, blue: 166/255, alpha: 1.0)
+        self.navigationItem.leftBarButtonItem?.tintColor = .black
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
+        
     }
     
     private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 16
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
         let width = UIScreen.main.bounds.width / 3 - spacing
         layout.itemSize = CGSize(width: width, height: width * 1.4)
         return layout
     }
     
-    @objc func moveToCurrnetDiary() {
-        let vc = CurrentDiaryViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+    private func setDateFormat(date: Date) -> String {
+        let myDateFormatter = DateFormatter()
+        myDateFormatter.dateFormat = "yyyy.MM.dd"
+        myDateFormatter.locale = Locale(identifier:"ko_KR")
+        return myDateFormatter.string(from: datePicker.date)
     }
     
-    @objc func moveToFutureDiary() {
-        let vc = FutureDiaryController()
-        self.navigationController?.pushViewController(vc, animated: true)
+    private func setCalendar() {
+        calendarView.addSubview(datePicker)
+        datePicker.translatesAutoresizingMaskIntoConstraints = false
+        datePicker.preferredDatePickerStyle = .inline
+        datePicker.datePickerMode = .date
+        datePicker.locale = Locale(identifier: "ko-KR")
+        datePicker.timeZone = .autoupdatingCurrent
+        datePicker.maximumDate = Date()
+        datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
+        datePicker.tintColor = .systemIndigo
+    }
+    
+    @objc func writeButtonTap() {
+        let alert = UIAlertController(title: "작성하실 일기 종류를 선택해주세요", message: nil, preferredStyle: .actionSheet)
+        
+        let future = UIAlertAction(title: "미래", style: .default , handler:{ _ in
+            let vc = FutureDiaryController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+        
+        let current = UIAlertAction(title: "오늘", style: .default , handler:{ _ in
+            let vc = CurrentDiaryViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        })
+        
+        let cancel = UIAlertAction(title: "취소", style: .destructive , handler:{ _ in
+            self.dismiss(animated: true)
+        })
+        
+        [future, current, cancel].forEach {
+            alert.addAction($0)
+        }
+        
+        self.present(alert, animated: true)
+    }
+    
+    @objc func showCalendar() {
+        if !isChecked {
+            setCalendar()
+            isChecked = !isChecked
+            calendarView.setHeight(view.bounds.height * 0.4)
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.up.circle"), style: .done, target: self, action: #selector(showCalendar))
+        }
+        else {
+            isChecked = !isChecked
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .done, target: self, action: #selector(showCalendar))
+            datePicker.removeFromSuperview()
+            calendarView.setHeight(1)
+        }
+        self.navigationItem.rightBarButtonItem?.tintColor = .black
+    }
+    
+    @objc func datePickerChanged(picker: UIDatePicker) {
+        dateLabel.text = setDateFormat(date: datePicker.date)
+    }
+    
+    @objc private func setSideMenu() {
+        let menu = SideMenuNavigationController(rootViewController: SideMenuViewController())
+        menu.leftSide = true
+        menu.blurEffectStyle = .dark
+        menu.presentationStyle = .viewSlideOutMenuIn
+        present(menu, animated: true, completion: nil)
     }
 }
 

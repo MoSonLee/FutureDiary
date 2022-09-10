@@ -16,7 +16,6 @@ import RxRelay
 final class CurrentDiaryViewController: UIViewController {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
-    private let appearance = UINavigationBarAppearance()
     private let doneButton = UIBarButtonItem()
     
     private let currentTitleTextField = FuryTextField()
@@ -91,13 +90,13 @@ final class CurrentDiaryViewController: UIViewController {
         doneButton.title = "완료"
         navigationItem.rightBarButtonItem = doneButton
         
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemIndigo
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().barTintColor = .black
+        UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().isTranslucent = false
         
-        self.navigationController?.navigationBar.tintColor = .white
         self.navigationItem.title = "현재"
+        self.navigationController?.navigationBar.tintColor = .white
+       
         self.navigationItem.rightBarButtonItem?.tintColor = .white
     }
     
@@ -136,22 +135,5 @@ extension CurrentDiaryViewController: UITextViewDelegate {
             textView.text = textViewPlaceHolder
             textView.textColor = .lightGray
         }
-    }
-}
-
-class FuryTextField: UITextField {
-    
-    let padding = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-    
-    override open func textRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: padding)
-    }
-    
-    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: padding)
-    }
-    
-    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.inset(by: padding)
     }
 }

@@ -27,7 +27,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     private func setConfigure() {
-        contentView.backgroundColor = .systemTeal
+        contentView.backgroundColor = .black
         [currentTitleTextLabel, currentTextView].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -35,6 +35,9 @@ class HomeCollectionViewCell: UICollectionViewCell {
         
         currentTextView.isEditable = false
         currentTextView.isUserInteractionEnabled = false
+        
+        currentTitleTextLabel.backgroundColor = .white
+        currentTextView.backgroundColor = .white
     }
     
     private func setConstraints() {

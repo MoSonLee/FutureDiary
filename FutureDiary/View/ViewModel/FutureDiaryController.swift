@@ -10,7 +10,6 @@ import UIKit
 final class FutureDiaryController: UIViewController {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
-    private let appearance = UINavigationBarAppearance()
     private let futureTitleTextField = FuryTextField()
     private let datePicker = UIDatePicker()
     
@@ -66,10 +65,6 @@ final class FutureDiaryController: UIViewController {
     }
     
     private func setNavigation() {
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor.systemRed
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(method))
         self.navigationItem.title = "미래"
         self.navigationController?.navigationBar.tintColor = .white
@@ -80,6 +75,8 @@ final class FutureDiaryController: UIViewController {
     private func setDatePicker() {
         datePicker.preferredDatePickerStyle = .compact
         datePicker.datePickerMode = .dateAndTime
+        datePicker.minimumDate = Date()
+    
         datePicker.locale = Locale(identifier: "ko-KR")
         datePicker.timeZone = .autoupdatingCurrent
         datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
