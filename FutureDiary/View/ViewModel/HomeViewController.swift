@@ -46,7 +46,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func fetchRealm() {
-        diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: datePicker.date)
+        diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.calendar.startOfDay(for: datePicker.date), currentDate: datePicker.date)
         collectionView.reloadData()
     }
     
@@ -114,7 +114,7 @@ final class HomeViewController: UIViewController {
     private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 16
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 4, bottom: 0, right: 4)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         let width = UIScreen.main.bounds.width / 3 - spacing
         layout.itemSize = CGSize(width: width, height: width * 1.4)
         return layout
@@ -123,22 +123,24 @@ final class HomeViewController: UIViewController {
     private func setDateFormatToString(date: Date) -> String {
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "yyyy.MM.dd"
-        myDateFormatter.locale = Locale(identifier:"ko_KR")
-        myDateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
+        myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
         return myDateFormatter.string(from: datePicker.date)
     }
+    
     
     private func setCalendar() {
         calendarView.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
-        datePicker.locale = Locale(identifier: "ko-KR")
-        datePicker.timeZone = .autoupdatingCurrent
+        datePicker.locale = Locale(identifier: Locale.autoupdatingCurrent.identifier)
+        datePicker.timeZone = TimeZone(abbreviation: Locale.autoupdatingCurrent.identifier)
         datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
         datePicker.tintColor = .black
     }
+    
     
     @objc func writeButtonTap() {
         let alert = UIAlertController(title: "작성하실 일기 종류를 선택해주세요", message: nil, preferredStyle: .actionSheet)
@@ -154,12 +156,9 @@ final class HomeViewController: UIViewController {
         let cancel = UIAlertAction(title: "취소", style: .destructive , handler: { _ in
             self.dismiss(animated: true)
         })
-        [current, future].forEach {
+        [current, future, cancel].forEach {
             alert.addAction($0)
-            $0.setValue(UIColor.black, forKey: "titleTextColor")
         }
-        alert.addAction(cancel)
-        
         self.present(alert, animated: true)
     }
     
@@ -206,3 +205,4 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         return cell
     }
 }
+

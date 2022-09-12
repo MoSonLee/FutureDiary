@@ -117,9 +117,10 @@ final class FutureDiaryController: UIViewController {
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .dateAndTime
         datePicker.minimumDate = Date()
-        datePicker.locale = Locale(identifier: "ko_KR")
-        datePicker.timeZone = TimeZone(abbreviation: "KST")
+        datePicker.locale = Locale(identifier: Locale.current.identifier)
+        datePicker.timeZone = TimeZone(abbreviation: Locale.current.identifier)
         datePicker.timeZone = .autoupdatingCurrent
+        datePicker.minimumDate = Calendar.current.date(byAdding: .minute, value: 5, to: Date())
         datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
         datePicker.tintColor = .black
     }

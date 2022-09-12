@@ -32,7 +32,7 @@ final class RealmRepository {
     
     func dateFilteredFetch(todayStartTime: Date, currentDate: Date) -> Results<Diary>! {
         return localRealm.objects(Diary.self)
-            .filter("diaryDate BETWEEN {%@, %@}", todayStartTime, currentDate)
+            .filter("diaryDate >= %@ && diaryDate <= %@", todayStartTime, currentDate.addingTimeInterval(60))
             .sorted(byKeyPath: "diaryDate", ascending: false)
     }
     

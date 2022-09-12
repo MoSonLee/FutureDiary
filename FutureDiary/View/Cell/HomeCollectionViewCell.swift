@@ -45,14 +45,14 @@ class HomeCollectionViewCell: UICollectionViewCell {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            currentTitleTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            currentTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            currentTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            currentTitleTextLabel.bottomAnchor.constraint(equalTo: currentTextView.topAnchor, constant: -8),
+            currentTitleTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
+            currentTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
+            currentTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
+            currentTitleTextLabel.bottomAnchor.constraint(equalTo: currentTextView.topAnchor, constant: -2),
             
-            currentTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 8),
-            currentTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            currentTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            currentTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
+            currentTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
+            currentTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
         ])
     }
 }
