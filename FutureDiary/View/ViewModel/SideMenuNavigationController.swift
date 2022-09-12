@@ -17,6 +17,8 @@ final class SideMenuViewController: UIViewController {
         super.viewDidLoad()
         setConfigure()
         setConstraints()
+        moveToDiaryCollectionButton.addTarget(self, action: #selector(moveToCollectionView), for: .touchUpInside)
+        moveToSettingButton.addTarget(self, action: #selector(moveToSettingView), for: .touchUpInside)
     }
     
     private func setConfigure() {
@@ -24,8 +26,8 @@ final class SideMenuViewController: UIViewController {
         [moveToSettingButton, moveToSearchDiaryButton, moveToDiaryCollectionButton].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.tintColor = .white
-            $0.setTitleColor(.white, for: .normal)
+            $0.tintColor = CustomColor.shared.buttonTintColor
+            $0.setTitleColor(CustomColor.shared.textColor, for: .normal)
             $0.titleLabel?.font = .systemFont(ofSize: 20, weight: .light)
             $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
             $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
@@ -55,5 +57,15 @@ final class SideMenuViewController: UIViewController {
             moveToDiaryCollectionButton.topAnchor.constraint(equalTo: moveToSearchDiaryButton.bottomAnchor, constant: 16),
             moveToDiaryCollectionButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
         ])
+    }
+    
+    @objc final func moveToCollectionView() {
+        let vc = CollectionViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc final func moveToSettingView() {
+        let vc = SettingViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

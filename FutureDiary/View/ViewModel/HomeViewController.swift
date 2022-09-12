@@ -192,7 +192,7 @@ final class HomeViewController: UIViewController {
     @objc private func setSideMenu() {
         let menu = SideMenuNavigationController(rootViewController: SideMenuViewController())
         menu.leftSide = true
-        menu.blurEffectStyle = .dark
+        menu.blurEffectStyle = .systemMaterial
         menu.presentationStyle = .viewSlideOutMenuIn
         present(menu, animated: true, completion: nil)
     }

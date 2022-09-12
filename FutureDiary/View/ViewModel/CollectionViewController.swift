@@ -1,14 +1,14 @@
 //
-//  SettingViewController.swift
+//  CollectionViewController.swift
 //  FutureDiary
 //
-//  Created by 이승후 on 2022/09/09.
+//  Created by 이승후 on 2022/09/13.
 //
 
 import UIKit
 
-final class SettingViewController: UIViewController {
-
+class CollectionViewController: UIViewController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setConfigure()
@@ -25,7 +25,7 @@ final class SettingViewController: UIViewController {
     }
     
     private func setNavigation() {
-        self.navigationItem.title = "설정"
+        self.navigationItem.title = "보관함"
         UINavigationBar.appearance().isTranslucent = false
         setNavigationColor()
     }

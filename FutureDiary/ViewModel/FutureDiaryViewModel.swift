@@ -42,7 +42,7 @@ final class FutureDiaryViewModel {
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
                 } else {
-                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2)
+                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2.addingTimeInterval(30))
                     self?.saveRealm(diary: diaryModel)
                 }
             })
