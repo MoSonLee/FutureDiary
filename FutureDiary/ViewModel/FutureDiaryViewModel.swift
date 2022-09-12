@@ -41,12 +41,8 @@ final class FutureDiaryViewModel {
             .emit(onNext: { [weak self] diary in
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
-                }
-                else if self?.setDateFormatToString(date: diary.2) == self?.setDateFormatToString(date: Date()) {
-                    self?.showToastRelay.accept("미래의 시간을 선택해주세요")
-                }
-                else {
-                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2.addingTimeInterval(-60))
+                } else {
+                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2)
                     self?.saveRealm(diary: diaryModel)
                 }
             })

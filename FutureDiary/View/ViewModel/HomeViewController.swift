@@ -47,7 +47,15 @@ final class HomeViewController: UIViewController {
     
     private func fetchRealm() {
         diaryTask = repository.fetch()
-        diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.calendar.startOfDay(for: datePicker.date), currentDate: datePicker.date.addingTimeInterval(60))
+        if datePicker.date < Date().startOfDay {
+            diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: datePicker.date.endOfDay)
+        } else {
+            diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: datePicker.date)
+        }
+        
+        print(diaryTask.count)
+        print(datePicker.calendar.startOfDay(for: datePicker.date))
+        print(datePicker.date)
         collectionView.reloadData()
     }
     
@@ -105,7 +113,6 @@ final class HomeViewController: UIViewController {
     
     private func setNavigation() {
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.circle"), style: .done, target: self, action: #selector(setSideMenu))
-        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .done, target: self, action: #selector(showCalendar))
         self.navigationController?.navigationBar.topItem?.title = "FURY"
         self.navigationItem.leftBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor

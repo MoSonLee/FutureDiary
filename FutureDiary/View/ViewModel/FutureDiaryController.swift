@@ -120,7 +120,7 @@ final class FutureDiaryController: UIViewController {
         datePicker.locale = Locale(identifier: Locale.current.identifier)
         datePicker.timeZone = TimeZone(abbreviation: Locale.current.identifier)
         datePicker.timeZone = .autoupdatingCurrent
-        datePicker.minimumDate = Calendar.current.date(byAdding: .minute, value: 5, to: Date())
+        datePicker.minimumDate = Calendar.current.date(byAdding: .minute, value: 5, to: datePicker.date)
         datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
         datePicker.tintColor = CustomColor.shared.buttonTintColor
     }
