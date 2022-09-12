@@ -26,7 +26,6 @@ final class HomeViewController: UIViewController {
     
     private var diaryTask: Results<Diary>! {
         didSet {
-            collectionView.reloadData()
         }
     }
     
@@ -46,16 +45,12 @@ final class HomeViewController: UIViewController {
     }
     
     private func fetchRealm() {
-        diaryTask = repository.fetch()
         if datePicker.date < Date().startOfDay {
             diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: datePicker.date.endOfDay)
         } else {
-            diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: datePicker.date)
+            // 저장 시점과 시간이 달라서 생기는 문제
+            diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: Date())
         }
-        
-        print(diaryTask.count)
-        print(datePicker.calendar.startOfDay(for: datePicker.date))
-        print(datePicker.date)
         collectionView.reloadData()
     }
     
@@ -192,6 +187,7 @@ final class HomeViewController: UIViewController {
     @objc private func setSideMenu() {
         let menu = SideMenuNavigationController(rootViewController: SideMenuViewController())
         menu.leftSide = true
+        menu.isNavigationBarHidden = true
         menu.blurEffectStyle = .systemMaterial
         menu.presentationStyle = .viewSlideOutMenuIn
         present(menu, animated: true, completion: nil)
