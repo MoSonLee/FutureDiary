@@ -48,7 +48,6 @@ final class HomeViewController: UIViewController {
         if datePicker.date < Date().startOfDay {
             diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: datePicker.date.endOfDay)
         } else {
-            // 저장 시점과 시간이 달라서 생기는 문제
             diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: Date())
         }
         collectionView.reloadData()
@@ -164,7 +163,6 @@ final class HomeViewController: UIViewController {
     }
     
     @objc func showCalendar() {
-        
         if !isChecked {
             setCalendar()
             isChecked = !isChecked
