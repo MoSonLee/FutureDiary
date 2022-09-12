@@ -128,7 +128,6 @@ final class HomeViewController: UIViewController {
         return myDateFormatter.string(from: datePicker.date)
     }
     
-    
     private func setCalendar() {
         calendarView.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
@@ -167,14 +166,13 @@ final class HomeViewController: UIViewController {
         if !isChecked {
             setCalendar()
             isChecked = !isChecked
-            calendarView.setHeight(view.bounds.height * 0.5)
+            calendarView.setHeight(view.bounds.height * 0.5, animateTime: 0.5)
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.up.circle"), style: .done, target: self, action: #selector(showCalendar))
-        }
-        else {
+        } else {
             isChecked = !isChecked
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .done, target: self, action: #selector(showCalendar))
             datePicker.removeFromSuperview()
-            calendarView.setHeight(1)
+            calendarView.setHeight(1, animateTime: 0.5)
         }
         self.navigationItem.rightBarButtonItem?.tintColor = .black
     }
