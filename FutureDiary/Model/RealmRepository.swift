@@ -26,13 +26,13 @@ final class RealmRepository {
         }
     }
     
-    func fetch(today: Date) -> Results<Diary>! {
+    func fetch() -> Results<Diary>! {
         return localRealm.objects(Diary.self).sorted(byKeyPath: "diaryDate", ascending: false)
     }
     
     func dateFilteredFetch(todayStartTime: Date, currentDate: Date) -> Results<Diary>! {
         return localRealm.objects(Diary.self)
-            .filter("diaryDate >= %@ && diaryDate <= %@", todayStartTime, currentDate.addingTimeInterval(60))
+            .filter("diaryDate >= %@ && diaryDate <= %@", todayStartTime, currentDate)
             .sorted(byKeyPath: "diaryDate", ascending: false)
     }
     

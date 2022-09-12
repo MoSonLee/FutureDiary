@@ -38,21 +38,21 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     private func setComponentsColor() {
-        contentView.backgroundColor = .black
-        currentTitleTextLabel.backgroundColor = .white
-        currentTextView.backgroundColor = .white
+        contentView.backgroundColor = CustomColor.shared.textColor
+        currentTitleTextLabel.backgroundColor = CustomColor.shared.backgroundColor
+        currentTextView.backgroundColor = CustomColor.shared.backgroundColor
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            currentTitleTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
-            currentTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-            currentTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
-            currentTitleTextLabel.bottomAnchor.constraint(equalTo: currentTextView.topAnchor, constant: -2),
+            currentTitleTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 1),
+            currentTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+            currentTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
+            currentTitleTextLabel.bottomAnchor.constraint(equalTo: currentTextView.topAnchor, constant: -1),
             
-            currentTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 2),
-            currentTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -2),
-            currentTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
+            currentTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+            currentTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
+            currentTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -1),
         ])
     }
 }

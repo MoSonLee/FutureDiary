@@ -46,7 +46,8 @@ final class HomeViewController: UIViewController {
     }
     
     private func fetchRealm() {
-        diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.calendar.startOfDay(for: datePicker.date), currentDate: datePicker.date)
+        diaryTask = repository.fetch()
+        diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.calendar.startOfDay(for: datePicker.date), currentDate: datePicker.date.addingTimeInterval(60))
         collectionView.reloadData()
     }
     
@@ -61,10 +62,10 @@ final class HomeViewController: UIViewController {
     }
     
     private func setComponentsColor() {
-        view.backgroundColor = .white
-        collectionView.backgroundColor = .white
-        writeDiaryButton.tintColor = .black
-        calendarView.layer.borderColor = UIColor.black.cgColor
+        view.backgroundColor = CustomColor.shared.backgroundColor
+        collectionView.backgroundColor = CustomColor.shared.backgroundColor
+        writeDiaryButton.tintColor = CustomColor.shared.buttonTintColor
+        calendarView.layer.borderColor = CustomColor.shared.buttonTintColor.cgColor
         calendarView.layer.borderWidth = 1
     }
     
@@ -107,8 +108,8 @@ final class HomeViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .done, target: self, action: #selector(showCalendar))
         self.navigationController?.navigationBar.topItem?.title = "FURY"
-        self.navigationItem.leftBarButtonItem?.tintColor = .black
-        self.navigationItem.rightBarButtonItem?.tintColor = .black
+        self.navigationItem.leftBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
+        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
     }
     
     private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
@@ -137,9 +138,8 @@ final class HomeViewController: UIViewController {
         datePicker.timeZone = TimeZone(abbreviation: Locale.autoupdatingCurrent.identifier)
         datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
-        datePicker.tintColor = .black
+        datePicker.tintColor = CustomColor.shared.textColor
     }
-    
     
     @objc func writeButtonTap() {
         let alert = UIAlertController(title: "작성하실 일기 종류를 선택해주세요", message: nil, preferredStyle: .actionSheet)
@@ -174,7 +174,7 @@ final class HomeViewController: UIViewController {
             datePicker.removeFromSuperview()
             calendarView.setHeight(1, animateTime: 0.5)
         }
-        self.navigationItem.rightBarButtonItem?.tintColor = .black
+        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
     }
     
     @objc func datePickerChanged(picker: UIDatePicker) {
@@ -203,4 +203,3 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         return cell
     }
 }
-

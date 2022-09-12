@@ -46,7 +46,7 @@ final class FutureDiaryViewModel {
                     self?.showToastRelay.accept("미래의 시간을 선택해주세요")
                 }
                 else {
-                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2)
+                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2.addingTimeInterval(-60))
                     self?.saveRealm(diary: diaryModel)
                 }
             })

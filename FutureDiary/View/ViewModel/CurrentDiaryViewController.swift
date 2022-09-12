@@ -27,7 +27,7 @@ final class CurrentDiaryViewController: UIViewController {
         view.textContainerInset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
         view.font = .systemFont(ofSize: 18)
         view.text = textViewPlaceHolder
-        view.textColor = .lightGray
+        view.textColor = .systemGray6
         view.delegate = self
         return view
     }()
@@ -72,10 +72,10 @@ final class CurrentDiaryViewController: UIViewController {
     }
     
     private func setComponentsColor() {
-        view.backgroundColor = .white
-        currentTitleTextField.layer.borderColor = UIColor.black.withAlphaComponent(0.7).cgColor
-        currentContentTextView.layer.borderColor = UIColor.black.withAlphaComponent(0.7).cgColor
-        currentTitleTextField.textColor = .black
+        view.backgroundColor = CustomColor.shared.backgroundColor
+        currentTitleTextField.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.7).cgColor
+        currentContentTextView.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.7).cgColor
+        currentTitleTextField.textColor = CustomColor.shared.textColor
     }
     
     private func setConstraints() {
@@ -103,10 +103,10 @@ final class CurrentDiaryViewController: UIViewController {
     }
     
     private func setNavigationColor() {
-        UINavigationBar.appearance().barTintColor = .black
-        UINavigationBar.appearance().tintColor = .black
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.rightBarButtonItem?.tintColor = .black
+        UINavigationBar.appearance().barTintColor = CustomColor.shared.buttonTintColor
+        UINavigationBar.appearance().tintColor = CustomColor.shared.buttonTintColor
+        self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
+        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
     }
     
     private func bind() {
@@ -136,14 +136,14 @@ extension CurrentDiaryViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == textViewPlaceHolder {
             textView.text = nil
-            textView.textColor = .black
+            textView.textColor = CustomColor.shared.textColor
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = textViewPlaceHolder
-            textView.textColor = .lightGray
+            textView.textColor = .systemGray6
         }
     }
 }

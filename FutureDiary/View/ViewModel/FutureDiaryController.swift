@@ -22,11 +22,11 @@ final class FutureDiaryController: UIViewController {
     lazy var futureContentTextView: UITextView = {
         let view = UITextView()
         view.layer.borderWidth = 1.0
-        view.layer.borderColor = UIColor.white.withAlphaComponent(0.7).cgColor
+        view.layer.borderColor = CustomColor.shared.backgroundColor.withAlphaComponent(0.7).cgColor
         view.textContainerInset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
         view.font = .systemFont(ofSize: 18)
         view.text = textViewPlaceHolder
-        view.textColor = .lightGray
+        view.textColor = .systemGray6
         view.delegate = self
         return view
     }()
@@ -74,10 +74,10 @@ final class FutureDiaryController: UIViewController {
     }
     
     private func setViewComponentsColor() {
-        view.backgroundColor = .white
-        futureContentTextView.layer.borderColor = UIColor.black.withAlphaComponent(0.7).cgColor
-        datePicker.layer.borderColor = UIColor.black.withAlphaComponent(0.7).cgColor
-        futureContentTextView.backgroundColor = .white
+        view.backgroundColor = CustomColor.shared.backgroundColor
+        futureTitleTextField.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.7).cgColor
+        futureContentTextView.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.7).cgColor
+        datePicker.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.7).cgColor
     }
     
     private func setConstraints() {
@@ -108,9 +108,9 @@ final class FutureDiaryController: UIViewController {
     }
     
     private func setNavigationColor() {
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.leftBarButtonItem?.tintColor = .black
-        self.navigationItem.rightBarButtonItem?.tintColor = .black
+        self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
+        self.navigationItem.leftBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
+        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
     }
     
     private func setDatePicker() {
@@ -122,7 +122,7 @@ final class FutureDiaryController: UIViewController {
         datePicker.timeZone = .autoupdatingCurrent
         datePicker.minimumDate = Calendar.current.date(byAdding: .minute, value: 5, to: Date())
         datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
-        datePicker.tintColor = .black
+        datePicker.tintColor = CustomColor.shared.buttonTintColor
     }
     
     private func bind() {
@@ -159,14 +159,14 @@ extension FutureDiaryController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == textViewPlaceHolder {
             textView.text = nil
-            textView.textColor = .black
+            textView.textColor = CustomColor.shared.textColor
         }
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = textViewPlaceHolder
-            textView.textColor = .lightGray
+            textView.textColor = CustomColor.shared.textColor
         }
     }
 }

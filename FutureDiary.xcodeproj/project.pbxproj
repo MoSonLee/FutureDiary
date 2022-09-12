@@ -22,6 +22,7 @@
 		770DF6EB28CA6BF900349D55 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */; };
 		773A6E3D28CC74D500452D68 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E3C28CC74D500452D68 /* UIView+Extension.swift */; };
 		773A6E3F28CC9F2600452D68 /* FuryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E3E28CC9F2600452D68 /* FuryTextField.swift */; };
+		773A6E4328CF6D0E00452D68 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E4228CF6D0E00452D68 /* Color.swift */; };
 		7781264D28CB22A30078CAD6 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 7781264C28CB22A30078CAD6 /* Realm */; };
 		7781264F28CB22A30078CAD6 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7781264E28CB22A30078CAD6 /* RealmSwift */; };
 		7781265128CB2BA80078CAD6 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7781265028CB2BA80078CAD6 /* Diary.swift */; };
@@ -48,6 +49,7 @@
 		773A6E3C28CC74D500452D68 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		773A6E3E28CC9F2600452D68 /* FuryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuryTextField.swift; sourceTree = "<group>"; };
 		773A6E4128CF508700452D68 /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ko; path = ko.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		773A6E4228CF6D0E00452D68 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7781265028CB2BA80078CAD6 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		7781265228CB2C310078CAD6 /* RealmRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmRepository.swift; sourceTree = "<group>"; };
 		779DA60F28CA62BB00561000 /* FutureDiary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FutureDiary.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -102,6 +104,7 @@
 			children = (
 				773A6E3C28CC74D500452D68 /* UIView+Extension.swift */,
 				773A6E3E28CC9F2600452D68 /* FuryTextField.swift */,
+				773A6E4228CF6D0E00452D68 /* Color.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				779DA61728CA62BB00561000 /* HomeViewController.swift in Sources */,
 				770DF6DF28CA68BE00349D55 /* FutureDiaryController.swift in Sources */,
 				779DA61328CA62BB00561000 /* AppDelegate.swift in Sources */,
+				773A6E4328CF6D0E00452D68 /* Color.swift in Sources */,
 				7781265128CB2BA80078CAD6 /* Diary.swift in Sources */,
 				770DF6E128CA68FB00349D55 /* SettingViewController.swift in Sources */,
 				770DF6DD28CA68B300349D55 /* CurrentDiaryViewController.swift in Sources */,
