@@ -26,6 +26,19 @@ final class RealmRepository {
         }
     }
     
+    func update(diary: Diary, completion: ((Bool) -> Void)) {
+        do {
+            try localRealm.write {
+                localRealm.create(Diary.self, value: diary, update: .modified)
+            }
+            completion(true)
+            
+        } catch let error {
+            completion(false)
+            print(error)
+        }
+    }
+    
     func fetch(date: Date) -> Results<Diary>! {
         return localRealm.objects(Diary.self)
             .filter("diaryDate <= %@", date)
@@ -47,11 +60,5 @@ final class RealmRepository {
         try! localRealm.write {
             localRealm.delete(item)
         }
-    }
-    
-    func update(item: Diary, title: String, content: String, date: Date) {
-        item.diaryTitle = title
-        item.diaryContent = content
-        item.diaryDate = Date()
     }
 }

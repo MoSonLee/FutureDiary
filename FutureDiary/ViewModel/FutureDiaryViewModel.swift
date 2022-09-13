@@ -31,8 +31,8 @@ final class FutureDiaryViewModel {
     private func setDateFormatToString(date: Date) -> String {
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "yyyy.MM.dd"
-        myDateFormatter.locale = Locale(identifier:"ko_KR")
-        myDateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
+        myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
         return myDateFormatter.string(from: date)
     }
     

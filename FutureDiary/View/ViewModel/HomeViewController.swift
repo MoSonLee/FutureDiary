@@ -26,6 +26,7 @@ final class HomeViewController: UIViewController {
     
     private var diaryTask: Results<Diary>! {
         didSet {
+            collectionView.reloadData()
         }
     }
     
@@ -130,6 +131,14 @@ final class HomeViewController: UIViewController {
         return myDateFormatter.string(from: datePicker.date)
     }
     
+    private func setDateFormatToStringWithHoursAndMinute(date: Date) -> String {
+        let myDateFormatter = DateFormatter()
+        myDateFormatter.dateFormat = "yyyy.MM.dd a hh:mm"
+        myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
+        myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
+        return myDateFormatter.string(from: date)
+    }
+    
     private func setCalendar() {
         calendarView.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
@@ -140,6 +149,14 @@ final class HomeViewController: UIViewController {
         datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
         datePicker.tintColor = CustomColor.shared.textColor
+    }
+    
+    private func moveToEditDiary(indexPath: IndexPath) {
+        let vc = CurrentDiaryViewController()
+        vc.currentTitleTextField.text = diaryTask[indexPath.row].diaryTitle
+        vc.currentContentTextView.text = diaryTask[indexPath.row].diaryContent
+        vc.viewModel.diaryTasks = diaryTask[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func writeButtonTap() {
@@ -193,14 +210,22 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         diaryTask.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        moveToEditDiary(indexPath: indexPath)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
-        cell.currentTitleTextLabel.text = diaryTask[indexPath.row].diaryTitle
-        cell.currentTextView.text = diaryTask[indexPath.row].diaryContent
+        cell.diaryTitleTextLabel.text = diaryTask[indexPath.row].diaryTitle
+        cell.diaryTextView.text = diaryTask[indexPath.row].diaryContent
+        cell.diaryDateLabel.text = setDateFormatToStringWithHoursAndMinute(date: diaryTask[indexPath.row].diaryDate)
+        cell.diaryDateLabel.textAlignment = .center
+        cell.diaryDateLabel.adjustsFontSizeToFitWidth = true
         return cell
     }
 }

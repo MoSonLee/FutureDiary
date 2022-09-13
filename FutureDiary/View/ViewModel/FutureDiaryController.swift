@@ -19,17 +19,7 @@ final class FutureDiaryController: UIViewController {
     private let datePicker = UIDatePicker()
     private let saveButton = UIBarButtonItem()
     
-    lazy var futureContentTextView: UITextView = {
-        let view = UITextView()
-        view.layer.borderWidth = 1.0
-        view.layer.borderColor = CustomColor.shared.backgroundColor.withAlphaComponent(0.7).cgColor
-        view.textContainerInset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
-        view.font = .systemFont(ofSize: 18)
-        view.text = textViewPlaceHolder
-        view.textColor = .systemGray6
-        view.delegate = self
-        return view
-    }()
+    lazy var futureContentTextView = UITextView()
     
     private let viewModel = FutureDiaryViewModel()
     private let disposdeBag = DisposeBag()
@@ -152,21 +142,5 @@ final class FutureDiaryController: UIViewController {
     
     @objc private func dismissView() {
         self.dismiss(animated: true)
-    }
-}
-
-extension FutureDiaryController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == textViewPlaceHolder {
-            textView.text = nil
-            textView.textColor = CustomColor.shared.textColor
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = textViewPlaceHolder
-            textView.textColor = CustomColor.shared.textColor
-        }
     }
 }

@@ -68,7 +68,7 @@ final class SideMenuViewController: UIViewController {
         let vc = SettingViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
-
+    
     @objc final func moveToSearchView() {
         let vc = SearchViewController()
         self.navigationController?.pushViewController(vc, animated: true)

@@ -18,21 +18,11 @@ final class CurrentDiaryViewController: UIViewController {
     private let textViewPlaceHolder = "내용을 입력하세요"
     private let saveButton = UIBarButtonItem()
     
-    private let currentTitleTextField = FuryTextField()
+    let currentTitleTextField = FuryTextField()
     
-    lazy var currentContentTextView: UITextView = {
-        let view = UITextView()
-        view.layer.borderWidth = 1.0
-        view.layer.borderColor = UIColor.white.withAlphaComponent(0.7).cgColor
-        view.textContainerInset = UIEdgeInsets(top: 16.0, left: 16.0, bottom: 16.0, right: 16.0)
-        view.font = .systemFont(ofSize: 18)
-        view.text = textViewPlaceHolder
-        view.textColor = .systemGray6
-        view.delegate = self
-        return view
-    }()
+    lazy var currentContentTextView = UITextView()
     
-    private let viewModel = CurrentDiaryViewModel()
+    let viewModel = CurrentDiaryViewModel()
     private let disposdeBag = DisposeBag()
     
     private lazy var input = CurrentDiaryViewModel.Input(
@@ -69,6 +59,8 @@ final class CurrentDiaryViewController: UIViewController {
         currentTitleTextField.placeholder = "제목을 입력해주세요"
         currentTitleTextField.layer.borderWidth = 1
         currentContentTextView.layer.borderWidth = 1
+        currentContentTextView.font = .systemFont(ofSize: 16)
+        
     }
     
     private func setComponentsColor() {
@@ -98,7 +90,6 @@ final class CurrentDiaryViewController: UIViewController {
         self.navigationItem.title = "현재"
         navigationItem.rightBarButtonItem = saveButton
         UINavigationBar.appearance().isTranslucent = false
-        
         setNavigationColor()
     }
     
@@ -132,18 +123,3 @@ final class CurrentDiaryViewController: UIViewController {
     }
 }
 
-extension CurrentDiaryViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == textViewPlaceHolder {
-            textView.text = nil
-            textView.textColor = CustomColor.shared.textColor
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            textView.text = textViewPlaceHolder
-            textView.textColor = .systemGray6
-        }
-    }
-}

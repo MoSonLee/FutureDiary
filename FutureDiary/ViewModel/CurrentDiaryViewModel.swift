@@ -28,21 +28,28 @@ final class CurrentDiaryViewModel {
     private let respository = RealmRepository()
     private let disoiseBag = DisposeBag()
     
+    var diaryTasks: Diary?
+    
     private func setDateFormatToString(date: Date) -> String {
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "yyyy.MM.dd"
-        myDateFormatter.locale = Locale(identifier:"ko_KR")
-        myDateFormatter.timeZone = TimeZone(abbreviation: "KST")
+        myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
+        myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
         return myDateFormatter.string(from: date)
     }
     
     func transform(input: Input) -> Output {
         input.saveButtonTap
             .emit(onNext: { [weak self] diary in
+                guard let dateString = self?.setDateFormatToString(date: Date()) else { return }
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
-                } else {
-                    guard let dateString = self?.setDateFormatToString(date: Date()) else { return }
+                } else if (self?.diaryTasks) != nil {
+                    print("AAAAAA")
+                    let diaryModel = Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: Date(), diaryDateToString: dateString)
+                    self?.updateRealm(diary: diaryModel)
+                }
+                else {
                     let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: Date(), diaryDateToString: dateString)
                     self?.saveRealm(diary: diaryModel)
                 }
@@ -57,8 +64,19 @@ final class CurrentDiaryViewModel {
 }
 
 extension CurrentDiaryViewModel {
+    
     private func saveRealm(diary: Diary) {
         respository.create(diary: diary) { isSaved in
+            if isSaved {
+                self.showAlertRelay.accept(("저장되었습니다", true))
+            } else {
+                self.showToastRelay.accept("오류가 발생했습니다. 다시 시도해주세요")
+            }
+        }
+    }
+    
+    private func updateRealm(diary: Diary) {
+        respository.update(diary: diary) { isSaved in
             if isSaved {
                 self.showAlertRelay.accept(("저장되었습니다", true))
             } else {

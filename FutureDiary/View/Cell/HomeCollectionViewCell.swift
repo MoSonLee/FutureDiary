@@ -13,8 +13,9 @@ class HomeCollectionViewCell: UICollectionViewCell {
         return "HomeCollectionViewCell"
     }
     
-    var currentTitleTextLabel = UILabel()
-    var currentTextView = UITextView()
+    var diaryTitleTextLabel = UILabel()
+    var diaryTextView = UITextView()
+    var diaryDateLabel = UILabel()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -27,32 +28,51 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     private func setConfigure() {
-        [currentTitleTextLabel, currentTextView].forEach {
+        [diaryTitleTextLabel, diaryTextView, diaryDateLabel].forEach {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
-        currentTextView.isEditable = false
-        currentTextView.isUserInteractionEnabled = false
-        currentTitleTextLabel.insetsLayoutMarginsFromSafeArea = true
+        diaryTextView.isEditable = false
+        diaryTextView.isUserInteractionEnabled = false
+        diaryTitleTextLabel.insetsLayoutMarginsFromSafeArea = true
         setComponentsColor()
     }
     
     private func setComponentsColor() {
         contentView.backgroundColor = CustomColor.shared.textColor
-        currentTitleTextLabel.backgroundColor = CustomColor.shared.backgroundColor
-        currentTextView.backgroundColor = CustomColor.shared.backgroundColor
+        diaryTitleTextLabel.backgroundColor = CustomColor.shared.backgroundColor
+        diaryTextView.backgroundColor = CustomColor.shared.backgroundColor
+        diaryDateLabel.backgroundColor = CustomColor.shared.backgroundColor
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            currentTitleTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 1),
-            currentTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
-            currentTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
-            currentTitleTextLabel.bottomAnchor.constraint(equalTo: currentTextView.topAnchor, constant: -1),
+            diaryTitleTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 1),
+            diaryTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+            diaryTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
+            diaryTitleTextLabel.bottomAnchor.constraint(equalTo: diaryTextView.topAnchor, constant: -1),
             
-            currentTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
-            currentTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
-            currentTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -1),
+            diaryTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+            diaryTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
+            diaryTextView.bottomAnchor.constraint(equalTo: diaryDateLabel.topAnchor, constant: 4),
+            
+            diaryDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+            diaryDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
+            diaryDateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -1),
         ])
+    }
+    
+    func setSearchedTexrColor(cellTitleText: String, cellDescriptionText: String, searchController: UISearchController) {
+        let attributeCellTitle = NSMutableAttributedString(string: cellTitleText)
+        let attributeCellDescripition = NSMutableAttributedString(string: cellDescriptionText)
+        
+        attributeCellTitle.addAttribute(.foregroundColor, value: UIColor.systemOrange, range: (cellTitleText as NSString).range(of: searchController.searchBar.text ?? ""))
+        attributeCellDescripition.addAttribute(.foregroundColor, value:  UIColor.systemOrange, range: (cellDescriptionText as NSString).range(of: searchController.searchBar.text ?? ""))
+        
+        if cellTitleText.contains(searchController.searchBar.text ?? "") {
+            self.diaryTitleTextLabel.attributedText = attributeCellTitle
+        } else if cellDescriptionText.contains(searchController.searchBar.text ?? "") {
+            self.diaryTextView.attributedText = attributeCellDescripition
+        }
     }
 }

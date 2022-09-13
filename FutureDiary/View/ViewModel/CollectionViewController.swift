@@ -16,12 +16,11 @@ import Toast
 class CollectionViewController: UIViewController {
     
     private var datePickerView = UIPickerView()
-    
-    private var diaryTask: Results<Diary>!
     private var diaryAllTask: Results<Diary>!
+    private var diaryTask: Results<Diary>!
+    
     private let repository = RealmRepository()
     private let localRealm = try! Realm()
-    private var pickerView = UIPickerView()
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     private var mailButton = UIBarButtonItem()
     
@@ -64,9 +63,9 @@ class CollectionViewController: UIViewController {
         ])
     }
     
-    private func setDateFormatToString(date: Date) -> String {
+    private func setDateFormatToStringWithHoursAndMinute(date: Date) -> String {
         let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "yyyy.MM.dd"
+        myDateFormatter.dateFormat = "yyyy.MM.dd a hh:mm"
         myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
         myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
         return myDateFormatter.string(from: date)
@@ -85,7 +84,7 @@ class CollectionViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.collectionViewLayout = setCollectionViewLayout()
         collectionView.register(HomeCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: HomeCollectionViewCell.identifider)
-        collectionView.register(CollectionHeaderReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionHeaderReusableView.identifier)
+//        collectionView.register(CollectionHeaderReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionHeaderReusableView.identifier)
     }
     
     private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
@@ -106,7 +105,7 @@ class CollectionViewController: UIViewController {
     }
     
     @objc func showToastMessage() {
-        view.makeToast("도착 예정 편지는 \(diaryAllTask.count - diaryTask.count)개 입니다!")
+        view.makeToast("도착 예정 편지는 \(diaryAllTask.count - diaryTask.count)개입니다!")
     }
 }
 
@@ -116,14 +115,14 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
         1
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionHeaderReusableView.identifier, for: indexPath) as? CollectionHeaderReusableView else { return UICollectionReusableView()}
-        headerView.headerLabel.backgroundColor = CustomColor.shared.backgroundColor
-        headerView.headerLabel.textColor = CustomColor.shared.textColor
-        headerView.headerLabel.text = diaryTask[indexPath.section].diaryDateToString
-        return headerView
-        
-    }
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionHeaderReusableView.identifier, for: indexPath) as? CollectionHeaderReusableView else { return UICollectionReusableView()}
+//        headerView.headerLabel.backgroundColor = CustomColor.shared.backgroundColor
+//        headerView.headerLabel.textColor = CustomColor.shared.textColor
+//        headerView.headerLabel.text = diaryTask[indexPath.section].diaryDateToString
+//        return headerView
+//
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         diaryTask.count
@@ -131,8 +130,12 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
-        cell.currentTitleTextLabel.text = diaryTask[indexPath.row].diaryTitle
-        cell.currentTextView.text = diaryTask[indexPath.row].diaryContent
+        cell.diaryTitleTextLabel.text = diaryTask[indexPath.row].diaryTitle
+        cell.diaryTextView.text = diaryTask[indexPath.row].diaryContent
+        cell.diaryDateLabel.text =  setDateFormatToStringWithHoursAndMinute(date: diaryTask[indexPath.row].diaryDate)
+        cell.diaryDateLabel.font = .systemFont(ofSize: 10)
+        cell.diaryDateLabel.textAlignment = .center
+        cell.diaryDateLabel.adjustsFontSizeToFitWidth = true
         return cell
     }
 }

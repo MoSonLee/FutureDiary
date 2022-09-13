@@ -7,27 +7,109 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+import RealmSwift
+import RxCocoa
+import RxSwift
+import SwiftUI
+import Toast
 
+class SearchViewController: UIViewController {
+    
+    private var datePickerView = UIPickerView()
+    private var diaryAllTask: Results<Diary>!
+    private var diaryTask: Results<Diary>!
+    private lazy var searchedDiary = Array(diaryTask)
+    
+    private let searchController = UISearchController(searchResultsController: nil)
+    private let repository = RealmRepository()
+    private let localRealm = try! Realm()
+    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    
+    private var isSearching: Bool {
+        let searchController = self.navigationItem.searchController
+        let isActive = searchController?.isActive ?? false
+        let isSearchBarHasText = searchController?.searchBar.text?.isEmpty == false
+        return isActive && isSearchBarHasText
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchRealm()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setConfigure()
         setConstraints()
         setNavigation()
+        setupSearchController()
+        collectionViewRegisterAndDelegate()
+    }
+    
+    private func fetchRealm() {
+        diaryTask = repository.fetch(date: Date())
+        diaryAllTask = repository.fetch()
+        collectionView.reloadData()
     }
     
     private func setConfigure() {
         view.backgroundColor = CustomColor.shared.backgroundColor
+        
+        [collectionView].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    private func setupSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "검색"
+        navigationItem.searchController = searchController
+        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
+        searchController.searchBar.tintColor = CustomColor.shared.buttonTintColor
+        searchController.hidesNavigationBarDuringPresentation = false
+        navigationItem.hidesSearchBarWhenScrolling = false
+        searchController.searchBar.enablesReturnKeyAutomatically = true
     }
     
     private func setConstraints() {
-        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
+    }
+    
+    private func setDateFormatToStringWithHoursAndMinute(date: Date) -> String {
+        let myDateFormatter = DateFormatter()
+        myDateFormatter.dateFormat = "yyyy.MM.dd a hh:mm"
+        myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
+        myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
+        return myDateFormatter.string(from: date)
     }
     
     private func setNavigation() {
-        self.navigationItem.title = "검색"
+        self.navigationItem.title = "검색하기"
         UINavigationBar.appearance().isTranslucent = false
         setNavigationColor()
+    }
+    
+    private func collectionViewRegisterAndDelegate() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.collectionViewLayout = setCollectionViewLayout()
+        collectionView.register(HomeCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: HomeCollectionViewCell.identifider)
+    }
+    
+    private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        let spacing: CGFloat = 16
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 32, right: 8)
+        let width = UIScreen.main.bounds.width / 4 - spacing
+        layout.itemSize = CGSize(width: width, height: width * 1.4)
+        layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
+        return layout
     }
     
     private func setNavigationColor() {
@@ -35,5 +117,51 @@ class SearchViewController: UIViewController {
         UINavigationBar.appearance().tintColor = CustomColor.shared.buttonTintColor
         self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
+    }
+}
+
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isSearching {
+            return searchedDiary.count
+        } else {
+            return 0
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
+        
+        if isSearching{
+            cell.diaryTitleTextLabel.text = searchedDiary[indexPath.row].diaryTitle
+            cell.diaryTextView.text = searchedDiary[indexPath.row].diaryContent
+            cell.diaryDateLabel.text = setDateFormatToStringWithHoursAndMinute(date: searchedDiary[indexPath.row].diaryDate)
+            cell.diaryDateLabel.font = .systemFont(ofSize: 10)
+            cell.diaryDateLabel.textAlignment = .center
+            cell.diaryDateLabel.adjustsFontSizeToFitWidth = true
+            
+            guard let cellTitleText = cell.diaryTitleTextLabel.text  else { return UICollectionViewCell() }
+            guard let cellDescriptionText = cell.diaryTextView.text else { return UICollectionViewCell() }
+            cell.setSearchedTexrColor(cellTitleText: cellTitleText, cellDescriptionText: cellDescriptionText, searchController: searchController)
+        } else {
+            cell.diaryTextView.textColor = CustomColor.shared.textColor
+            cell.diaryTitleTextLabel.textColor = CustomColor.shared.textColor
+            cell.diaryDateLabel.textColor = CustomColor.shared.textColor
+        }
+        return cell
+    }
+}
+
+extension SearchViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text?.lowercased() else { return }
+        self.searchedDiary = self.diaryTask.filter{ $0.diaryTitle.lowercased().contains(text)}
+        collectionView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
+        self.collectionView.reloadData()
     }
 }
