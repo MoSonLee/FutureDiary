@@ -11,17 +11,25 @@ import RealmSwift
 import RxCocoa
 import RxSwift
 import SwiftUI
+import Toast
 
 class CollectionViewController: UIViewController {
     
+    private var datePickerView = UIPickerView()
+    
     private var diaryTask: Results<Diary>!
+    private var diaryAllTask: Results<Diary>!
     private let repository = RealmRepository()
     private let localRealm = try! Realm()
+    private var pickerView = UIPickerView()
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    private var mailButton = UIBarButtonItem()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchRealm()
+        print(diaryTask.count)
+        print(diaryAllTask.count)
     }
     
     override func viewDidLoad() {
@@ -33,15 +41,18 @@ class CollectionViewController: UIViewController {
     }
     
     private func fetchRealm() {
-        diaryTask = repository.fetch()
+        diaryTask = repository.fetch(date: Date())
+        diaryAllTask = repository.fetch()
         collectionView.reloadData()
-        
     }
     
     private func setConfigure() {
         view.backgroundColor = CustomColor.shared.backgroundColor
-        view.addSubview(collectionView)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+        [collectionView].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     private func setConstraints() {
@@ -53,9 +64,19 @@ class CollectionViewController: UIViewController {
         ])
     }
     
+    private func setDateFormatToString(date: Date) -> String {
+        let myDateFormatter = DateFormatter()
+        myDateFormatter.dateFormat = "yyyy.MM.dd"
+        myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
+        myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
+        return myDateFormatter.string(from: date)
+    }
+    
     private func setNavigation() {
         self.navigationItem.title = "보관함"
         UINavigationBar.appearance().isTranslucent = false
+        mailButton = UIBarButtonItem(image: UIImage(systemName: "signpost.right.fill"), style: .done, target: self, action: #selector(showToastMessage))
+        self.navigationItem.rightBarButtonItem = mailButton
         setNavigationColor()
     }
     
@@ -83,19 +104,23 @@ class CollectionViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
     }
+    
+    @objc func showToastMessage() {
+        view.makeToast("도착 예정 편지는 \(diaryAllTask.count - diaryTask.count)개 입니다!")
+    }
 }
 
 extension CollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
+        1
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionHeaderReusableView.identifier, for: indexPath) as? CollectionHeaderReusableView else { return UICollectionReusableView()}
         headerView.headerLabel.backgroundColor = CustomColor.shared.backgroundColor
         headerView.headerLabel.textColor = CustomColor.shared.textColor
-        headerView.headerLabel.text = "날짜날짜"
+        headerView.headerLabel.text = diaryTask[indexPath.section].diaryDateToString
         return headerView
         
     }

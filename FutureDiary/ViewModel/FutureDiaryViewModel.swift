@@ -30,7 +30,7 @@ final class FutureDiaryViewModel {
     
     private func setDateFormatToString(date: Date) -> String {
         let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "yyyy.MM.dd.hh.mm"
+        myDateFormatter.dateFormat = "yyyy.MM.dd"
         myDateFormatter.locale = Locale(identifier:"ko_KR")
         myDateFormatter.timeZone = TimeZone(abbreviation: "KST")
         return myDateFormatter.string(from: date)
@@ -42,7 +42,8 @@ final class FutureDiaryViewModel {
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
                 } else {
-                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2)
+                    guard let dateString = self?.setDateFormatToString(date: diary.2) else { return }
+                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2, diaryDateToString: dateString)
                     self?.saveRealm(diary: diaryModel)
                 }
             })
