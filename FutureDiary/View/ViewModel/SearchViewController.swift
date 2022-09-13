@@ -118,6 +118,14 @@ class SearchViewController: UIViewController {
         self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
     }
+    
+    private func moveToEditDiary(indexPath: IndexPath) {
+        let vc = CurrentDiaryViewController()
+        vc.currentTitleTextField.text = diaryTask[indexPath.row].diaryTitle
+        vc.currentContentTextView.text = diaryTask[indexPath.row].diaryContent
+        vc.viewModel.diaryTasks = diaryTask[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -154,6 +162,10 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
             cell.diaryDateLabel.textColor = CustomColor.shared.textColor
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        moveToEditDiary(indexPath: indexPath)
     }
 }
 

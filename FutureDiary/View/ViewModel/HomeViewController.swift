@@ -149,6 +149,13 @@ final class HomeViewController: UIViewController {
         datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
         datePicker.tintColor = CustomColor.shared.textColor
+        
+        NSLayoutConstraint.activate([
+            datePicker.topAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.topAnchor),
+            datePicker.leadingAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.leadingAnchor),
+            datePicker.trailingAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.trailingAnchor),
+            datePicker.bottomAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
     
     private func moveToEditDiary(indexPath: IndexPath) {

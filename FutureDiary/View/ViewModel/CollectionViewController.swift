@@ -107,6 +107,14 @@ class CollectionViewController: UIViewController {
     @objc func showToastMessage() {
         view.makeToast("도착 예정 편지는 \(diaryAllTask.count - diaryTask.count)개입니다!")
     }
+    
+    private func moveToEditDiary(indexPath: IndexPath) {
+        let vc = CurrentDiaryViewController()
+        vc.currentTitleTextField.text = diaryTask[indexPath.row].diaryTitle
+        vc.currentContentTextView.text = diaryTask[indexPath.row].diaryContent
+        vc.viewModel.diaryTasks = diaryTask[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 extension CollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -137,5 +145,9 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
         cell.diaryDateLabel.textAlignment = .center
         cell.diaryDateLabel.adjustsFontSizeToFitWidth = true
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        moveToEditDiary(indexPath: indexPath)
     }
 }
