@@ -67,7 +67,7 @@ final class HomeViewController: UIViewController {
         view.backgroundColor = CustomColor.shared.backgroundColor
         collectionView.backgroundColor = CustomColor.shared.backgroundColor
         writeDiaryButton.tintColor = CustomColor.shared.buttonTintColor
-        calendarView.layer.borderColor = CustomColor.shared.buttonTintColor.cgColor
+        calendarView.layer.borderColor = CustomColor.shared.textColor.cgColor
         calendarView.layer.borderWidth = 1
     }
     
@@ -84,8 +84,8 @@ final class HomeViewController: UIViewController {
             dateLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
             calendarView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
-            calendarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            calendarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            calendarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  8),
+            calendarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
             calendarView.heightAnchor.constraint(equalToConstant: 1),
             
             collectionView.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 8),
@@ -117,7 +117,7 @@ final class HomeViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 16
         layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-        let width = UIScreen.main.bounds.width / 3 - spacing
+        let width = UIScreen.main.bounds.width / 2 - spacing
         layout.itemSize = CGSize(width: width, height: width * 1.4)
         return layout
     }
@@ -187,7 +187,7 @@ final class HomeViewController: UIViewController {
         menu.leftSide = true
         menu.isNavigationBarHidden = true
         menu.blurEffectStyle = .systemMaterial
-        menu.presentationStyle = .viewSlideOutMenuIn
+        menu.presentationStyle = .viewSlideOut
         present(menu, animated: true, completion: nil)
     }
 }
