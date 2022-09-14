@@ -51,7 +51,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
             diaryTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
             diaryTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
             diaryTitleTextLabel.bottomAnchor.constraint(equalTo: diaryTextView.topAnchor, constant: -1),
-            diaryTitleTextLabel.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.1),
+            diaryTitleTextLabel.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.15),
             
             diaryTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
             diaryTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),

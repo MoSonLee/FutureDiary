@@ -11,6 +11,7 @@ import RealmSwift
 import RxCocoa
 import RxSwift
 import SideMenu
+import Toast
 
 final class HomeViewController: UIViewController {
     
@@ -22,16 +23,21 @@ final class HomeViewController: UIViewController {
     private let datePicker = UIDatePicker()
     private let dateLabel = UILabel()
     private var isChecked: Bool = false
+    private let notificationCenter = UNUserNotificationCenter.current()
     
     private var diaryTask: Results<Diary>! {
         didSet {
             collectionView.reloadData()
         }
     }
+    private var futureDiary: Results<Diary>!
+    private var futureDiaryTime: [Date] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.applicationIconBadgeNumber = 0
         fetchRealm()
+        requestAuthorization()
     }
     
     override func viewDidLoad() {
@@ -44,11 +50,40 @@ final class HomeViewController: UIViewController {
         datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
     }
     
+    private func requestAuthorization() {
+        let authorizationOptions = UNAuthorizationOptions(arrayLiteral: .alert, .badge, .sound)
+        notificationCenter.requestAuthorization(options: authorizationOptions) { success, error in
+            if success {
+                self.sendNotification()
+            }
+        }
+    }
+    
+    func sendNotification() {
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = "일기가 도착했습니다!"
+        notificationContent.body = "과거로부터 온 편지를 확인해보세요"
+        notificationContent.sound = .default
+        notificationContent.badge = 1
+        
+        futureDiaryTime = futureDiaryTime.filter{ $0 > Date()}
+        futureDiaryTime.forEach {
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: $0.timeIntervalSince(Date()) + 0.5, repeats: false)
+            let request = UNNotificationRequest(identifier: "\($0)" , content: notificationContent , trigger: trigger)
+            notificationCenter.add(request)
+        }
+    }
+    
     private func fetchRealm() {
         if datePicker.date < Date().startOfDay {
             diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: datePicker.date.endOfDay)
         } else {
             diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: Date())
+        }
+        
+        futureDiary = repository.filterFuture(date: Date())
+        futureDiary.forEach {
+            futureDiaryTime.append($0.diaryDate)
         }
         collectionView.reloadData()
     }

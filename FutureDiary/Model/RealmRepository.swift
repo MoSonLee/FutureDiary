@@ -55,6 +55,11 @@ final class RealmRepository {
             .filter("diaryDate BETWEEN {%@, %@}", todayStartTime, currentDate)
             .sorted(byKeyPath: "diaryDate", ascending: false)
     }
+    
+    func filterFuture(date: Date) -> Results<Diary> {
+        return realm.objects(Diary.self)
+            .filter("diaryDate > %@", date)
+    }
 
     func delete(diary: Diary) {
         try! realm.write {
