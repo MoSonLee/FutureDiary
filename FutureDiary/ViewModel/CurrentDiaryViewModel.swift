@@ -22,13 +22,13 @@ final class CurrentDiaryViewModel {
         let dismiss: Signal<Void>
     }
     
+    var diaryTasks: Diary?
+    
+    private let respository = RealmRepository()
     private let showAlertRelay = PublishRelay<(String, Bool)>()
     private let showToastRelay = PublishRelay<String>()
     private let popVCRelay = PublishRelay<Void>()
-    private let respository = RealmRepository()
     private let disoiseBag = DisposeBag()
-    
-    var diaryTasks: Diary?
     
     private func setDateFormatToString(date: Date) -> String {
         let myDateFormatter = DateFormatter()
@@ -45,7 +45,7 @@ final class CurrentDiaryViewModel {
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
                 } else if (self?.diaryTasks) != nil {
-                    print("AAAAAA")
+                    print("UPDATED")
                     let diaryModel = Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: Date(), diaryDateToString: dateString)
                     self?.updateRealm(diary: diaryModel)
                 }
@@ -64,7 +64,6 @@ final class CurrentDiaryViewModel {
 }
 
 extension CurrentDiaryViewModel {
-    
     private func saveRealm(diary: Diary) {
         respository.create(diary: diary) { isSaved in
             if isSaved {

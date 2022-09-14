@@ -17,7 +17,8 @@ final class CurrentDiaryViewController: UIViewController {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
     private let saveButton = UIBarButtonItem()
-    private let deleteButton = UIBarButtonItem()
+    var deleteButton = UIBarButtonItem()
+    private let repository = RealmRepository()
     
     let currentTitleTextField = FuryTextField()
     
@@ -45,6 +46,7 @@ final class CurrentDiaryViewController: UIViewController {
         setConstraints()
         setNavigation()
         bind()
+        
     }
     
     private func setConfigure() {
@@ -88,9 +90,13 @@ final class CurrentDiaryViewController: UIViewController {
     
     private func setNavigation() {
         saveButton.title = "완료"
-        deleteButton.title = "삭제"
         self.navigationItem.title = "현재"
-        navigationItem.rightBarButtonItems = [saveButton, deleteButton]
+        deleteButton = UIBarButtonItem(title: "삭제", style: .done, target: self, action: #selector(showDeleteAlert))
+        if viewModel.diaryTasks != nil {
+            navigationItem.rightBarButtonItems = [saveButton, deleteButton]
+        } else {
+            navigationItem.rightBarButtonItem = saveButton
+        }
         UINavigationBar.appearance().isTranslucent = false
         setNavigationColor()
     }
@@ -102,8 +108,22 @@ final class CurrentDiaryViewController: UIViewController {
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
     }
     
-    private func bind() {
+    //rx로 수정예정
+    @objc func showDeleteAlert() {
+        let alert =  UIAlertController(title: "정말 삭제하실건가요?", message: "삭제하시면 복구할 수 없어요!", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        guard let diary = self.viewModel.diaryTasks else { return }
         
+        let ok = UIAlertAction(title: "확인", style:.destructive, handler: { _ in
+            self.repository.delete(diary: diary)
+            self.navigationController?.popViewController(animated: true)
+        })
+        alert.addAction(cancel)
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func bind() {
         output.showAlert
             .emit(onNext: {[weak self] text, isSaved in
                 let alert = UIAlertController(title: text, message: nil, preferredStyle: .alert)

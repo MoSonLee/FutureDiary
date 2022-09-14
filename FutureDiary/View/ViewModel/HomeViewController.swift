@@ -116,9 +116,9 @@ final class HomeViewController: UIViewController {
     private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 16
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-        let width = UIScreen.main.bounds.width / 2 - spacing
-        layout.itemSize = CGSize(width: width, height: width * 1.4)
+        layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        let width = UIScreen.main.bounds.width - spacing
+        layout.itemSize = CGSize(width: width, height: width * 0.5)
         return layout
     }
     

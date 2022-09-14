@@ -85,13 +85,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		770DF6E828CA6BC600349D55 /* Cell */ = {
+		770DF6E828CA6BC600349D55 /* Resuable */ = {
 			isa = PBXGroup;
 			children = (
 				770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */,
 				776DF96B28D055EA00809EA2 /* CollectionHeaderReusableView.swift */,
 			);
-			path = Cell;
+			path = Resuable;
 			sourceTree = "<group>";
 		};
 		770DF6E928CA6BD200349D55 /* ViewModel */ = {
@@ -162,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				770DF6E928CA6BD200349D55 /* ViewModel */,
-				770DF6E828CA6BC600349D55 /* Cell */,
+				770DF6E828CA6BC600349D55 /* Resuable */,
 			);
 			path = View;
 			sourceTree = "<group>";

@@ -11,12 +11,12 @@ import RealmSwift
 
 final class RealmRepository {
     
-    private let localRealm = try! Realm()
+    private let realm = try! Realm()
     
     func create(diary: Diary, completion: ((Bool) -> Void)) {
         do {
-            try localRealm.write {
-                localRealm.add(diary)
+            try realm.write {
+                realm.add(diary)
             }
             completion(true)
             
@@ -28,8 +28,8 @@ final class RealmRepository {
     
     func update(diary: Diary, completion: ((Bool) -> Void)) {
         do {
-            try localRealm.write {
-                localRealm.create(Diary.self, value: diary, update: .modified)
+            try realm.write {
+                realm.create(Diary.self, value: diary, update: .modified)
             }
             completion(true)
             
@@ -40,25 +40,38 @@ final class RealmRepository {
     }
     
     func fetch(date: Date) -> Results<Diary>! {
-        return localRealm.objects(Diary.self)
+        return realm.objects(Diary.self)
             .filter("diaryDate <= %@", date)
             .sorted(byKeyPath: "diaryDate", ascending: false)
     }
     
     func fetch() -> Results<Diary>! {
-        return localRealm.objects(Diary.self)
+        return realm.objects(Diary.self)
             .sorted(byKeyPath: "diaryDate", ascending: false)
     }
     
     func dateFilteredFetch(todayStartTime: Date, currentDate: Date) -> Results<Diary>! {
-        return localRealm.objects(Diary.self)
+        return realm.objects(Diary.self)
             .filter("diaryDate BETWEEN {%@, %@}", todayStartTime, currentDate)
             .sorted(byKeyPath: "diaryDate", ascending: false)
     }
+
+    func delete(diary: Diary) {
+        try! realm.write {
+            realm.delete(diary)
+        }
+    }
     
-    func delete(item: Diary) {
-        try! localRealm.write {
-            localRealm.delete(item)
+    func delete(diary: Diary, completion: ((Bool) -> Void)) {
+        do {
+            try realm.write {
+                realm.delete(diary)
+            }
+            completion(true)
+            
+        } catch let error {
+            completion(false)
+            print(error)
         }
     }
 }
