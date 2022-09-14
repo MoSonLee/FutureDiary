@@ -130,7 +130,7 @@ final class CurrentDiaryViewController: UIViewController {
                 let alert = UIAlertController(title: text, message: nil, preferredStyle: .alert)
                 let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
                     if isSaved {
-                        self?.navigationController?.popToRootViewController(animated: true)
+                        self?.navigationController?.popViewController(animated: true)
                     }
                 }
                 alert.addAction(confirmAction)

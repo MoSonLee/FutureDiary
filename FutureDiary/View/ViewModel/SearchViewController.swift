@@ -48,7 +48,6 @@ class SearchViewController: UIViewController {
     private func fetchRealm() {
         diaryTask = repository.fetch(date: Date())
         diaryAllTask = repository.fetch()
-        collectionView.reloadData()
     }
     
     private func setConfigure() {

@@ -83,16 +83,16 @@ class CollectionViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.collectionViewLayout = setCollectionViewLayout()
         collectionView.register(HomeCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: HomeCollectionViewCell.identifider)
-//        collectionView.register(CollectionHeaderReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionHeaderReusableView.identifier)
+        collectionView.register(CollectionHeaderReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionHeaderReusableView.identifier)
     }
     
     private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 16
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 32, right: 8)
+        layout.sectionInset = UIEdgeInsets(top: 32, left: 8, bottom: 32, right: 8)
         let width = UIScreen.main.bounds.width / 4 - spacing
         layout.itemSize = CGSize(width: width, height: width * 1.4)
-        layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
+//        layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
         return layout
     }
     
@@ -126,7 +126,7 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
 //        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionHeaderReusableView.identifier, for: indexPath) as? CollectionHeaderReusableView else { return UICollectionReusableView()}
 //        headerView.headerLabel.backgroundColor = CustomColor.shared.backgroundColor
 //        headerView.headerLabel.textColor = CustomColor.shared.textColor
-//        headerView.headerLabel.text = diaryTask[indexPath.section].diaryDateToString
+//        headerView.headerLabel.text = "전체 보관함"
 //        return headerView
 //
 //    }
@@ -140,7 +140,8 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
         cell.diaryTitleTextLabel.text = diaryTask[indexPath.row].diaryTitle
         cell.diaryTextView.text = diaryTask[indexPath.row].diaryContent
         cell.diaryDateLabel.text =  setDateFormatToStringWithHoursAndMinute(date: diaryTask[indexPath.row].diaryDate)
-        cell.diaryDateLabel.font = .systemFont(ofSize: 10)
+        cell.diaryDateLabel.font = .systemFont(ofSize: 12)
+        cell.diaryTitleTextLabel.font = .systemFont(ofSize: 12)
         cell.diaryDateLabel.textAlignment = .center
         cell.diaryDateLabel.adjustsFontSizeToFitWidth = true
         return cell
