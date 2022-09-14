@@ -17,6 +17,7 @@ final class CurrentDiaryViewController: UIViewController {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
     private let saveButton = UIBarButtonItem()
+    private let deleteButton = UIBarButtonItem()
     
     let currentTitleTextField = FuryTextField()
     
@@ -87,8 +88,9 @@ final class CurrentDiaryViewController: UIViewController {
     
     private func setNavigation() {
         saveButton.title = "완료"
+        deleteButton.title = "삭제"
         self.navigationItem.title = "현재"
-        navigationItem.rightBarButtonItem = saveButton
+        navigationItem.rightBarButtonItems = [saveButton, deleteButton]
         UINavigationBar.appearance().isTranslucent = false
         setNavigationColor()
     }
@@ -122,4 +124,3 @@ final class CurrentDiaryViewController: UIViewController {
             .disposed(by: disposdeBag)
     }
 }
-

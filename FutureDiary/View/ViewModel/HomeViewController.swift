@@ -16,7 +16,6 @@ final class HomeViewController: UIViewController {
     
     private let viewModel = HomeViewModel()
     private let repository = RealmRepository()
-    private let localRealm = try! Realm()
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     private let writeDiaryButton = UIButton()
     private let calendarView = UIView()

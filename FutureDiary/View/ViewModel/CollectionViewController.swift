@@ -18,11 +18,10 @@ class CollectionViewController: UIViewController {
     private var datePickerView = UIPickerView()
     private var diaryAllTask: Results<Diary>!
     private var diaryTask: Results<Diary>!
+    private var mailButton = UIBarButtonItem()
     
     private let repository = RealmRepository()
-    private let localRealm = try! Realm()
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
-    private var mailButton = UIBarButtonItem()
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

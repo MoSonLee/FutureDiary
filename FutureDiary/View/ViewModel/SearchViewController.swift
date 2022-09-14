@@ -22,7 +22,6 @@ class SearchViewController: UIViewController {
     
     private let searchController = UISearchController(searchResultsController: nil)
     private let repository = RealmRepository()
-    private let localRealm = try! Realm()
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     
     private var isSearching: Bool {
@@ -63,7 +62,7 @@ class SearchViewController: UIViewController {
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "검색"
+        searchController.searchBar.placeholder = "제목으로 검색해보세요"
         navigationItem.searchController = searchController
         searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
         searchController.searchBar.tintColor = CustomColor.shared.buttonTintColor
