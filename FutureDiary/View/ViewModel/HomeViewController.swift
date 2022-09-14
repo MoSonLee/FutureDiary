@@ -161,7 +161,7 @@ final class HomeViewController: UIViewController {
         let vc = CurrentDiaryViewController()
         vc.currentTitleTextField.text = diaryTask[indexPath.row].diaryTitle
         vc.currentContentTextView.text = diaryTask[indexPath.row].diaryContent
-        vc.viewModel.diaryTasks = diaryTask[indexPath.row]
+        vc.viewModel.diaryTask = diaryTask[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -92,7 +92,7 @@ final class CurrentDiaryViewController: UIViewController {
         saveButton.title = "완료"
         self.navigationItem.title = "현재"
         deleteButton = UIBarButtonItem(title: "삭제", style: .done, target: self, action: #selector(showDeleteAlert))
-        if viewModel.diaryTasks != nil {
+        if viewModel.diaryTask != nil {
             navigationItem.rightBarButtonItems = [saveButton, deleteButton]
         } else {
             navigationItem.rightBarButtonItem = saveButton
@@ -112,12 +112,13 @@ final class CurrentDiaryViewController: UIViewController {
     @objc func showDeleteAlert() {
         let alert =  UIAlertController(title: "정말 삭제하실건가요?", message: "삭제하시면 복구할 수 없어요!", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "취소", style: .cancel)
-        guard let diary = self.viewModel.diaryTasks else { return }
+        guard let diary = self.viewModel.diaryTask else { return }
         
         let ok = UIAlertAction(title: "확인", style:.destructive, handler: { _ in
             self.repository.delete(diary: diary)
             self.navigationController?.popViewController(animated: true)
         })
+        
         alert.addAction(cancel)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)

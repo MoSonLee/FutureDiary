@@ -22,7 +22,7 @@ final class CurrentDiaryViewModel {
         let dismiss: Signal<Void>
     }
     
-    var diaryTasks: Diary?
+    var diaryTask: Diary?
     
     private let respository = RealmRepository()
     private let showAlertRelay = PublishRelay<(String, Bool)>()
@@ -41,15 +41,18 @@ final class CurrentDiaryViewModel {
     func transform(input: Input) -> Output {
         input.saveButtonTap
             .emit(onNext: { [weak self] diary in
+                
                 guard let dateString = self?.setDateFormatToString(date: Date()) else { return }
+                
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
-                } else if (self?.diaryTasks) != nil {
+                } else if let diaryTask = self?.diaryTask {
                     print("UPDATED")
-                    let diaryModel = Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: Date(), diaryDateToString: dateString)
+                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: Date(), diaryDateToString: dateString)
                     self?.updateRealm(diary: diaryModel)
-                }
-                else {
+                    self?.respository.delete(diary: diaryTask)
+                } else {
+                    print("SAVED")
                     let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: Date(), diaryDateToString: dateString)
                     self?.saveRealm(diary: diaryModel)
                 }
@@ -82,5 +85,9 @@ extension CurrentDiaryViewModel {
                 self.showToastRelay.accept("오류가 발생했습니다. 다시 시도해주세요")
             }
         }
+    }
+    
+    private func deleteRealm(diary: Diary) {
+        respository.delete(diary: diary)
     }
 }
