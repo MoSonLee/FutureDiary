@@ -28,22 +28,13 @@ final class FutureDiaryViewModel {
     private let respository = RealmRepository()
     private let disoiseBag = DisposeBag()
     
-    private func setDateFormatToString(date: Date) -> String {
-        let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "yyyy.MM.dd"
-        myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
-        myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
-        return myDateFormatter.string(from: date)
-    }
-    
     func transform(input: Input) -> Output {
         input.saveButtonTap
             .emit(onNext: { [weak self] diary in
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
                 } else {
-                    guard let dateString = self?.setDateFormatToString(date: diary.2) else { return }
-                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2, diaryDateToString: dateString)
+                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2)
                     self?.saveRealm(diary: diaryModel)
                 }
             })

@@ -14,15 +14,13 @@ final class Diary: Object {
     @Persisted var diaryTitle: String
     @Persisted var diaryContent: String
     @Persisted var diaryDate: Date
-    @Persisted var diaryDateToString: String
     
     @Persisted(primaryKey: true) var objectId: ObjectId
     
-    convenience init(diaryTitle: String, diaryContent: String, diaryDate: Date, diaryDateToString: String) {
+    convenience init(diaryTitle: String, diaryContent: String, diaryDate: Date) {
         self.init()
         self.diaryTitle = diaryTitle
         self.diaryContent = diaryContent
         self.diaryDate = diaryDate
-        self.diaryDateToString = diaryDateToString
     }
 }

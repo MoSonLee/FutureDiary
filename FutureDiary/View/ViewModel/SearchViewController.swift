@@ -79,14 +79,6 @@ class SearchViewController: UIViewController {
         ])
     }
     
-    private func setDateFormatToLongString(date: Date) -> String {
-        let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "yyyy.MM.dd a hh:mm"
-        myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
-        myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
-        return myDateFormatter.string(from: date)
-    }
-    
     private func setNavigation() {
         self.navigationItem.title = "검색하기"
         UINavigationBar.appearance().isTranslucent = false
@@ -141,7 +133,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         
         cell.diaryTitleTextLabel.text = searchedDiary[indexPath.row].diaryTitle
         cell.diaryTextView.text = searchedDiary[indexPath.row].diaryContent
-        cell.diaryDateLabel.text = setDateFormatToLongString(date: searchedDiary[indexPath.row].diaryDate)
+        cell.diaryDateLabel.text = searchedDiary[indexPath.row].diaryDate.toDetailString
         cell.diaryDateLabel.font = .systemFont(ofSize: 10)
         cell.diaryDateLabel.textAlignment = .center
         cell.diaryDateLabel.adjustsFontSizeToFitWidth = true

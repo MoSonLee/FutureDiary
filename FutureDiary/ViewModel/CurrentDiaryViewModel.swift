@@ -41,19 +41,14 @@ final class CurrentDiaryViewModel {
     func transform(input: Input) -> Output {
         input.saveButtonTap
             .emit(onNext: { [weak self] diary in
-                
-                guard let dateString = self?.setDateFormatToString(date: Date()) else { return }
-                
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
                 } else if let diaryTask = self?.diaryTask {
                     print("UPDATED")
-                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: Date(), diaryDateToString: dateString)
-                    self?.updateRealm(diary: diaryModel)
-                    self?.respository.delete(diary: diaryTask)
+                    self?.updateRealm(diary: diaryTask, title: diary.0, content: diary.1)
                 } else {
                     print("SAVED")
-                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: Date(), diaryDateToString: dateString)
+                    let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: Date())
                     self?.saveRealm(diary: diaryModel)
                 }
             })
@@ -77,8 +72,8 @@ extension CurrentDiaryViewModel {
         }
     }
     
-    private func updateRealm(diary: Diary) {
-        respository.update(diary: diary) { isSaved in
+    private func updateRealm(diary: Diary, title: String, content: String) {
+        respository.update(diary: diary, title: title, content: content) { isSaved in
             if isSaved {
                 self.showAlertRelay.accept(("저장되었습니다", true))
             } else {

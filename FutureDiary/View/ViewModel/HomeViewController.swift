@@ -25,11 +25,12 @@ final class HomeViewController: UIViewController {
     private var isChecked: Bool = false
     private let notificationCenter = UNUserNotificationCenter.current()
     
-    private var diaryTask: Results<Diary>! {
+    private var diarys: Results<Diary>! {
         didSet {
             collectionView.reloadData()
         }
     }
+    
     private var futureDiary: Results<Diary>!
     private var futureDiaryTime: [Date] = []
     
@@ -66,25 +67,27 @@ final class HomeViewController: UIViewController {
         notificationContent.sound = .default
         notificationContent.badge = 1
         
-        futureDiaryTime = futureDiaryTime.filter{ $0 > Date()}
         futureDiaryTime.forEach {
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: $0.timeIntervalSince(Date()) + 0.5, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: $0.timeIntervalSince(Date()), repeats: false)
             let request = UNNotificationRequest(identifier: "\($0)" , content: notificationContent , trigger: trigger)
             notificationCenter.add(request)
         }
     }
     
     private func fetchRealm() {
-        if datePicker.date < Date().startOfDay {
-            diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: datePicker.date.endOfDay)
+        if datePicker.date < Date().toStartOfDay {
+            diarys = repository.dateFilteredFetch(todayStartTime: datePicker.date.toStartOfDay, currentDate: datePicker.date.toEndOfDay)
         } else {
-            diaryTask = repository.dateFilteredFetch(todayStartTime: datePicker.date.startOfDay, currentDate: Date())
+            diarys = repository.dateFilteredFetch(todayStartTime: datePicker.date.toStartOfDay, currentDate: Date())
         }
         
         futureDiary = repository.filterFuture(date: Date())
         futureDiary.forEach {
             futureDiaryTime.append($0.diaryDate)
         }
+        
+        futureDiaryTime = futureDiaryTime.filter{ $0 > Date()}
+        
         collectionView.reloadData()
     }
     
@@ -110,7 +113,7 @@ final class HomeViewController: UIViewController {
         let largeConfig = UIImage.SymbolConfiguration(pointSize: 44, weight: .bold, scale: .large)
         let largeBoldDoc = UIImage(systemName: "pencil.circle.fill", withConfiguration: largeConfig)
         writeDiaryButton.setImage(largeBoldDoc, for: .normal)
-        dateLabel.text = setDateFormatToString(date: datePicker.date)
+        dateLabel.text = datePicker.date.toString
     }
     
     private func setConstraints() {
@@ -157,22 +160,6 @@ final class HomeViewController: UIViewController {
         return layout
     }
     
-    private func setDateFormatToString(date: Date) -> String {
-        let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "yyyy.MM.dd"
-        myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
-        myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
-        return myDateFormatter.string(from: datePicker.date)
-    }
-    
-    private func setDateFormatToStringWithHoursAndMinute(date: Date) -> String {
-        let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "yyyy.MM.dd a hh:mm"
-        myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
-        myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
-        return myDateFormatter.string(from: date)
-    }
-    
     private func setCalendar() {
         calendarView.addSubview(datePicker)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
@@ -182,7 +169,6 @@ final class HomeViewController: UIViewController {
         datePicker.timeZone = TimeZone(abbreviation: Locale.autoupdatingCurrent.identifier)
         datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
-        datePicker.tintColor = CustomColor.shared.textColor
         
         NSLayoutConstraint.activate([
             datePicker.topAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.topAnchor),
@@ -194,9 +180,10 @@ final class HomeViewController: UIViewController {
     
     private func moveToEditDiary(indexPath: IndexPath) {
         let vc = CurrentDiaryViewController()
-        vc.currentTitleTextField.text = diaryTask[indexPath.row].diaryTitle
-        vc.currentContentTextView.text = diaryTask[indexPath.row].diaryContent
-        vc.viewModel.diaryTask = diaryTask[indexPath.row]
+        vc.currentTitleTextField.text = diarys[indexPath.row].diaryTitle
+        vc.currentContentTextView.text = diarys[indexPath.row].diaryContent
+        vc.viewModel.diaryTask = diarys[indexPath.row]
+        print(diarys[indexPath.row].objectId)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -236,7 +223,7 @@ final class HomeViewController: UIViewController {
     }
     
     @objc func datePickerChanged(picker: UIDatePicker) {
-        dateLabel.text = setDateFormatToString(date: picker.date)
+        dateLabel.text = picker.date.toString
         fetchRealm()
     }
     
@@ -253,7 +240,7 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        diaryTask.count
+        diarys.count
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -262,9 +249,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
-        cell.diaryTitleTextLabel.text = diaryTask[indexPath.row].diaryTitle
-        cell.diaryTextView.text = diaryTask[indexPath.row].diaryContent
-        cell.diaryDateLabel.text = setDateFormatToStringWithHoursAndMinute(date: diaryTask[indexPath.row].diaryDate)
+        cell.diaryTitleTextLabel.text = diarys[indexPath.row].diaryTitle
+        cell.diaryTextView.text = diarys[indexPath.row].diaryContent
+        cell.diaryDateLabel.text = diarys[indexPath.row].diaryDate.toDetailString
         cell.diaryDateLabel.textAlignment = .center
         cell.diaryDateLabel.adjustsFontSizeToFitWidth = true
         return cell

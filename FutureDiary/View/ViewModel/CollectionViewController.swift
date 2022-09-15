@@ -19,6 +19,7 @@ class CollectionViewController: UIViewController {
     private var diaryAllTask: Results<Diary>!
     private var diaryTask: Results<Diary>!
     private var mailButton = UIBarButtonItem()
+    private var diaryDictionary: [String : [Diary]] = [ : ]
     
     private let repository = RealmRepository()
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -28,6 +29,10 @@ class CollectionViewController: UIViewController {
         fetchRealm()
         print(diaryTask.count)
         print(diaryAllTask.count)
+        
+        diaryTask.forEach { value in
+            diaryDictionary[value.diaryDate.toString] = Array(diaryTask.filter{ $0.diaryDate.toString == value.diaryDate.toString })
+        }
     }
     
     override func viewDidLoad() {
@@ -46,7 +51,6 @@ class CollectionViewController: UIViewController {
     
     private func setConfigure() {
         view.backgroundColor = CustomColor.shared.backgroundColor
-        
         [collectionView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -60,14 +64,6 @@ class CollectionViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
-    }
-    
-    private func setDateFormatToStringWithHoursAndMinute(date: Date) -> String {
-        let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "yyyy.MM.dd a hh:mm"
-        myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
-        myDateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
-        return myDateFormatter.string(from: date)
     }
     
     private func setNavigation() {
@@ -92,7 +88,7 @@ class CollectionViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 32, left: 8, bottom: 32, right: 8)
         let width = UIScreen.main.bounds.width / 4 - spacing
         layout.itemSize = CGSize(width: width, height: width * 1.4)
-//        layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
+        layout.headerReferenceSize = CGSize(width: view.bounds.width / 2, height: 30)
         return layout
     }
     
@@ -119,27 +115,32 @@ class CollectionViewController: UIViewController {
 extension CollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
+        diaryDictionary.keys.count
     }
     
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-//        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionHeaderReusableView.identifier, for: indexPath) as? CollectionHeaderReusableView else { return UICollectionReusableView()}
-//        headerView.headerLabel.backgroundColor = CustomColor.shared.backgroundColor
-//        headerView.headerLabel.textColor = CustomColor.shared.textColor
-//        headerView.headerLabel.text = "전체 보관함"
-//        return headerView
-//
-//    }
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionHeaderReusableView.identifier, for: indexPath) as? CollectionHeaderReusableView else { return UICollectionReusableView()}
+        headerView.headerLabel.backgroundColor = CustomColor.shared.backgroundColor
+        headerView.headerLabel.textColor = CustomColor.shared.textColor
+        headerView.headerLabel.text = Array(diaryDictionary.keys)[indexPath.section]
+        return headerView
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        diaryTask.count
+        let key = Array(diaryDictionary.keys)[section]
+        return diaryDictionary[key]?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
-        cell.diaryTitleTextLabel.text = diaryTask[indexPath.row].diaryTitle
-        cell.diaryTextView.text = diaryTask[indexPath.row].diaryContent
-        cell.diaryDateLabel.text =  setDateFormatToStringWithHoursAndMinute(date: diaryTask[indexPath.row].diaryDate)
+        
+        let key = Array(diaryDictionary.keys)[indexPath.section]
+        let diary = diaryDictionary[key]?[indexPath.item]
+        
+        cell.diaryTitleTextLabel.text = diary?.diaryTitle
+        cell.diaryTextView.text = diary?.diaryContent
+        cell.diaryDateLabel.text = diary?.diaryDate.toDetailString
+        
         cell.diaryDateLabel.font = .systemFont(ofSize: 12)
         cell.diaryTitleTextLabel.font = .systemFont(ofSize: 12)
         cell.diaryDateLabel.textAlignment = .center

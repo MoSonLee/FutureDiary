@@ -20,7 +20,7 @@ final class CollectionHeaderReusableView: UICollectionReusableView {
         setConfigure()
         setConstraints()
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -36,7 +36,7 @@ final class CollectionHeaderReusableView: UICollectionReusableView {
             headerLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8),
             headerLabel.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -8),
             headerLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -2),
-            ])
+        ])
     }
     
     private func setComponentsColor() {

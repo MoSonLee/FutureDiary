@@ -26,13 +26,14 @@ final class RealmRepository {
         }
     }
     
-    func update(diary: Diary, completion: ((Bool) -> Void)) {
+    func update(diary: Diary, title: String, content: String, completion: ((Bool) -> Void)) {
         do {
             try realm.write {
-                realm.create(Diary.self, value: diary, update: .modified)
+                diary.diaryTitle = title
+                diary.diaryContent = content
             }
             completion(true)
-            
+
         } catch let error {
             completion(false)
             print(error)
@@ -64,19 +65,6 @@ final class RealmRepository {
     func delete(diary: Diary) {
         try! realm.write {
             realm.delete(diary)
-        }
-    }
-    
-    func delete(diary: Diary, completion: ((Bool) -> Void)) {
-        do {
-            try realm.write {
-                realm.delete(diary)
-            }
-            completion(true)
-            
-        } catch let error {
-            completion(false)
-            print(error)
         }
     }
 }

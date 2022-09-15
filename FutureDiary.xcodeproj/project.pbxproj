@@ -20,6 +20,7 @@
 		770DF6E528CA6A2700349D55 /* FutureDiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6E428CA6A2700349D55 /* FutureDiaryViewModel.swift */; };
 		770DF6E728CA6A2F00349D55 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6E628CA6A2F00349D55 /* SettingViewModel.swift */; };
 		770DF6EB28CA6BF900349D55 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */; };
+		7722831C28D36268007A9557 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722831B28D36268007A9557 /* Date+Extension.swift */; };
 		773A6E3D28CC74D500452D68 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E3C28CC74D500452D68 /* UIView+Extension.swift */; };
 		773A6E3F28CC9F2600452D68 /* FuryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E3E28CC9F2600452D68 /* FuryTextField.swift */; };
 		773A6E4328CF6D0E00452D68 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E4228CF6D0E00452D68 /* Color.swift */; };
@@ -49,6 +50,7 @@
 		770DF6E428CA6A2700349D55 /* FutureDiaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureDiaryViewModel.swift; sourceTree = "<group>"; };
 		770DF6E628CA6A2F00349D55 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
+		7722831B28D36268007A9557 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		773A6E3C28CC74D500452D68 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		773A6E3E28CC9F2600452D68 /* FuryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuryTextField.swift; sourceTree = "<group>"; };
 		773A6E4128CF508700452D68 /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ko; path = ko.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				773A6E3C28CC74D500452D68 /* UIView+Extension.swift */,
+				7722831B28D36268007A9557 /* Date+Extension.swift */,
 				773A6E3E28CC9F2600452D68 /* FuryTextField.swift */,
 				773A6E4228CF6D0E00452D68 /* Color.swift */,
 			);
@@ -293,6 +296,7 @@
 				770DF6E128CA68FB00349D55 /* SettingViewController.swift in Sources */,
 				770DF6DD28CA68B300349D55 /* CurrentDiaryViewController.swift in Sources */,
 				770DF6E528CA6A2700349D55 /* FutureDiaryViewModel.swift in Sources */,
+				7722831C28D36268007A9557 /* Date+Extension.swift in Sources */,
 				779DA61528CA62BB00561000 /* SceneDelegate.swift in Sources */,
 				770DF6DB28CA676E00349D55 /* SideMenuNavigationController.swift in Sources */,
 				770DF6E728CA6A2F00349D55 /* SettingViewModel.swift in Sources */,
