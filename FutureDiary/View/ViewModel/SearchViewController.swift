@@ -133,32 +133,19 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if isSearching {
-            return searchedDiary.count
-        } else {
-            return 0
-        }
+        isSearching ? searchedDiary.count : 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
         
-        if isSearching{
-            cell.diaryTitleTextLabel.text = searchedDiary[indexPath.row].diaryTitle
-            cell.diaryTextView.text = searchedDiary[indexPath.row].diaryContent
-            cell.diaryDateLabel.text = setDateFormatToStringWithHoursAndMinute(date: searchedDiary[indexPath.row].diaryDate)
-            cell.diaryDateLabel.font = .systemFont(ofSize: 10)
-            cell.diaryDateLabel.textAlignment = .center
-            cell.diaryDateLabel.adjustsFontSizeToFitWidth = true
-            
-            guard let cellTitleText = cell.diaryTitleTextLabel.text  else { return UICollectionViewCell() }
-            guard let cellDescriptionText = cell.diaryTextView.text else { return UICollectionViewCell() }
-            cell.setSearchedTexrColor(cellTitleText: cellTitleText, cellDescriptionText: cellDescriptionText, searchController: searchController)
-        } else {
-            cell.diaryTextView.textColor = CustomColor.shared.textColor
-            cell.diaryTitleTextLabel.textColor = CustomColor.shared.textColor
-            cell.diaryDateLabel.textColor = CustomColor.shared.textColor
-        }
+        cell.diaryTitleTextLabel.text = searchedDiary[indexPath.row].diaryTitle
+        cell.diaryTextView.text = searchedDiary[indexPath.row].diaryContent
+        cell.diaryDateLabel.text = setDateFormatToStringWithHoursAndMinute(date: searchedDiary[indexPath.row].diaryDate)
+        cell.diaryDateLabel.font = .systemFont(ofSize: 10)
+        cell.diaryDateLabel.textAlignment = .center
+        cell.diaryDateLabel.adjustsFontSizeToFitWidth = true
+        
         return cell
     }
     

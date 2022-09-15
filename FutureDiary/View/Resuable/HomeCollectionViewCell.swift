@@ -62,18 +62,4 @@ class HomeCollectionViewCell: UICollectionViewCell {
             diaryDateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -1),
         ])
     }
-    
-    func setSearchedTexrColor(cellTitleText: String, cellDescriptionText: String, searchController: UISearchController) {
-        let attributeCellTitle = NSMutableAttributedString(string: cellTitleText)
-        let attributeCellDescripition = NSMutableAttributedString(string: cellDescriptionText)
-        
-        attributeCellTitle.addAttribute(.foregroundColor, value: UIColor.systemOrange, range: (cellTitleText as NSString).range(of: searchController.searchBar.text ?? ""))
-        attributeCellDescripition.addAttribute(.foregroundColor, value:  UIColor.systemOrange, range: (cellDescriptionText as NSString).range(of: searchController.searchBar.text ?? ""))
-        
-        if cellTitleText.contains(searchController.searchBar.text ?? "") {
-            self.diaryTitleTextLabel.attributedText = attributeCellTitle
-        } else if cellDescriptionText.contains(searchController.searchBar.text ?? "") {
-            self.diaryTextView.attributedText = attributeCellDescripition
-        }
-    }
 }
