@@ -79,7 +79,7 @@ class SearchViewController: UIViewController {
         ])
     }
     
-    private func setDateFormatToStringWithHoursAndMinute(date: Date) -> String {
+    private func setDateFormatToLongString(date: Date) -> String {
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "yyyy.MM.dd a hh:mm"
         myDateFormatter.locale = Locale(identifier: Locale.current.identifier)
@@ -141,7 +141,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         
         cell.diaryTitleTextLabel.text = searchedDiary[indexPath.row].diaryTitle
         cell.diaryTextView.text = searchedDiary[indexPath.row].diaryContent
-        cell.diaryDateLabel.text = setDateFormatToStringWithHoursAndMinute(date: searchedDiary[indexPath.row].diaryDate)
+        cell.diaryDateLabel.text = setDateFormatToLongString(date: searchedDiary[indexPath.row].diaryDate)
         cell.diaryDateLabel.font = .systemFont(ofSize: 10)
         cell.diaryDateLabel.textAlignment = .center
         cell.diaryDateLabel.adjustsFontSizeToFitWidth = true

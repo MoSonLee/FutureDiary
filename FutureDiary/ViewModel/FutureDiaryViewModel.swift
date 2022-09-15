@@ -60,7 +60,7 @@ extension FutureDiaryViewModel {
     private func saveRealm(diary: Diary) {
         respository.create(diary: diary) { isSaved in
             if isSaved {
-                self.showAlertRelay.accept(("미래로 일기를 보냈습니다! 설정해주신 시간에 알림을 보내드릴게요", true))
+                self.showAlertRelay.accept(("미래로 전송되었습니다!", true))
             } else {
                 self.showToastRelay.accept("오류가 발생했습니다. 다시 시도해주세요")
             }

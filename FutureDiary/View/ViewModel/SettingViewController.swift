@@ -21,7 +21,6 @@ final class SettingViewController: UIViewController {
     }
     
     private func setConstraints() {
-        
     }
     
     private func setNavigation() {

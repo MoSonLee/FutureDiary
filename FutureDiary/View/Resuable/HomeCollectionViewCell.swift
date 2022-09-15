@@ -12,7 +12,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
     static var identifider: String {
         return "HomeCollectionViewCell"
     }
-    
     var diaryTitleTextLabel = UILabel()
     var diaryTextView = UITextView()
     var diaryDateLabel = UILabel()
