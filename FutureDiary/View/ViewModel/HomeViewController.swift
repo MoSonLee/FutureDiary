@@ -8,8 +8,6 @@
 import UIKit
 
 import RealmSwift
-import RxCocoa
-import RxSwift
 import SideMenu
 import Toast
 
@@ -17,7 +15,7 @@ final class HomeViewController: UIViewController {
     
     private let viewModel = HomeViewModel()
     private let repository = RealmRepository()
-    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     private let writeDiaryButton = UIButton()
     private let calendarView = UIView()
     private let datePicker = UIDatePicker()
@@ -49,6 +47,17 @@ final class HomeViewController: UIViewController {
         collectionViewRegisterAndDelegate()
         writeDiaryButton.addTarget(self, action: #selector(writeButtonTap), for: .touchUpInside)
         datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
+        sendNotification()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: NSNotification.Name(rawValue: "reloadCollectionView"), object: nil)
+    }
+    
+    @objc func reloadCollectionView() {
+        fetchRealm()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver("reloadCollectionView")
     }
     
     private func requestAuthorization() {
@@ -58,20 +67,6 @@ final class HomeViewController: UIViewController {
                 self.sendNotification()
             }
         }
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        let application = UIApplication.shared
-        
-        if(application.applicationState == .active){
-            print("user tapped the notification bar when the app is in foreground")
-        }
-        
-        if(application.applicationState == .inactive)
-        {
-            print("user tapped the notification bar when the app is in background")
-        }
-        completionHandler()
     }
     
     func sendNotification() {
@@ -89,7 +84,7 @@ final class HomeViewController: UIViewController {
         }
     }
     
-    private func fetchRealm() {
+    func fetchRealm() {
         if datePicker.date < Date().toStartOfDay {
             diarys = repository.dateFilteredFetch(todayStartTime: datePicker.date.toStartOfDay, currentDate: datePicker.date.toEndOfDay)
         } else {
@@ -100,6 +95,7 @@ final class HomeViewController: UIViewController {
         futureDiary.forEach {
             futureDiaryTime.append($0.diaryDate)
         }
+        
         collectionView.reloadData()
     }
     
@@ -218,9 +214,10 @@ final class HomeViewController: UIViewController {
             let vc = FutureDiaryController()
             self.navigationController?.pushViewController(vc, animated: true)
         })
-        let cancel = UIAlertAction(title: "취소", style: .destructive , handler: { _ in
+        let cancel = UIAlertAction(title: "취소", style: .cancel , handler: { _ in
             self.dismiss(animated: true)
         })
+        
         [current, future, cancel].forEach {
             alert.addAction($0)
         }
@@ -230,6 +227,7 @@ final class HomeViewController: UIViewController {
                 popoverController.sourceView = self.view
                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
                 popoverController.permittedArrowDirections = []
+                
                 self.present(alert, animated: true, completion: nil)
             }
         } else {

@@ -8,9 +8,6 @@
 import UIKit
 
 import RealmSwift
-import RxCocoa
-import RxSwift
-import SwiftUI
 import Toast
 
 class SearchViewController: UIViewController {

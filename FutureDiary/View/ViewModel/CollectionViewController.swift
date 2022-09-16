@@ -8,9 +8,6 @@
 import UIKit
 
 import RealmSwift
-import RxCocoa
-import RxSwift
-import SwiftUI
 import Toast
 
 class CollectionViewController: UIViewController {
@@ -42,7 +39,7 @@ class CollectionViewController: UIViewController {
     }
     
     private func fetchRealm() {
-        diaryTask = repository.fetch()
+        diaryTask = repository.fetch(date: Date())
         diaryAllTask = repository.fetch()
         collectionView.reloadData()
     }
