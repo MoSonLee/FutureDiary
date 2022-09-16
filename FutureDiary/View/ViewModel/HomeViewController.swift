@@ -169,8 +169,8 @@ final class HomeViewController: UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            let width = (UIScreen.main.bounds.width / 2 - spacing * 2)
-            layout.itemSize = CGSize(width: width, height: width * 0.5)
+            let width = (UIScreen.main.bounds.width / 3 - spacing * 2)
+            layout.itemSize = CGSize(width: width, height: width * 0.7)
             return layout
         } else {
             let width = UIScreen.main.bounds.width - spacing
@@ -184,6 +184,7 @@ final class HomeViewController: UIViewController {
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
+        datePicker.tintColor = CustomColor.shared.buttonTintColor
         datePicker.locale = Locale(identifier: Locale.autoupdatingCurrent.identifier)
         datePicker.timeZone = TimeZone(abbreviation: Locale.autoupdatingCurrent.identifier)
         datePicker.maximumDate = Date()

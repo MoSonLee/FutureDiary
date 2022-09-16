@@ -20,6 +20,7 @@ class CollectionViewController: UIViewController {
     private var diaryTask: Results<Diary>!
     private var mailButton = UIBarButtonItem()
     private var diaryDictionary: [String : [Diary]] = [ : ]
+    private lazy var diarySortedKey = diaryDictionary.keys.sorted(by: >)
     
     private let repository = RealmRepository()
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
@@ -27,9 +28,6 @@ class CollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchRealm()
-        print(diaryTask.count)
-        print(diaryAllTask.count)
-        
         diaryTask.forEach { value in
             diaryDictionary[value.diaryDate.toString] = Array(diaryTask.filter{ $0.diaryDate.toString == value.diaryDate.toString })
         }
@@ -44,7 +42,7 @@ class CollectionViewController: UIViewController {
     }
     
     private func fetchRealm() {
-        diaryTask = repository.fetch(date: Date())
+        diaryTask = repository.fetch()
         diaryAllTask = repository.fetch()
         collectionView.reloadData()
     }
@@ -115,26 +113,27 @@ class CollectionViewController: UIViewController {
 extension CollectionViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        diaryDictionary.keys.count
+        diarySortedKey.count
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionHeaderReusableView.identifier, for: indexPath) as? CollectionHeaderReusableView else { return UICollectionReusableView()}
+        
         headerView.headerLabel.backgroundColor = CustomColor.shared.backgroundColor
         headerView.headerLabel.textColor = CustomColor.shared.textColor
-        headerView.headerLabel.text = Array(diaryDictionary.keys)[indexPath.section]
+        headerView.headerLabel.text = Array(diarySortedKey)[indexPath.section]
         return headerView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let key = Array(diaryDictionary.keys)[section]
+        let key = Array(diarySortedKey)[section]
         return diaryDictionary[key]?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
         
-        let key = Array(diaryDictionary.keys)[indexPath.section]
+        let key = Array(diarySortedKey)[indexPath.section]
         let diary = diaryDictionary[key]?[indexPath.item]
         
         cell.diaryTitleTextLabel.text = diary?.diaryTitle
