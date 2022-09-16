@@ -113,8 +113,6 @@ final class HomeViewController: UIViewController {
         view.backgroundColor = CustomColor.shared.backgroundColor
         collectionView.backgroundColor = CustomColor.shared.backgroundColor
         writeDiaryButton.tintColor = CustomColor.shared.buttonTintColor
-        calendarView.layer.borderColor = CustomColor.shared.textColor.cgColor
-        calendarView.layer.borderWidth = 1
     }
     
     private func setComponentsTextAndImage() {
@@ -132,7 +130,7 @@ final class HomeViewController: UIViewController {
             calendarView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 8),
             calendarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant:  8),
             calendarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -8),
-            calendarView.heightAnchor.constraint(equalToConstant: 1),
+            calendarView.heightAnchor.constraint(equalToConstant: 0),
             
             collectionView.topAnchor.constraint(equalTo: calendarView.bottomAnchor, constant: 8),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -152,8 +150,9 @@ final class HomeViewController: UIViewController {
     }
     
     private func setNavigation() {
-        self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(systemName: "line.3.horizontal.circle"), style: .done, target: self, action: #selector(setSideMenu))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .done, target: self, action: #selector(showCalendar))
+        self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(systemName: "lineweight"), style: .done, target: self, action: #selector(setSideMenu))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .done, target: self, action: #selector(showCalendar))
+        
         self.navigationController?.navigationBar.topItem?.title = "FURY"
         self.navigationItem.leftBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
@@ -243,7 +242,7 @@ final class HomeViewController: UIViewController {
             isChecked = !isChecked
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .done, target: self, action: #selector(showCalendar))
             datePicker.removeFromSuperview()
-            calendarView.setHeight(1, animateTime: 0.5)
+            calendarView.setHeight(0, animateTime: 0.5)
         }
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
     }

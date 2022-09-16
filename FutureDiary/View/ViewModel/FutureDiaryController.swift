@@ -15,12 +15,11 @@ import SideMenu
 
 final class FutureDiaryController: UIViewController, UITextViewDelegate {
     
-    private let textViewPlaceHolder = "내용을 입력하세요"
     private let futureTitleTextField = FuryTextField()
     private let datePicker = UIDatePicker()
     private let saveButton = UIBarButtonItem()
-    
-    lazy var futureContentTextView = UITextView()
+    private var placeholderLabel : UILabel!
+    private let futureContentTextView = UITextView()
     
     private let viewModel = FutureDiaryViewModel()
     private let disposdeBag = DisposeBag()
@@ -38,7 +37,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     )
     
     private lazy var output = viewModel.transform(input: input)
-    private lazy var keybord = IQKeyboardManager.shared
+    private var keybord = IQKeyboardManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +47,19 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
         setDatePicker()
         bind()
         keybordFunction()
+        setTextViewPlaceholder()
+    }
+    
+    private func setTextViewPlaceholder() {
+        futureContentTextView.delegate = self
+        placeholderLabel = UILabel()
+        placeholderLabel.text = "내용을 입력하세요"
+        placeholderLabel.font = .italicSystemFont(ofSize: (futureContentTextView.font?.pointSize)!)
+        placeholderLabel.sizeToFit()
+        futureContentTextView.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPoint(x: 8, y: (futureContentTextView.font?.pointSize)! / 2)
+        placeholderLabel.textColor = .tertiaryLabel
+        placeholderLabel.isHidden = !futureContentTextView.text.isEmpty
     }
     
     private func keybordFunction() {
@@ -70,16 +82,13 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     
     private func setViewComponents() {
         futureTitleTextField.placeholder = "제목을 입력해주세요"
-        futureTitleTextField.layer.borderWidth = 1
-        futureContentTextView.layer.borderWidth = 1
+        futureContentTextView.font = .systemFont(ofSize: 16)
         datePicker.layer.borderWidth = 1
     }
     
     private func setViewComponentsColor() {
         view.backgroundColor = CustomColor.shared.backgroundColor
-        futureTitleTextField.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.7).cgColor
-        futureContentTextView.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.7).cgColor
-        datePicker.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.7).cgColor
+        datePicker.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.3).cgColor
     }
     
     private func setConstraints() {
@@ -166,5 +175,11 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     
     @objc private func doneButtonTapped() {
         view.endEditing(true)
+    }
+}
+
+extension FutureDiaryController  {
+    func textViewDidChange(_ textView: UITextView) {
+        placeholderLabel.isHidden = !textView.text.isEmpty
     }
 }

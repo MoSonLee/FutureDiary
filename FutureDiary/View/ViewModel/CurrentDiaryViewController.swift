@@ -12,22 +12,19 @@ import RealmSwift
 import RxCocoa
 import RxSwift
 import SideMenu
-import Toast
 
 final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     
-    private let textViewPlaceHolder = "내용을 입력하세요"
-    private let saveButton = UIBarButtonItem()
-    var deleteButton = UIBarButtonItem()
-    private let repository = RealmRepository()
-    
-    let currentTitleTextField = FuryTextField()
-    
-    lazy var currentContentTextView = UITextView()
-    private lazy var keybord = IQKeyboardManager.shared
-    
     let viewModel = CurrentDiaryViewModel()
+    let currentTitleTextField = FuryTextField()
+    let currentContentTextView = UITextView()
+    private let saveButton = UIBarButtonItem()
+    private let repository = RealmRepository()
     private let disposdeBag = DisposeBag()
+    private let keybord = IQKeyboardManager.shared
+    
+    private var placeholderLabel : UILabel!
+    private var deleteButton = UIBarButtonItem()
     
     private lazy var input = CurrentDiaryViewModel.Input(
         saveButtonTap: saveButton.rx.tap
@@ -51,6 +48,19 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
         setNavigation()
         bind()
         keybordFunction()
+        setTextViewPlaceholder()
+    }
+    
+    private func setTextViewPlaceholder() {
+        currentContentTextView.delegate = self
+        placeholderLabel = UILabel()
+        placeholderLabel.text = "내용을 입력하세요"
+        placeholderLabel.font = .italicSystemFont(ofSize: (currentContentTextView.font?.pointSize)!)
+        placeholderLabel.sizeToFit()
+        currentContentTextView.addSubview(placeholderLabel)
+        placeholderLabel.frame.origin = CGPoint(x: 8, y: (currentContentTextView.font?.pointSize)! / 2)
+        placeholderLabel.textColor = .tertiaryLabel
+        placeholderLabel.isHidden = !currentContentTextView.text.isEmpty
     }
     
     private func keybordFunction() {
@@ -73,17 +83,13 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     
     private func setViewComponents() {
         currentTitleTextField.placeholder = "제목을 입력해주세요"
-        currentTitleTextField.layer.borderWidth = 1
-        currentContentTextView.layer.borderWidth = 1
         currentContentTextView.font = .systemFont(ofSize: 16)
-        
     }
     
     private func setComponentsColor() {
         view.backgroundColor = CustomColor.shared.backgroundColor
-        currentTitleTextField.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.7).cgColor
-        currentContentTextView.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.7).cgColor
         currentTitleTextField.textColor = CustomColor.shared.textColor
+        currentContentTextView.backgroundColor = CustomColor.shared.backgroundColor
     }
     
     private func setConstraints() {
@@ -97,7 +103,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
             currentContentTextView.topAnchor.constraint(equalTo: currentTitleTextField.bottomAnchor, constant: 16),
             currentContentTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             currentContentTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            currentContentTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            currentContentTextView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5)
         ])
     }
     
@@ -121,7 +127,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
     }
     
-    //rx로 수정예정
+    
     @objc func showDeleteAlert() {
         let alert =  UIAlertController(title: "정말 삭제하실건가요?", message: "삭제하시면 복구할 수 없어요!", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -172,5 +178,11 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     
     @objc private func doneButtonTapped() {
         view.endEditing(true)
+    }
+}
+
+extension CurrentDiaryViewController  {
+    func textViewDidChange(_ textView: UITextView) {
+        placeholderLabel.isHidden = !textView.text.isEmpty
     }
 }
