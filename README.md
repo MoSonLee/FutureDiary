@@ -52,4 +52,4 @@
       
 ## 9/15
    - 컬렉션뷰에 날짜에 맞게 헤더 날짜 최신순으로 맞게 보여주게 수정 완료 -> sort 사용
-   
+   - notification을 눌렀을 때 view reload 해주기 완료 -> user notification didReceive 로직사용
