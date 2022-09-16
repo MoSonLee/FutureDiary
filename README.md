@@ -55,4 +55,13 @@
    - notification을 눌렀을 때 view reload 해주기 완료 -> user notification didReceive 로직사용
    - 내용으로도 검색할 수 있게 해줌
    - textfiled에 first responder 적용
+   - iqkeybord 매니저 사용하여 키보드가 텍스트를 가리지 않게해줌
+   
+   - 남은것
+      - 전채뷰애서 cell을 삭제하면 오류 발생(realm 관련)
+      - 다국어 지원
+      - 설정창(복구/ 백업)
+      - 레이아웃 토대에 맞게 UI개선
+      - 일기를 작성한 캘린더 날짜에 표시해서 유저가 알기 쉽게 해주기 -> 최후순위 (FsCalendar로 변경 고민중)
+      - iqkeybord매니저를 사용할 때 navigationbar에 침범하는 오류
    
