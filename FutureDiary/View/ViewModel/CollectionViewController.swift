@@ -11,7 +11,6 @@ import RealmSwift
 import Toast
 
 class CollectionViewController: UIViewController {
-    
     private var datePickerView = UIPickerView()
     private var diaryAllTask: Results<Diary>!
     private var diaryTask: Results<Diary>!
@@ -25,9 +24,6 @@ class CollectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchRealm()
-        diaryTask.forEach { value in
-            diaryDictionary[value.diaryDate.toString] = Array(diaryTask.filter{ $0.diaryDate.toString == value.diaryDate.toString })
-        }
     }
     
     override func viewDidLoad() {
@@ -41,6 +37,9 @@ class CollectionViewController: UIViewController {
     private func fetchRealm() {
         diaryTask = repository.fetch(date: Date())
         diaryAllTask = repository.fetch()
+        diaryTask.forEach { value in
+            diaryDictionary[value.diaryDate.toString] = Array(diaryTask.filter{ $0.diaryDate.toString == value.diaryDate.toString })
+        }
         collectionView.reloadData()
     }
     
@@ -99,10 +98,14 @@ class CollectionViewController: UIViewController {
     }
     
     private func moveToEditDiary(indexPath: IndexPath) {
+        
+        let key = diarySortedKey[indexPath.section]
+        guard let diary = diaryDictionary[key]?[indexPath.item] else { return  }
+        
         let vc = CurrentDiaryViewController()
-        vc.currentTitleTextField.text = diaryTask[indexPath.row].diaryTitle
-        vc.currentContentTextView.text = diaryTask[indexPath.row].diaryContent
-        vc.viewModel.diaryTask = diaryTask[indexPath.row]
+        vc.currentTitleTextField.text = diary.diaryTitle
+        vc.currentContentTextView.text = diary.diaryContent
+        vc.viewModel.diaryTask = diary
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -118,33 +121,30 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
         
         headerView.headerLabel.backgroundColor = CustomColor.shared.backgroundColor
         headerView.headerLabel.textColor = CustomColor.shared.textColor
-        headerView.headerLabel.text = Array(diarySortedKey)[indexPath.section]
+        headerView.headerLabel.text = diarySortedKey[indexPath.section]
+        
         return headerView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let key = Array(diarySortedKey)[section]
+        let key = diarySortedKey[section]
         return diaryDictionary[key]?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        moveToEditDiary(indexPath: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
         
-        let key = Array(diarySortedKey)[indexPath.section]
-        let diary = diaryDictionary[key]?[indexPath.item]
+        let key = diarySortedKey[indexPath.section]
+        guard let diary = diaryDictionary[key]?[indexPath.item] else { return UICollectionViewCell() }
         
-        cell.diaryTitleTextLabel.text = diary?.diaryTitle
-        cell.diaryTextView.text = diary?.diaryContent
-        cell.diaryDateLabel.text = diary?.diaryDate.toDetailString
+        cell.diaryTitleTextLabel.text = diary.diaryTitle
+        cell.diaryTextView.text = diary.diaryContent
+        cell.diaryDateLabel.text = diary.diaryDate.toDetailString
         
-        cell.diaryDateLabel.font = .systemFont(ofSize: 12)
-        cell.diaryTitleTextLabel.font = .systemFont(ofSize: 12)
-        cell.diaryDateLabel.textAlignment = .center
-        cell.diaryDateLabel.adjustsFontSizeToFitWidth = true
         return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        moveToEditDiary(indexPath: indexPath)
     }
 }

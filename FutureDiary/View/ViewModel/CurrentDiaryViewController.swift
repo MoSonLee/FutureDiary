@@ -7,13 +7,14 @@
 
 import UIKit
 
+import IQKeyboardManagerSwift
 import RealmSwift
 import RxCocoa
 import RxSwift
 import SideMenu
 import Toast
 
-final class CurrentDiaryViewController: UIViewController {
+final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
     private let saveButton = UIBarButtonItem()
@@ -23,6 +24,7 @@ final class CurrentDiaryViewController: UIViewController {
     let currentTitleTextField = FuryTextField()
     
     lazy var currentContentTextView = UITextView()
+    private lazy var keybord = IQKeyboardManager.shared
     
     let viewModel = CurrentDiaryViewModel()
     private let disposdeBag = DisposeBag()
@@ -40,13 +42,24 @@ final class CurrentDiaryViewController: UIViewController {
     
     private lazy var output = viewModel.transform(input: input)
     
+    var diaryTask: Diary?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setConfigure()
         setConstraints()
         setNavigation()
         bind()
-        
+        keybordFunction()
+    }
+    
+    private func keybordFunction() {
+        currentTitleTextField.becomeFirstResponder()
+        self.hideKeyboardWhenTappedAround()
+        currentContentTextView.delegate = self
+        setUpTextFieldAndView()
+        keybord.enable = true
+        keybord.enableAutoToolbar = false
     }
     
     private func setConfigure() {
@@ -118,7 +131,6 @@ final class CurrentDiaryViewController: UIViewController {
             self.repository.delete(diary: diary)
             self.navigationController?.popViewController(animated: true)
         })
-        
         alert.addAction(cancel)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
@@ -143,5 +155,22 @@ final class CurrentDiaryViewController: UIViewController {
                 self?.view.makeToast(text)
             })
             .disposed(by: disposdeBag)
+    }
+    
+    private func setUpTextFieldAndView() {
+        let toolbar = UIToolbar()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                        target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done,
+                                         target: self, action: #selector(doneButtonTapped))
+        toolbar.setItems([flexSpace, doneButton], animated: true)
+        toolbar.sizeToFit()
+        
+        currentTitleTextField.inputAccessoryView = toolbar
+        currentContentTextView.inputAccessoryView = toolbar
+    }
+    
+    @objc private func doneButtonTapped() {
+        view.endEditing(true)
     }
 }

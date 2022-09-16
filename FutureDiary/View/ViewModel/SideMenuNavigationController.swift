@@ -8,11 +8,11 @@
 import UIKit
 
 final class SideMenuViewController: UIViewController {
-    
+
     private let moveToSettingButton = UIButton()
     private let moveToSearchDiaryButton = UIButton()
     private let moveToDiaryCollectionButton = UIButton()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setConfigure()

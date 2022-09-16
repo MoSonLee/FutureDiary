@@ -7,12 +7,13 @@
 
 import UIKit
 
+import IQKeyboardManagerSwift
 import RealmSwift
 import RxCocoa
 import RxSwift
 import SideMenu
 
-final class FutureDiaryController: UIViewController {
+final class FutureDiaryController: UIViewController, UITextViewDelegate {
     
     private let textViewPlaceHolder = "내용을 입력하세요"
     private let futureTitleTextField = FuryTextField()
@@ -37,6 +38,7 @@ final class FutureDiaryController: UIViewController {
     )
     
     private lazy var output = viewModel.transform(input: input)
+    private lazy var keybord = IQKeyboardManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,16 @@ final class FutureDiaryController: UIViewController {
         setNavigation()
         setDatePicker()
         bind()
+        keybordFunction()
+    }
+    
+    private func keybordFunction() {
+        futureTitleTextField.becomeFirstResponder()
+        self.hideKeyboardWhenTappedAround()
+        futureContentTextView.delegate = self
+        setUpTextFieldAndView()
+        keybord.enable = true
+        keybord.enableAutoToolbar = false
     }
     
     private func setConfigure() {
@@ -140,7 +152,19 @@ final class FutureDiaryController: UIViewController {
         print(datePicker.rx.date)
     }
     
-    @objc private func dismissView() {
-        self.dismiss(animated: true)
+    private func setUpTextFieldAndView() {
+        let toolbar = UIToolbar()
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                        target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: .done,
+                                         target: self, action: #selector(doneButtonTapped))
+        toolbar.setItems([flexSpace, doneButton], animated: true)
+        toolbar.sizeToFit()
+        futureTitleTextField.inputAccessoryView = toolbar
+        futureContentTextView.inputAccessoryView = toolbar
+    }
+    
+    @objc private func doneButtonTapped() {
+        view.endEditing(true)
     }
 }

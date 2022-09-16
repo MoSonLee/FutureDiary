@@ -58,7 +58,7 @@ class SearchViewController: UIViewController {
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "제목으로 검색해보세요"
+        searchController.searchBar.placeholder = "검색하기"
         navigationItem.searchController = searchController
         searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
         searchController.searchBar.tintColor = CustomColor.shared.buttonTintColor
@@ -108,9 +108,9 @@ class SearchViewController: UIViewController {
     
     private func moveToEditDiary(indexPath: IndexPath) {
         let vc = CurrentDiaryViewController()
-        vc.currentTitleTextField.text = diaryTask[indexPath.row].diaryTitle
-        vc.currentContentTextView.text = diaryTask[indexPath.row].diaryContent
-        vc.viewModel.diaryTask = diaryTask[indexPath.row]
+        vc.currentTitleTextField.text = searchedDiary[indexPath.row].diaryTitle
+        vc.currentContentTextView.text = searchedDiary[indexPath.row].diaryContent
+        vc.viewModel.diaryTask = searchedDiary[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -146,7 +146,8 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text?.lowercased() else { return }
-        self.searchedDiary = self.diaryTask.filter{ $0.diaryTitle.lowercased().contains(text)}
+        self.searchedDiary = self.diaryTask.filter{
+            $0.diaryTitle.lowercased().contains(text) || $0.diaryContent.lowercased().contains(text)}
         collectionView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
         self.collectionView.reloadData()
     }

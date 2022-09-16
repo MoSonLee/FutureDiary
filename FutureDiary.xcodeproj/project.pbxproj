@@ -21,6 +21,9 @@
 		770DF6E728CA6A2F00349D55 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6E628CA6A2F00349D55 /* SettingViewModel.swift */; };
 		770DF6EB28CA6BF900349D55 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */; };
 		7722831C28D36268007A9557 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722831B28D36268007A9557 /* Date+Extension.swift */; };
+		7722831F28D4DB0D007A9557 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 7722831E28D4DB0D007A9557 /* JGProgressHUD */; };
+		7722832228D505D8007A9557 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7722832128D505D8007A9557 /* IQKeyboardManagerSwift */; };
+		7722832428D50843007A9557 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722832328D50843007A9557 /* UIViewController+Extension.swift */; };
 		773A6E3D28CC74D500452D68 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E3C28CC74D500452D68 /* UIView+Extension.swift */; };
 		773A6E3F28CC9F2600452D68 /* FuryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E3E28CC9F2600452D68 /* FuryTextField.swift */; };
 		773A6E4328CF6D0E00452D68 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E4228CF6D0E00452D68 /* Color.swift */; };
@@ -51,6 +54,7 @@
 		770DF6E628CA6A2F00349D55 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		7722831B28D36268007A9557 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		7722832328D50843007A9557 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		773A6E3C28CC74D500452D68 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		773A6E3E28CC9F2600452D68 /* FuryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuryTextField.swift; sourceTree = "<group>"; };
 		773A6E4128CF508700452D68 /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ko; path = ko.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -78,8 +82,10 @@
 				770DF6D528CA650500349D55 /* RxRelay in Frameworks */,
 				770DF6D328CA650500349D55 /* RxCocoa in Frameworks */,
 				770DF6D728CA650500349D55 /* RxSwift in Frameworks */,
+				7722832228D505D8007A9557 /* IQKeyboardManagerSwift in Frameworks */,
 				770DF6D028CA64EE00349D55 /* SideMenu in Frameworks */,
 				7781265628CB2FB80078CAD6 /* Toast in Frameworks */,
+				7722831F28D4DB0D007A9557 /* JGProgressHUD in Frameworks */,
 				7781264D28CB22A30078CAD6 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				773A6E3C28CC74D500452D68 /* UIView+Extension.swift */,
+				7722832328D50843007A9557 /* UIViewController+Extension.swift */,
 				7722831B28D36268007A9557 /* Date+Extension.swift */,
 				773A6E3E28CC9F2600452D68 /* FuryTextField.swift */,
 				773A6E4228CF6D0E00452D68 /* Color.swift */,
@@ -223,6 +230,8 @@
 				7781264E28CB22A30078CAD6 /* RealmSwift */,
 				7781265528CB2FB80078CAD6 /* Toast */,
 				7781265828CB33320078CAD6 /* SnapKit */,
+				7722831E28D4DB0D007A9557 /* JGProgressHUD */,
+				7722832128D505D8007A9557 /* IQKeyboardManagerSwift */,
 			);
 			productName = FutureDiary;
 			productReference = 779DA60F28CA62BB00561000 /* FutureDiary.app */;
@@ -258,6 +267,8 @@
 				7781264B28CB22A30078CAD6 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				7781265428CB2FB80078CAD6 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				7781265728CB33320078CAD6 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				7722831D28D4DB0D007A9557 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				7722832028D505D8007A9557 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 779DA61028CA62BB00561000 /* Products */;
 			projectDirPath = "";
@@ -297,6 +308,7 @@
 				770DF6DD28CA68B300349D55 /* CurrentDiaryViewController.swift in Sources */,
 				770DF6E528CA6A2700349D55 /* FutureDiaryViewModel.swift in Sources */,
 				7722831C28D36268007A9557 /* Date+Extension.swift in Sources */,
+				7722832428D50843007A9557 /* UIViewController+Extension.swift in Sources */,
 				779DA61528CA62BB00561000 /* SceneDelegate.swift in Sources */,
 				770DF6DB28CA676E00349D55 /* SideMenuNavigationController.swift in Sources */,
 				770DF6E728CA6A2F00349D55 /* SettingViewModel.swift in Sources */,
@@ -535,6 +547,22 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		7722831D28D4DB0D007A9557 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		7722832028D505D8007A9557 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		7781264B28CB22A30078CAD6 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -581,6 +609,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 770DF6D128CA650500349D55 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
+		};
+		7722831E28D4DB0D007A9557 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7722831D28D4DB0D007A9557 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
+		7722832128D505D8007A9557 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7722832028D505D8007A9557 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 		7781264C28CB22A30078CAD6 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -199,7 +199,6 @@ final class HomeViewController: UIViewController {
         vc.currentTitleTextField.text = diarys[indexPath.row].diaryTitle
         vc.currentContentTextView.text = diarys[indexPath.row].diaryContent
         vc.viewModel.diaryTask = diarys[indexPath.row]
-        print(diarys[indexPath.row].objectId)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -259,7 +258,7 @@ final class HomeViewController: UIViewController {
         menu.leftSide = true
         menu.isNavigationBarHidden = true
         menu.blurEffectStyle = .systemMaterial
-        menu.presentationStyle = .viewSlideOut
+        menu.presentationStyle = .menuSlideIn
         present(menu, animated: true, completion: nil)
     }
 }

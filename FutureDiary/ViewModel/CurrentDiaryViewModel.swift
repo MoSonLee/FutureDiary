@@ -81,8 +81,4 @@ extension CurrentDiaryViewModel {
             }
         }
     }
-    
-    private func deleteRealm(diary: Diary) {
-        respository.delete(diary: diary)
-    }
 }
