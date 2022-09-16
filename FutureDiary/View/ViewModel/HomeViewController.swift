@@ -60,6 +60,20 @@ final class HomeViewController: UIViewController {
         }
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let application = UIApplication.shared
+        
+        if(application.applicationState == .active){
+            print("user tapped the notification bar when the app is in foreground")
+        }
+        
+        if(application.applicationState == .inactive)
+        {
+            print("user tapped the notification bar when the app is in background")
+        }
+        completionHandler()
+    }
+    
     func sendNotification() {
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = "일기가 도착했습니다!"
@@ -67,6 +81,7 @@ final class HomeViewController: UIViewController {
         notificationContent.sound = .default
         notificationContent.badge = 1
         
+        futureDiaryTime = futureDiaryTime.filter{ $0 > Date()}
         futureDiaryTime.forEach {
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: $0.timeIntervalSince(Date()), repeats: false)
             let request = UNNotificationRequest(identifier: "\($0)" , content: notificationContent , trigger: trigger)
@@ -85,9 +100,6 @@ final class HomeViewController: UIViewController {
         futureDiary.forEach {
             futureDiaryTime.append($0.diaryDate)
         }
-        
-        futureDiaryTime = futureDiaryTime.filter{ $0 > Date()}
-        
         collectionView.reloadData()
     }
     
@@ -155,9 +167,16 @@ final class HomeViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 16
         layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        let width = UIScreen.main.bounds.width - spacing
-        layout.itemSize = CGSize(width: width, height: width * 0.5)
-        return layout
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let width = (UIScreen.main.bounds.width / 2 - spacing * 2)
+            layout.itemSize = CGSize(width: width, height: width * 0.5)
+            return layout
+        } else {
+            let width = UIScreen.main.bounds.width - spacing
+            layout.itemSize = CGSize(width: width, height: width * 0.5)
+            return layout
+        }
     }
     
     private func setCalendar() {
@@ -204,7 +223,16 @@ final class HomeViewController: UIViewController {
         [current, future, cancel].forEach {
             alert.addAction($0)
         }
-        self.present(alert, animated: true)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            if let popoverController = alert.popoverPresentationController {
+                popoverController.sourceView = self.view
+                popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
+                popoverController.permittedArrowDirections = []
+                self.present(alert, animated: true, completion: nil)
+            }
+        } else {
+            self.present(alert, animated: true) }
     }
     
     @objc func showCalendar() {
