@@ -66,3 +66,5 @@
       - iqkeybord매니저를 사용할 때 navigationbar에 침범하는 오류 
       - 일기를 작성한 캘린더 날짜에 표시해서 유저가 알기 쉽게 해주기 -> 최후순위 (FsCalendar로 변경 고민중)
    
+## 9/16
+   - extension + 재사용 코드 모듈화
