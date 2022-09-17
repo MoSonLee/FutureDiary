@@ -43,7 +43,6 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
     
     private func setNavigation() {
         self.navigationItem.title = "설정"
-        UINavigationBar.appearance().isTranslucent = false
         setNavigationColor()
     }
     

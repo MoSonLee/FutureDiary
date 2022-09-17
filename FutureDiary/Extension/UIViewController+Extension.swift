@@ -20,8 +20,7 @@ extension UIViewController {
     }
     
     func setNavigationColor() {
-        UINavigationBar.appearance().barTintColor = CustomColor.shared.buttonTintColor
-        UINavigationBar.appearance().tintColor = CustomColor.shared.buttonTintColor
+        self.navigationController?.navigationBar.backgroundColor = CustomColor.shared.backgroundColor
         self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
     }

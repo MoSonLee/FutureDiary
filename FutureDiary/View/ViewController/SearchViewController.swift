@@ -78,7 +78,6 @@ class SearchViewController: UIViewController {
     
     private func setNavigation() {
         self.navigationItem.title = "검색하기"
-        UINavigationBar.appearance().isTranslucent = false
         setNavigationColor()
     }
     

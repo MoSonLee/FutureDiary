@@ -114,7 +114,6 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
         saveButton.title = "완료"
         self.navigationItem.title = "미래"
         navigationItem.rightBarButtonItem = saveButton
-        UINavigationBar.appearance().isTranslucent = false
         setNavigationColor()
     }
     
