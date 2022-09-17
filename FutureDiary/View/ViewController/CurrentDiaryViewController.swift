@@ -18,6 +18,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     let viewModel = CurrentDiaryViewModel()
     let currentTitleTextField = FuryTextField()
     let currentContentTextView = UITextView()
+    
     private let saveButton = UIBarButtonItem()
     private let repository = RealmRepository()
     private let disposdeBag = DisposeBag()
@@ -25,7 +26,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     
     private var placeholderLabel : UILabel!
     private var deleteButton = UIBarButtonItem()
-    
+
     private lazy var input = CurrentDiaryViewModel.Input(
         saveButtonTap: saveButton.rx.tap
             .withLatestFrom(
@@ -103,7 +104,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
             currentContentTextView.topAnchor.constraint(equalTo: currentTitleTextField.bottomAnchor, constant: 16),
             currentContentTextView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             currentContentTextView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            currentContentTextView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.5)
+            currentContentTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
         ])
     }
     
@@ -116,17 +117,8 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
         } else {
             navigationItem.rightBarButtonItem = saveButton
         }
-        UINavigationBar.appearance().isTranslucent = false
         setNavigationColor()
     }
-    
-    private func setNavigationColor() {
-        UINavigationBar.appearance().barTintColor = CustomColor.shared.buttonTintColor
-        UINavigationBar.appearance().tintColor = CustomColor.shared.buttonTintColor
-        self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
-        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
-    }
-    
     
     @objc func showDeleteAlert() {
         let alert =  UIAlertController(title: "정말 삭제하실건가요?", message: "삭제하시면 복구할 수 없어요!", preferredStyle: .alert)

@@ -61,4 +61,30 @@ class HomeCollectionViewCell: UICollectionViewCell {
             diaryDateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -1),
         ])
     }
+    
+     func configureCollectionViewCell(diary: Diary) {
+        
+        self.diaryTitleTextLabel.text = diary.diaryTitle
+        self.diaryTextView.text = diary.diaryContent
+        self.diaryDateLabel.text = diary.diaryDate.toShortString
+        
+        self.diaryTitleTextLabel.textAlignment = .center
+        self.diaryDateLabel.textAlignment = .center
+        
+        self.diaryDateLabel.adjustsFontSizeToFitWidth = true
+        self.diaryTitleTextLabel.adjustsFontSizeToFitWidth = true
+        
+        self.diaryTitleTextLabel.font = .systemFont(ofSize: 12)
+        self.diaryTextView.font = .systemFont(ofSize: 10)
+        self.diaryDateLabel.font = .systemFont(ofSize: 10)
+    }
+    
+    func configureSearchCollectionViewCell(searchedDiary: [Diary], indexPath: IndexPath) {
+        self.diaryTitleTextLabel.text = searchedDiary[indexPath.row].diaryTitle
+        self.diaryTextView.text = searchedDiary[indexPath.row].diaryContent
+        self.diaryDateLabel.text = searchedDiary[indexPath.row].diaryDate.toDetailString
+        self.diaryDateLabel.font = .systemFont(ofSize: 10)
+        self.diaryDateLabel.textAlignment = .center
+        self.diaryDateLabel.adjustsFontSizeToFitWidth = true
+    }
 }

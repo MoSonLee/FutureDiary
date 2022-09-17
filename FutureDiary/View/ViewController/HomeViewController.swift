@@ -15,7 +15,7 @@ final class HomeViewController: UIViewController {
     
     private let viewModel = HomeViewModel()
     private let repository = RealmRepository()
-    let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     private let writeDiaryButton = UIButton()
     private let calendarView = UIView()
     private let datePicker = UIDatePicker()
@@ -146,7 +146,7 @@ final class HomeViewController: UIViewController {
         collectionView.register(HomeCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: HomeCollectionViewCell.identifider)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.collectionViewLayout = setCollectionViewLayout()
+        collectionView.collectionViewLayout = setHomeCollectionViewLayout()
     }
     
     private func setNavigation() {
@@ -156,22 +156,6 @@ final class HomeViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "FURY"
         self.navigationItem.leftBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
-    }
-    
-    private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 16
-        layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            let width = (UIScreen.main.bounds.width / 3 - spacing * 2)
-            layout.itemSize = CGSize(width: width, height: width * 0.7)
-            return layout
-        } else {
-            let width = UIScreen.main.bounds.width - spacing
-            layout.itemSize = CGSize(width: width, height: width * 0.5)
-            return layout
-        }
     }
     
     private func setCalendar() {

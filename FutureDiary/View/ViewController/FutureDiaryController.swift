@@ -44,7 +44,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
         setConfigure()
         setConstraints()
         setNavigation()
-        setDatePicker()
+        setDatePicker(datePicker: datePicker)
         bind()
         keybordFunction()
         setTextViewPlaceholder()
@@ -83,7 +83,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     private func setViewComponents() {
         futureTitleTextField.placeholder = "제목을 입력해주세요"
         futureContentTextView.font = .systemFont(ofSize: 16)
-        datePicker.layer.borderWidth = 1
+        datePicker.layer.borderWidth = 0.5
     }
     
     private func setViewComponentsColor() {
@@ -118,24 +118,6 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
         setNavigationColor()
     }
     
-    private func setNavigationColor() {
-        self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
-        self.navigationItem.leftBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
-        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
-    }
-    
-    private func setDatePicker() {
-        datePicker.preferredDatePickerStyle = .inline
-        datePicker.datePickerMode = .dateAndTime
-        datePicker.minimumDate = Date()
-        datePicker.locale = Locale(identifier: Locale.current.identifier)
-        datePicker.timeZone = TimeZone(abbreviation: Locale.current.identifier)
-        datePicker.timeZone = .autoupdatingCurrent
-        datePicker.minimumDate = Calendar.current.date(byAdding: .minute, value: 1, to: datePicker.date)
-        datePicker.addTarget(self, action: #selector(handleDatePicker), for: .valueChanged)
-        datePicker.tintColor = CustomColor.shared.buttonTintColor
-    }
-    
     private func bind() {
         output.showAlert
             .emit(onNext: {[weak self] text, isSaved in
@@ -155,10 +137,6 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
                 self?.view.makeToast(text)
             })
             .disposed(by: disposdeBag)
-    }
-    
-    @objc private func handleDatePicker(_ sender: UIDatePicker) {
-        print(datePicker.rx.date)
     }
     
     private func setUpTextFieldAndView() {

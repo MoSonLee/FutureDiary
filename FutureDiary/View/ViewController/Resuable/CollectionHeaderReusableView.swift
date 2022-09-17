@@ -42,4 +42,10 @@ final class CollectionHeaderReusableView: UICollectionReusableView {
     private func setComponentsColor() {
         
     }
+    
+    func setConfigureHeader(diaryDic: [String], indexPath: IndexPath) {
+        self.headerLabel.backgroundColor = CustomColor.shared.backgroundColor
+        self.headerLabel.textColor = CustomColor.shared.textColor
+        self.headerLabel.text = diaryDic[indexPath.section]
+    }
 }

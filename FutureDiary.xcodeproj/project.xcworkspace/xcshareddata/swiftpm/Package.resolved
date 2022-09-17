@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "jgprogresshud",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/JonasGessner/JGProgressHUD.git",
-      "state" : {
-        "branch" : "master",
-        "revision" : "103d67f308b8c0c18926061025549af98cdfd6fc"
-      }
-    },
-    {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core",
@@ -55,21 +46,21 @@
       }
     },
     {
-      "identity" : "snapkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SnapKit/SnapKit.git",
-      "state" : {
-        "branch" : "develop",
-        "revision" : "07c5d1f6044701d97e94dc11157259e8811977be"
-      }
-    },
-    {
       "identity" : "toast-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scalessec/Toast-Swift.git",
       "state" : {
         "branch" : "master",
         "revision" : "0c9493eeacb102cc614da385cfaaf475379f4ab4"
+      }
+    },
+    {
+      "identity" : "zip",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/marmelroy/Zip.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "67fa55813b9e7b3b9acee9c0ae501def28746d76"
       }
     }
   ],

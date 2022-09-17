@@ -21,9 +21,12 @@
 		770DF6E728CA6A2F00349D55 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6E628CA6A2F00349D55 /* SettingViewModel.swift */; };
 		770DF6EB28CA6BF900349D55 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */; };
 		7722831C28D36268007A9557 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722831B28D36268007A9557 /* Date+Extension.swift */; };
-		7722831F28D4DB0D007A9557 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 7722831E28D4DB0D007A9557 /* JGProgressHUD */; };
 		7722832228D505D8007A9557 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7722832128D505D8007A9557 /* IQKeyboardManagerSwift */; };
 		7722832428D50843007A9557 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722832328D50843007A9557 /* UIViewController+Extension.swift */; };
+		77260C9428D5F199007453E7 /* ReusableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77260C9328D5F199007453E7 /* ReusableTableViewCell.swift */; };
+		77260C9628D618EA007453E7 /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77260C9528D618EA007453E7 /* VersionViewController.swift */; };
+		77260C9928D61D3E007453E7 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 77260C9828D61D3E007453E7 /* Zip */; };
+		77260C9B28D6228E007453E7 /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77260C9A28D6228E007453E7 /* LicenseViewController.swift */; };
 		773A6E3D28CC74D500452D68 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E3C28CC74D500452D68 /* UIView+Extension.swift */; };
 		773A6E3F28CC9F2600452D68 /* FuryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E3E28CC9F2600452D68 /* FuryTextField.swift */; };
 		773A6E4328CF6D0E00452D68 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E4228CF6D0E00452D68 /* Color.swift */; };
@@ -35,7 +38,6 @@
 		7781265128CB2BA80078CAD6 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7781265028CB2BA80078CAD6 /* Diary.swift */; };
 		7781265328CB2C310078CAD6 /* RealmRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7781265228CB2C310078CAD6 /* RealmRepository.swift */; };
 		7781265628CB2FB80078CAD6 /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 7781265528CB2FB80078CAD6 /* Toast */; };
-		7781265928CB33320078CAD6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7781265828CB33320078CAD6 /* SnapKit */; };
 		779DA61328CA62BB00561000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DA61228CA62BB00561000 /* AppDelegate.swift */; };
 		779DA61528CA62BB00561000 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DA61428CA62BB00561000 /* SceneDelegate.swift */; };
 		779DA61728CA62BB00561000 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DA61628CA62BB00561000 /* HomeViewController.swift */; };
@@ -55,6 +57,9 @@
 		770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		7722831B28D36268007A9557 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		7722832328D50843007A9557 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		77260C9328D5F199007453E7 /* ReusableTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableTableViewCell.swift; sourceTree = "<group>"; };
+		77260C9528D618EA007453E7 /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
+		77260C9A28D6228E007453E7 /* LicenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
 		773A6E3C28CC74D500452D68 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		773A6E3E28CC9F2600452D68 /* FuryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuryTextField.swift; sourceTree = "<group>"; };
 		773A6E4128CF508700452D68 /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ko; path = ko.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -78,14 +83,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7781264F28CB22A30078CAD6 /* RealmSwift in Frameworks */,
-				7781265928CB33320078CAD6 /* SnapKit in Frameworks */,
 				770DF6D528CA650500349D55 /* RxRelay in Frameworks */,
 				770DF6D328CA650500349D55 /* RxCocoa in Frameworks */,
 				770DF6D728CA650500349D55 /* RxSwift in Frameworks */,
 				7722832228D505D8007A9557 /* IQKeyboardManagerSwift in Frameworks */,
+				77260C9928D61D3E007453E7 /* Zip in Frameworks */,
 				770DF6D028CA64EE00349D55 /* SideMenu in Frameworks */,
 				7781265628CB2FB80078CAD6 /* Toast in Frameworks */,
-				7722831F28D4DB0D007A9557 /* JGProgressHUD in Frameworks */,
 				7781264D28CB22A30078CAD6 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -98,22 +102,26 @@
 			children = (
 				770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */,
 				776DF96B28D055EA00809EA2 /* CollectionHeaderReusableView.swift */,
+				77260C9328D5F199007453E7 /* ReusableTableViewCell.swift */,
 			);
 			path = Resuable;
 			sourceTree = "<group>";
 		};
-		770DF6E928CA6BD200349D55 /* ViewModel */ = {
+		770DF6E928CA6BD200349D55 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				779DA61628CA62BB00561000 /* HomeViewController.swift */,
 				770DF6DA28CA676E00349D55 /* SideMenuNavigationController.swift */,
 				770DF6DC28CA68B300349D55 /* CurrentDiaryViewController.swift */,
 				770DF6DE28CA68BE00349D55 /* FutureDiaryController.swift */,
-				770DF6E028CA68FB00349D55 /* SettingViewController.swift */,
 				776DF96928CF980400809EA2 /* SearchViewController.swift */,
 				776DF96728CF95B000809EA2 /* CollectionViewController.swift */,
+				770DF6E028CA68FB00349D55 /* SettingViewController.swift */,
+				77260C9528D618EA007453E7 /* VersionViewController.swift */,
+				77260C9A28D6228E007453E7 /* LicenseViewController.swift */,
+				770DF6E828CA6BC600349D55 /* Resuable */,
 			);
-			path = ViewModel;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		773A6E3B28CC74B700452D68 /* Extension */ = {
@@ -171,8 +179,7 @@
 		779DA62728CA632000561000 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				770DF6E928CA6BD200349D55 /* ViewModel */,
-				770DF6E828CA6BC600349D55 /* Resuable */,
+				770DF6E928CA6BD200349D55 /* ViewController */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -229,9 +236,8 @@
 				7781264C28CB22A30078CAD6 /* Realm */,
 				7781264E28CB22A30078CAD6 /* RealmSwift */,
 				7781265528CB2FB80078CAD6 /* Toast */,
-				7781265828CB33320078CAD6 /* SnapKit */,
-				7722831E28D4DB0D007A9557 /* JGProgressHUD */,
 				7722832128D505D8007A9557 /* IQKeyboardManagerSwift */,
+				77260C9828D61D3E007453E7 /* Zip */,
 			);
 			productName = FutureDiary;
 			productReference = 779DA60F28CA62BB00561000 /* FutureDiary.app */;
@@ -266,9 +272,8 @@
 				770DF6D128CA650500349D55 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				7781264B28CB22A30078CAD6 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				7781265428CB2FB80078CAD6 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
-				7781265728CB33320078CAD6 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				7722831D28D4DB0D007A9557 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 				7722832028D505D8007A9557 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				77260C9728D61D3E007453E7 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 779DA61028CA62BB00561000 /* Products */;
 			projectDirPath = "";
@@ -299,8 +304,10 @@
 				776DF96828CF95B000809EA2 /* CollectionViewController.swift in Sources */,
 				773A6E3D28CC74D500452D68 /* UIView+Extension.swift in Sources */,
 				779DA61728CA62BB00561000 /* HomeViewController.swift in Sources */,
+				77260C9628D618EA007453E7 /* VersionViewController.swift in Sources */,
 				770DF6DF28CA68BE00349D55 /* FutureDiaryController.swift in Sources */,
 				776DF96A28CF980400809EA2 /* SearchViewController.swift in Sources */,
+				77260C9428D5F199007453E7 /* ReusableTableViewCell.swift in Sources */,
 				779DA61328CA62BB00561000 /* AppDelegate.swift in Sources */,
 				773A6E4328CF6D0E00452D68 /* Color.swift in Sources */,
 				7781265128CB2BA80078CAD6 /* Diary.swift in Sources */,
@@ -315,6 +322,7 @@
 				770DF6E328CA6A1900349D55 /* CurrentDiaryViewModel.swift in Sources */,
 				770DF6D928CA65F500349D55 /* HomeViewModel.swift in Sources */,
 				776DF96C28D055EA00809EA2 /* CollectionHeaderReusableView.swift in Sources */,
+				77260C9B28D6228E007453E7 /* LicenseViewController.swift in Sources */,
 				773A6E3F28CC9F2600452D68 /* FuryTextField.swift in Sources */,
 				770DF6EB28CA6BF900349D55 /* HomeCollectionViewCell.swift in Sources */,
 				7781265328CB2C310078CAD6 /* RealmRepository.swift in Sources */,
@@ -547,17 +555,17 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		7722831D28D4DB0D007A9557 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+		7722832028D505D8007A9557 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
 			requirement = {
 				branch = master;
 				kind = branch;
 			};
 		};
-		7722832028D505D8007A9557 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+		77260C9728D61D3E007453E7 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			repositoryURL = "https://github.com/marmelroy/Zip.git";
 			requirement = {
 				branch = master;
 				kind = branch;
@@ -576,14 +584,6 @@
 			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
 			requirement = {
 				branch = master;
-				kind = branch;
-			};
-		};
-		7781265728CB33320078CAD6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
-			requirement = {
-				branch = develop;
 				kind = branch;
 			};
 		};
@@ -610,15 +610,15 @@
 			package = 770DF6D128CA650500349D55 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
-		7722831E28D4DB0D007A9557 /* JGProgressHUD */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7722831D28D4DB0D007A9557 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
-			productName = JGProgressHUD;
-		};
 		7722832128D505D8007A9557 /* IQKeyboardManagerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7722832028D505D8007A9557 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		77260C9828D61D3E007453E7 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77260C9728D61D3E007453E7 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
 		};
 		7781264C28CB22A30078CAD6 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -634,11 +634,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7781265428CB2FB80078CAD6 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
-		};
-		7781265828CB33320078CAD6 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7781265728CB33320078CAD6 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

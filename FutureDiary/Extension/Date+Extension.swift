@@ -19,7 +19,7 @@ extension Date {
         let date = calendar.date(from: dateComponents)!
         let range = calendar.range(of: .day, in: .month, for: date)!
         let numDays = range.count
-
+        
         return numDays
     }
     
@@ -32,6 +32,16 @@ extension Date {
         components.day = 1
         components.second = -1
         return Calendar.current.date(byAdding: components, to: toStartOfDay)!
+    }
+    
+    var toShortString: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: Locale.current.identifier)
+        formatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
+        formatter.dateFormat = "a hh:mm"
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
+        return formatter.string(from: self)
     }
     
     var toString: String {
@@ -53,16 +63,14 @@ extension Date {
         formatter.pmSymbol = "PM"
         return formatter.string(from: self)
     }
-}
-
-extension String {
     
-    var toDate: Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: Locale.current.identifier)
-        dateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ"
-        let date = dateFormatter.date(from: self)!
-        return date
+    var toLongDetailString: String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: Locale.current.identifier)
+        formatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ"
+        formatter.amSymbol = "AM"
+        formatter.pmSymbol = "PM"
+        return formatter.string(from: self)
     }
 }

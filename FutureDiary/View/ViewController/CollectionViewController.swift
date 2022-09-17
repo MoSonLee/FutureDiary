@@ -10,11 +10,12 @@ import UIKit
 import RealmSwift
 import Toast
 
-class CollectionViewController: UIViewController {
+final class CollectionViewController: UIViewController {
     private var datePickerView = UIPickerView()
     private var diaryAllTask: Results<Diary>!
     private var diaryTask: Results<Diary>!
     private var mailButton = UIBarButtonItem()
+    
     private var diaryDictionary: [String : [Diary]] = [ : ]
     private lazy var diarySortedKey = diaryDictionary.keys.sorted(by: >)
     
@@ -62,7 +63,6 @@ class CollectionViewController: UIViewController {
     
     private func setNavigation() {
         self.navigationItem.title = "보관함"
-        UINavigationBar.appearance().isTranslucent = false
         mailButton = UIBarButtonItem(image: UIImage(systemName: "signpost.right.fill"), style: .done, target: self, action: #selector(showToastMessage))
         self.navigationItem.rightBarButtonItem = mailButton
         setNavigationColor()
@@ -76,33 +76,16 @@ class CollectionViewController: UIViewController {
         collectionView.register(CollectionHeaderReusableView.classForCoder(), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: CollectionHeaderReusableView.identifier)
     }
     
-    private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 16
-        layout.sectionInset = UIEdgeInsets(top: 32, left: 8, bottom: 32, right: 8)
-        let width = UIScreen.main.bounds.width / 4 - spacing
-        layout.itemSize = CGSize(width: width, height: width * 1.4)
-        layout.headerReferenceSize = CGSize(width: view.bounds.width / 2, height: 30)
-        return layout
-    }
-    
-    private func setNavigationColor() {
-        UINavigationBar.appearance().barTintColor = CustomColor.shared.buttonTintColor
-        UINavigationBar.appearance().tintColor = CustomColor.shared.buttonTintColor
-        self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
-        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
-    }
-    
     @objc func showToastMessage() {
         view.makeToast("도착 예정 편지는 \(diaryAllTask.count - diaryTask.count)개입니다!")
     }
     
     private func moveToEditDiary(indexPath: IndexPath) {
         
+        let vc = CurrentDiaryViewController()
         let key = diarySortedKey[indexPath.section]
         guard let diary = diaryDictionary[key]?[indexPath.item] else { return  }
         
-        let vc = CurrentDiaryViewController()
         vc.currentTitleTextField.text = diary.diaryTitle
         vc.currentContentTextView.text = diary.diaryContent
         vc.viewModel.diaryTask = diary
@@ -119,10 +102,7 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionHeaderReusableView.identifier, for: indexPath) as? CollectionHeaderReusableView else { return UICollectionReusableView()}
         
-        headerView.headerLabel.backgroundColor = CustomColor.shared.backgroundColor
-        headerView.headerLabel.textColor = CustomColor.shared.textColor
-        headerView.headerLabel.text = diarySortedKey[indexPath.section]
-        
+        headerView.setConfigureHeader(diaryDic: diarySortedKey, indexPath: indexPath)
         return headerView
     }
     
@@ -140,10 +120,7 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
         
         let key = diarySortedKey[indexPath.section]
         guard let diary = diaryDictionary[key]?[indexPath.item] else { return UICollectionViewCell() }
-        
-        cell.diaryTitleTextLabel.text = diary.diaryTitle
-        cell.diaryTextView.text = diary.diaryContent
-        cell.diaryDateLabel.text = diary.diaryDate.toDetailString
+        cell.configureCollectionViewCell(diary: diary)
         
         return cell
     }

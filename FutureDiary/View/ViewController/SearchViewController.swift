@@ -89,23 +89,6 @@ class SearchViewController: UIViewController {
         collectionView.register(HomeCollectionViewCell.classForCoder(), forCellWithReuseIdentifier: HomeCollectionViewCell.identifider)
     }
     
-    private func setCollectionViewLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 16
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 32, right: 8)
-        let width = UIScreen.main.bounds.width / 4 - spacing
-        layout.itemSize = CGSize(width: width, height: width * 1.4)
-        layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
-        return layout
-    }
-    
-    private func setNavigationColor() {
-        UINavigationBar.appearance().barTintColor = CustomColor.shared.buttonTintColor
-        UINavigationBar.appearance().tintColor = CustomColor.shared.buttonTintColor
-        self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
-        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
-    }
-    
     private func moveToEditDiary(indexPath: IndexPath) {
         let vc = CurrentDiaryViewController()
         vc.currentTitleTextField.text = searchedDiary[indexPath.row].diaryTitle
@@ -128,13 +111,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
         
-        cell.diaryTitleTextLabel.text = searchedDiary[indexPath.row].diaryTitle
-        cell.diaryTextView.text = searchedDiary[indexPath.row].diaryContent
-        cell.diaryDateLabel.text = searchedDiary[indexPath.row].diaryDate.toDetailString
-        cell.diaryDateLabel.font = .systemFont(ofSize: 10)
-        cell.diaryDateLabel.textAlignment = .center
-        cell.diaryDateLabel.adjustsFontSizeToFitWidth = true
-        
+        cell.configureSearchCollectionViewCell(searchedDiary: searchedDiary, indexPath: indexPath)
         return cell
     }
     
