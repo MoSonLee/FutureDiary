@@ -98,34 +98,30 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
     }
     
     func showActivityViewController() {
-        
         guard let path = documentDirectoryPath() else {
-            showAlert(title: "도큐먼트 위치에 오류가 있씁니다.")
+            showAlert(title: "도큐먼트 위치에 오류가 있습니다.")
             return
         }
         
         let backUpFileURL = path.appendingPathComponent("Fury.zip")
-        
         let vc = UIActivityViewController(activityItems: [backUpFileURL], applicationActivities: [])
         self.present(vc, animated: true)
     }
     
     func backupButtonClicked() {
-        
         var urlPaths = [URL]()
         guard let path = documentDirectoryPath() else {
-            showAlert(title: "도큐먼트 위치에 오류가 있씁니다.")
+            showAlert(title: "도큐먼트 위치에 오류가 있습니다.")
             return
         }
-        
         let realmFile = path.appendingPathComponent("default.realm")
-        
         guard FileManager.default.fileExists(atPath: realmFile.path) else {
             showAlert(title: "벡압힐 파일이 없습니다")
             return
         }
         
         urlPaths.append(URL(string: realmFile.path)!)
+        
         do {
             let zipFilePath = try Zip.quickZipFiles(urlPaths, fileName: "Fury")
             showActivityViewController()
@@ -206,7 +202,6 @@ extension SettingViewController: UIDocumentPickerDelegate{
         
         if FileManager.default.fileExists(atPath: sandboxFileURL.path) {
             let fileURL = path.appendingPathComponent("Fury.zip")
-            
             do {
                 try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { progress in
                     print("progress \(progress)")
