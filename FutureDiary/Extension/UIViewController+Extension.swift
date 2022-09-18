@@ -20,9 +20,10 @@ extension UIViewController {
     }
     
     func setNavigationColor() {
-        self.navigationController?.navigationBar.backgroundColor = CustomColor.shared.backgroundColor
+//        self.navigationController?.navigationBar.backgroundColor = CustomColor.shared.backgroundColor
         self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
+        self.navigationController?.navigationBar.backgroundColor = .clear
     }
     
     func setDatePicker(datePicker: UIDatePicker) {

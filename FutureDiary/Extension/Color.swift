@@ -21,3 +21,4 @@ final class CustomColor {
     lazy var textColor: UIColor = checkUserMode(lightModeColor: .black, darkModeColor: .white)
     lazy var buttonTintColor: UIColor = checkUserMode(lightModeColor: .black, darkModeColor: .white)
 }
+

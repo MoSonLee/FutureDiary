@@ -11,16 +11,16 @@ import RealmSwift
 import Toast
 
 final class CollectionViewController: UIViewController {
-    private var datePickerView = UIPickerView()
-    private var diaryAllTask: Results<Diary>!
-    private var diaryTask: Results<Diary>!
-    private var mailButton = UIBarButtonItem()
     
+    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    private var datePickerView = UIPickerView()
+    private var mailButton = UIBarButtonItem()
     private var diaryDictionary: [String : [Diary]] = [ : ]
     private lazy var diarySortedKey = diaryDictionary.keys.sorted(by: >)
     
     private let repository = RealmRepository()
-    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
+    private var diaryAllTask: Results<Diary>!
+    private var diaryTask: Results<Diary>!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -33,11 +33,13 @@ final class CollectionViewController: UIViewController {
         setConstraints()
         setNavigation()
         collectionViewRegisterAndDelegate()
+        
     }
     
     private func fetchRealm() {
         diaryTask = repository.fetch(date: Date())
         diaryAllTask = repository.fetch()
+        
         diaryTask.forEach { value in
             diaryDictionary[value.diaryDate.toString] = Array(diaryTask.filter{ $0.diaryDate.toString == value.diaryDate.toString })
         }
@@ -45,7 +47,9 @@ final class CollectionViewController: UIViewController {
     }
     
     private func setConfigure() {
-        view.backgroundColor = CustomColor.shared.backgroundColor
+//        view.backgroundColor = CustomColor.shared.backgroundColor
+        view.backgroundColor = UIColor(patternImage:  UIImage(named: "BackGround")!)
+        collectionView.backgroundColor = .clear
         [collectionView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
@@ -121,7 +125,6 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
         let key = diarySortedKey[indexPath.section]
         guard let diary = diaryDictionary[key]?[indexPath.item] else { return UICollectionViewCell() }
         cell.configureCollectionViewCell(diary: diary)
-        
         return cell
     }
 }

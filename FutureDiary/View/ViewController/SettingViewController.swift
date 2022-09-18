@@ -136,7 +136,6 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         documentPicker.delegate = self
         documentPicker.allowsMultipleSelection = false
         self.present(documentPicker, animated: true)
-        
     }
 }
 
