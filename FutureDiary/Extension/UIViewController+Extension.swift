@@ -20,7 +20,6 @@ extension UIViewController {
     }
     
     func setNavigationColor() {
-//        self.navigationController?.navigationBar.backgroundColor = CustomColor.shared.backgroundColor
         self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
         self.navigationController?.navigationBar.backgroundColor = .clear
@@ -41,10 +40,10 @@ extension UIViewController {
     func setHomeCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 16
-        layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            let width = (UIScreen.main.bounds.width / 3 - spacing * 2)
+            let width = (UIScreen.main.bounds.width / 2 - spacing)
             layout.itemSize = CGSize(width: width, height: width * 0.7)
             return layout
         } else {
@@ -56,12 +55,19 @@ extension UIViewController {
     
     func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        let spacing: CGFloat = 16
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 8, bottom: 32, right: 8)
-        let width = UIScreen.main.bounds.width / 4 - spacing
-        layout.itemSize = CGSize(width: width, height: width * 1.4)
-        layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
-        return layout
+        layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            let width = UIScreen.main.bounds.width / 3 - 16
+            layout.itemSize = CGSize(width: width, height: width * 0.7 )
+            layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
+            return layout
+        } else {
+            let width = UIScreen.main.bounds.width / 2 - 20
+            layout.itemSize = CGSize(width: width, height: width)
+            layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
+            return layout
+        }
     }
     
     func showAlert(title: String) {

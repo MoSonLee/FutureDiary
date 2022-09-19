@@ -83,12 +83,12 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     private func setViewComponents() {
         futureTitleTextField.placeholder = "제목을 입력해주세요"
         futureContentTextView.font = .systemFont(ofSize: 16)
-        datePicker.layer.borderWidth = 0.5
     }
     
     private func setViewComponentsColor() {
-        view.backgroundColor = CustomColor.shared.backgroundColor
-        datePicker.layer.borderColor = CustomColor.shared.textColor.withAlphaComponent(0.3).cgColor
+        view.backgroundColor = UIColor(patternImage:  UIImage(named: "future")!)
+        futureContentTextView.backgroundColor = .clear
+        datePicker.backgroundColor = .clear
     }
     
     private func setConstraints() {

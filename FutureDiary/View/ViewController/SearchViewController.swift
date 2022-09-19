@@ -48,7 +48,8 @@ class SearchViewController: UIViewController {
     }
     
     private func setConfigure() {
-        view.backgroundColor = CustomColor.shared.backgroundColor
+        view.backgroundColor = UIColor(patternImage:  UIImage(named: "Background")!)
+        collectionView.backgroundColor = .clear
         
         [collectionView].forEach {
             view.addSubview($0)

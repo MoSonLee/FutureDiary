@@ -258,11 +258,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
-        cell.diaryTitleTextLabel.text = diarys[indexPath.row].diaryTitle
-        cell.diaryTextView.text = diarys[indexPath.row].diaryContent
-        cell.diaryDateLabel.text = diarys[indexPath.row].diaryDate.toDetailString
-        cell.diaryDateLabel.textAlignment = .center
-        cell.diaryDateLabel.adjustsFontSizeToFitWidth = true
+        
+        cell.configureHomeCollectionViewCell(diarys: diarys, indexPath: indexPath)
         return cell
     }
 }

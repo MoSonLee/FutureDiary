@@ -182,8 +182,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension SettingViewController: UIDocumentPickerDelegate{
+    
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        print(#function)
+        view.makeToast("취소되었습니다.")
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {

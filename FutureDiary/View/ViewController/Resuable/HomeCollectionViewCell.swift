@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RealmSwift
+
 class HomeCollectionViewCell: UICollectionViewCell {
     
     static var identifider: String {
@@ -23,7 +25,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         setConfigure()
-        setConstraints()
+        //        setConstraints()
     }
     
     private func setConfigure() {
@@ -34,24 +36,59 @@ class HomeCollectionViewCell: UICollectionViewCell {
         diaryTextView.isEditable = false
         diaryTextView.isUserInteractionEnabled = false
         diaryTitleTextLabel.insetsLayoutMarginsFromSafeArea = true
+        diaryTitleTextLabel.numberOfLines = 0
         setComponentsColor()
     }
     
     private func setComponentsColor() {
-        contentView.backgroundColor = CustomColor.shared.textColor
-        diaryTitleTextLabel.backgroundColor = CustomColor.shared.backgroundColor
-        diaryTextView.backgroundColor = CustomColor.shared.backgroundColor
-        diaryDateLabel.backgroundColor = CustomColor.shared.backgroundColor
+        diaryTitleTextLabel.backgroundColor = .clear
+        diaryTextView.backgroundColor = .clear
+        diaryDateLabel.backgroundColor = .clear
+        contentView.backgroundColor = .clear
+        
+        diaryTextView.textColor = .black
+        diaryTitleTextLabel.textColor = .black
+        diaryDateLabel.textColor = .black
+        
+        contentView.backgroundColor = UIColor(patternImage:  UIImage(named: "letter")!)
     }
     
     private func setConstraints() {
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            NSLayoutConstraint.activate([
+                diaryTitleTextLabel.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
+                diaryTitleTextLabel.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
+                diaryTitleTextLabel.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor),
+                
+                diaryDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+                diaryDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
+                diaryDateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -32),
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                
+                diaryTitleTextLabel.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
+                diaryTitleTextLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
+
+                diaryTitleTextLabel.centerXAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerXAnchor),
+                diaryTitleTextLabel.centerYAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.centerYAnchor, constant:  -16),
+                
+                diaryDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+                diaryDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
+                diaryDateLabel.topAnchor.constraint(equalTo: diaryTitleTextLabel.bottomAnchor, constant: 16),
+            ])
+        }
+    }
+    
+     func setHomeConstraints() {
         NSLayoutConstraint.activate([
-            diaryTitleTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 1),
-            diaryTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+            diaryTitleTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            diaryTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             diaryTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
-            diaryTitleTextLabel.bottomAnchor.constraint(equalTo: diaryTextView.topAnchor, constant: -1),
             diaryTitleTextLabel.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.15),
             
+            diaryTextView.topAnchor.constraint(equalTo: diaryTitleTextLabel.bottomAnchor, constant: 50),
             diaryTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
             diaryTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
             diaryTextView.bottomAnchor.constraint(equalTo: diaryDateLabel.topAnchor, constant: 4),
@@ -62,7 +99,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-     func configureCollectionViewCell(diary: Diary) {
+    func configureCollectionViewCell(diary: Diary) {
         
         self.diaryTitleTextLabel.text = diary.diaryTitle
         self.diaryTextView.text = diary.diaryContent
@@ -72,11 +109,17 @@ class HomeCollectionViewCell: UICollectionViewCell {
         self.diaryDateLabel.textAlignment = .center
         
         self.diaryDateLabel.adjustsFontSizeToFitWidth = true
-        self.diaryTitleTextLabel.adjustsFontSizeToFitWidth = true
         
         self.diaryTitleTextLabel.font = .systemFont(ofSize: 12)
         self.diaryTextView.font = .systemFont(ofSize: 10)
         self.diaryDateLabel.font = .systemFont(ofSize: 10)
+        setConstraints()
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            contentView.backgroundColor = UIColor(patternImage:  UIImage(named: "letter")!)
+        } else {
+            contentView.backgroundColor = UIColor(patternImage:  UIImage(named: "postit")!)
+        }
     }
     
     func configureSearchCollectionViewCell(searchedDiary: [Diary], indexPath: IndexPath) {
@@ -86,5 +129,21 @@ class HomeCollectionViewCell: UICollectionViewCell {
         self.diaryDateLabel.font = .systemFont(ofSize: 10)
         self.diaryDateLabel.textAlignment = .center
         self.diaryDateLabel.adjustsFontSizeToFitWidth = true
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            contentView.backgroundColor = UIColor(patternImage:  UIImage(named: "letter")!)
+        } else {
+            contentView.backgroundColor = UIColor(patternImage:  UIImage(named: "postit")!)
+        }
+        setConstraints()
+    }
+    
+    func configureHomeCollectionViewCell(diarys: Results<Diary>!, indexPath: IndexPath) {
+        self.diaryTitleTextLabel.text = diarys[indexPath.row].diaryTitle
+        self.diaryTextView.text = diarys[indexPath.row].diaryContent
+        self.diaryDateLabel.text = diarys[indexPath.row].diaryDate.toDetailString
+        self.diaryDateLabel.textAlignment = .right
+        self.diaryDateLabel.adjustsFontSizeToFitWidth = true
+        setHomeConstraints()
     }
 }

@@ -33,7 +33,6 @@ final class CollectionViewController: UIViewController {
         setConstraints()
         setNavigation()
         collectionViewRegisterAndDelegate()
-        
     }
     
     private func fetchRealm() {
@@ -47,7 +46,6 @@ final class CollectionViewController: UIViewController {
     }
     
     private func setConfigure() {
-//        view.backgroundColor = CustomColor.shared.backgroundColor
         view.backgroundColor = UIColor(patternImage:  UIImage(named: "Background")!)
         collectionView.backgroundColor = .clear
         [collectionView].forEach {

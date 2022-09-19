@@ -88,9 +88,9 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     }
     
     private func setComponentsColor() {
-        view.backgroundColor = CustomColor.shared.backgroundColor
+        view.backgroundColor = UIColor(patternImage:  UIImage(named: "Background")!)
         currentTitleTextField.textColor = CustomColor.shared.textColor
-        currentContentTextView.backgroundColor = CustomColor.shared.backgroundColor
+        currentContentTextView.backgroundColor = .clear
     }
     
     private func setConstraints() {
