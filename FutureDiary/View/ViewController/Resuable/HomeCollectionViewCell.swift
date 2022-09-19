@@ -113,28 +113,19 @@ class HomeCollectionViewCell: UICollectionViewCell {
         self.diaryTitleTextLabel.font = .systemFont(ofSize: 12)
         self.diaryTextView.font = .systemFont(ofSize: 10)
         self.diaryDateLabel.font = .systemFont(ofSize: 10)
+        contentView.backgroundColor = UIColor(patternImage:  UIImage(named: "letter")!)
         setConstraints()
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            contentView.backgroundColor = UIColor(patternImage:  UIImage(named: "letter")!)
-        } else {
-            contentView.backgroundColor = UIColor(patternImage:  UIImage(named: "postit")!)
-        }
     }
     
     func configureSearchCollectionViewCell(searchedDiary: [Diary], indexPath: IndexPath) {
+        
         self.diaryTitleTextLabel.text = searchedDiary[indexPath.row].diaryTitle
         self.diaryTextView.text = searchedDiary[indexPath.row].diaryContent
         self.diaryDateLabel.text = searchedDiary[indexPath.row].diaryDate.toDetailString
         self.diaryDateLabel.font = .systemFont(ofSize: 10)
         self.diaryDateLabel.textAlignment = .center
         self.diaryDateLabel.adjustsFontSizeToFitWidth = true
-        
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            contentView.backgroundColor = UIColor(patternImage:  UIImage(named: "letter")!)
-        } else {
-            contentView.backgroundColor = UIColor(patternImage:  UIImage(named: "postit")!)
-        }
+        contentView.backgroundColor = UIColor(patternImage:  UIImage(named: "letter")!)
         setConstraints()
     }
     

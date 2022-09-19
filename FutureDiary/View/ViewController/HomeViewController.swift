@@ -112,7 +112,7 @@ final class HomeViewController: UIViewController {
     private func setComponentsColor() {
         view.backgroundColor = UIColor(patternImage:  UIImage(named: "Background")!)
         collectionView.backgroundColor = .clear
-        writeDiaryButton.tintColor = CustomColor.shared.buttonTintColor
+        writeDiaryButton.tintColor = .black
     }
     
     private func setComponentsTextAndImage() {

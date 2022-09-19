@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "post.png",
+      "filename" : "darkMail.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "post@2x.png",
+      "filename" : "darkMail@2x.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "post@3x.png",
+      "filename" : "darkMail@3x.jpg",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -29,6 +29,7 @@
 		773A6E3D28CC74D500452D68 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E3C28CC74D500452D68 /* UIView+Extension.swift */; };
 		773A6E3F28CC9F2600452D68 /* FuryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E3E28CC9F2600452D68 /* FuryTextField.swift */; };
 		773A6E4328CF6D0E00452D68 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E4228CF6D0E00452D68 /* Color.swift */; };
+		7766CF1A28D8DCF900F89B11 /* CopyrightViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7766CF1928D8DCF900F89B11 /* CopyrightViewViewController.swift */; };
 		776DF96828CF95B000809EA2 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DF96728CF95B000809EA2 /* CollectionViewController.swift */; };
 		776DF96A28CF980400809EA2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DF96928CF980400809EA2 /* SearchViewController.swift */; };
 		776DF96C28D055EA00809EA2 /* CollectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DF96B28D055EA00809EA2 /* CollectionHeaderReusableView.swift */; };
@@ -62,6 +63,7 @@
 		773A6E3E28CC9F2600452D68 /* FuryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuryTextField.swift; sourceTree = "<group>"; };
 		773A6E4128CF508700452D68 /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ko; path = ko.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		773A6E4228CF6D0E00452D68 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		7766CF1928D8DCF900F89B11 /* CopyrightViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyrightViewViewController.swift; sourceTree = "<group>"; };
 		776DF96728CF95B000809EA2 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		776DF96928CF980400809EA2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		776DF96B28D055EA00809EA2 /* CollectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderReusableView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 				770DF6E028CA68FB00349D55 /* SettingViewController.swift */,
 				77260C9528D618EA007453E7 /* VersionViewController.swift */,
 				77260C9A28D6228E007453E7 /* LicenseViewController.swift */,
+				7766CF1928D8DCF900F89B11 /* CopyrightViewViewController.swift */,
 				770DF6E828CA6BC600349D55 /* Resuable */,
 			);
 			path = ViewController;
@@ -316,6 +319,7 @@
 				779DA61528CA62BB00561000 /* SceneDelegate.swift in Sources */,
 				770DF6DB28CA676E00349D55 /* SideMenuNavigationController.swift in Sources */,
 				770DF6E328CA6A1900349D55 /* CurrentDiaryViewModel.swift in Sources */,
+				7766CF1A28D8DCF900F89B11 /* CopyrightViewViewController.swift in Sources */,
 				770DF6D928CA65F500349D55 /* HomeViewModel.swift in Sources */,
 				776DF96C28D055EA00809EA2 /* CollectionHeaderReusableView.swift in Sources */,
 				77260C9B28D6228E007453E7 /* LicenseViewController.swift in Sources */,

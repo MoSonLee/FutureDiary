@@ -49,6 +49,7 @@ class SearchViewController: UIViewController {
     
     private func setConfigure() {
         view.backgroundColor = UIColor(patternImage:  UIImage(named: "Background")!)
+        
         collectionView.backgroundColor = .clear
         
         [collectionView].forEach {
@@ -66,6 +67,7 @@ class SearchViewController: UIViewController {
         searchController.hidesNavigationBarDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.enablesReturnKeyAutomatically = true
+        searchController.obscuresBackgroundDuringPresentation = false
     }
     
     private func setConstraints() {
@@ -126,6 +128,6 @@ extension SearchViewController: UISearchResultsUpdating {
         self.searchedDiary = self.diaryTask.filter{
             $0.diaryTitle.lowercased().contains(text) || $0.diaryContent.lowercased().contains(text)}
         collectionView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
-        self.collectionView.reloadData()
+        collectionView.reloadData()
     }
 }

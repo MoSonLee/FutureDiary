@@ -15,7 +15,7 @@ import Zip
 final class SettingViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     private let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
-    private let settingList = ["백업", "복구", "문의하기", "리뷰 작성하기", "Open License", "버전 정보"]
+    private let settingList = ["백업", "복구", "문의하기", "리뷰 작성하기", "Open License", "버전 정보", "Copyright"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,6 +97,11 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    private func movetoCopyrightView() {
+        let vc = CopyrightViewViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func showActivityViewController() {
         guard let path = documentDirectoryPath() else {
             showAlert(title: "도큐먼트 위치에 오류가 있습니다.")
@@ -174,6 +179,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             
         case 5:
             return moveToVersionView()
+            
+        case 6:
+            return movetoCopyrightView()
             
         default:
             print("error")
