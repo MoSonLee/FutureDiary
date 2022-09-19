@@ -8,6 +8,7 @@
 import UIKit
 
 final class CustomColor {
+    
     static let shared = CustomColor()
     private init() {}
     
