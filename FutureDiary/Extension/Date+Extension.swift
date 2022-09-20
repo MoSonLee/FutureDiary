@@ -19,7 +19,6 @@ extension Date {
         let date = calendar.date(from: dateComponents)!
         let range = calendar.range(of: .day, in: .month, for: date)!
         let numDays = range.count
-        
         return numDays
     }
     
@@ -59,16 +58,6 @@ extension Date {
         formatter.locale = Locale(identifier: Locale.current.identifier)
         formatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
         formatter.dateFormat = "yyyy.MM.dd a hh:mm"
-        formatter.amSymbol = "AM"
-        formatter.pmSymbol = "PM"
-        return formatter.string(from: self)
-    }
-    
-    var toLongDetailString: String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: Locale.current.identifier)
-        formatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSZ"
         formatter.amSymbol = "AM"
         formatter.pmSymbol = "PM"
         return formatter.string(from: self)

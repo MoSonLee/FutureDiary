@@ -15,7 +15,7 @@ import Zip
 final class SettingViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     private let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
-    private let settingList = ["백업", "복구", "문의하기", "리뷰 작성하기", "Open License", "버전 정보", "Copyright"]
+    private let settingList = ["백업", "복구", "문의하기", "리뷰 작성하기", "Open License", "Copyright", "버전 정보"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         tableView.register(ReusableTableViewCell.self, forCellReuseIdentifier: ReusableTableViewCell.identifier)
     }
     
-    func sendMail() {
+    private func sendMail() {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.setToRecipients(["ronlee6235@gmail.com"])
@@ -92,17 +92,12 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func moveToVersionView() {
-        let vc = VersionViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
     private func movetoCopyrightView() {
         let vc = CopyrightViewViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func showActivityViewController() {
+    private func showActivityViewController() {
         guard let path = documentDirectoryPath() else {
             showAlert(title: "도큐먼트 위치에 오류가 있습니다.")
             return
@@ -113,7 +108,7 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         self.present(vc, animated: true)
     }
     
-    func backupButtonClicked() {
+    private func backupButtonClicked() {
         var urlPaths = [URL]()
         guard let path = documentDirectoryPath() else {
             showAlert(title: "도큐먼트 위치에 오류가 있습니다.")
@@ -136,7 +131,7 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         }
     }
     
-    func restoreButtonClicked() {
+    private func restoreButtonClicked() {
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.archive], asCopy:  true)
         documentPicker.delegate = self
         documentPicker.allowsMultipleSelection = false
@@ -155,6 +150,11 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.settingTextLabel.text = settingList[indexPath.row]
         cell.settingTextLabel.textColor = CustomColor.shared.textColor
+        
+        if indexPath.row == 5 {
+            cell.textLabel?.text = "1.0.0"
+            cell.textLabel?.textAlignment = .right
+        }
         return cell
     }
     
@@ -178,9 +178,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             return moveToLicenseView()
             
         case 5:
-            return moveToVersionView()
-            
-        case 6:
             return movetoCopyrightView()
             
         default:

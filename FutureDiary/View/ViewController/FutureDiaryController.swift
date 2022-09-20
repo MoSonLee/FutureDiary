@@ -54,7 +54,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
         futureContentTextView.delegate = self
         placeholderLabel = UILabel()
         placeholderLabel.text = "내용을 입력하세요"
-        placeholderLabel.font = .italicSystemFont(ofSize: (futureContentTextView.font?.pointSize)!)
+        placeholderLabel.font = setCustomFont(size: 25)
         placeholderLabel.sizeToFit()
         futureContentTextView.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 8, y: (futureContentTextView.font?.pointSize)! / 2)
@@ -82,11 +82,12 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     
     private func setViewComponents() {
         futureTitleTextField.placeholder = "제목을 입력해주세요"
-        futureContentTextView.font = .systemFont(ofSize: 16)
+        futureTitleTextField.font = setCustomFont(size: 30)
+        futureContentTextView.font = setCustomFont(size: 25)
     }
     
     private func setViewComponentsColor() {
-        view.backgroundColor = UIColor(patternImage:  UIImage(named: "future")!)
+        view.backgroundColor = UIColor(patternImage:  .futureImage)
         futureContentTextView.backgroundColor = .clear
         datePicker.backgroundColor = .clear
     }

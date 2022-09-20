@@ -14,6 +14,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
     static var identifider: String {
         return "HomeCollectionViewCell"
     }
+    
     var diaryTitleTextLabel = UILabel()
     var diaryTextView = UITextView()
     var diaryDateLabel = UILabel()
@@ -32,10 +33,13 @@ class HomeCollectionViewCell: UICollectionViewCell {
             contentView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        
+        diaryTitleTextLabel.numberOfLines = 1
         diaryTextView.isEditable = false
         diaryTextView.isUserInteractionEnabled = false
+        
+        diaryDateLabel.adjustsFontSizeToFitWidth = true
         diaryTitleTextLabel.insetsLayoutMarginsFromSafeArea = true
-        diaryTitleTextLabel.numberOfLines = 1
         setComponentsColor()
     }
     
@@ -66,7 +70,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
             NSLayoutConstraint.activate([
                 diaryTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
                 diaryTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                diaryTitleTextLabel.bottomAnchor.constraint(equalTo: diaryDateLabel.topAnchor, constant: -3),
+                diaryTitleTextLabel.bottomAnchor.constraint(equalTo: diaryDateLabel.topAnchor, constant: -0.5),
                 
                 diaryDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
                 diaryDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
@@ -78,8 +82,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
     func setHomeConstraints() {
         NSLayoutConstraint.activate([
             diaryTitleTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
-            diaryTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
-            diaryTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
+            diaryTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
+            diaryTitleTextLabel.trailingAnchor.constraint(equalTo: diaryDateLabel.leadingAnchor, constant: -12),
             diaryTitleTextLabel.heightAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.heightAnchor, multiplier: 0.15),
             diaryTitleTextLabel.widthAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.widthAnchor, multiplier: 0.4),
             
@@ -90,8 +94,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
             diaryTextView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -16),
             
             diaryDateLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 24),
-            diaryDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
-            diaryDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32),
+            diaryDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
+            diaryDateLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.4)
         ])
     }
     
@@ -104,8 +108,9 @@ class HomeCollectionViewCell: UICollectionViewCell {
         self.diaryTitleTextLabel.textAlignment = .center
         self.diaryDateLabel.textAlignment = .right
         self.diaryDateLabel.adjustsFontSizeToFitWidth = true
-        self.diaryDateLabel.font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: 15)
-        self.diaryTitleTextLabel.font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: 20)
+        
+        self.diaryDateLabel.font = setCustomFont(size: 15)
+        self.diaryTitleTextLabel.font = setCustomFont(size: 20)
         
         contentView.addBackground(imageName: "mailcard",  contentMode: .scaleToFill)
         setConstraints()
@@ -119,9 +124,9 @@ class HomeCollectionViewCell: UICollectionViewCell {
         
         self.diaryTitleTextLabel.textAlignment = .center
         self.diaryDateLabel.textAlignment = .right
-        self.diaryDateLabel.adjustsFontSizeToFitWidth = true
-        self.diaryDateLabel.font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: 15)
-        self.diaryTitleTextLabel.font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: 20)
+        
+        self.diaryDateLabel.font = setCustomFont(size: 15)
+        self.diaryTitleTextLabel.font = setCustomFont(size: 2)
         
         contentView.addBackground(imageName: "mailcard",  contentMode: .scaleToFill)
         setConstraints()
@@ -135,9 +140,9 @@ class HomeCollectionViewCell: UICollectionViewCell {
         self.diaryDateLabel.text = diarys[indexPath.row].diaryDate.toDetailString
         
         self.diaryDateLabel.textAlignment = .right
-        self.diaryDateLabel.font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: 20)
-        self.diaryTitleTextLabel.font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: 30)
-        self.diaryTextView.font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: 20)
+        self.diaryDateLabel.font = setCustomFont(size: 18)
+        self.diaryTitleTextLabel.font = setCustomFont(size: 30)
+        self.diaryTextView.font = setCustomFont(size: 2)
         setHomeConstraints()
     }
 }

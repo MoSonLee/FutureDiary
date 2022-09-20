@@ -28,7 +28,7 @@ final class SideMenuViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.tintColor = CustomColor.shared.buttonTintColor
             $0.setTitleColor(CustomColor.shared.textColor, for: .normal)
-            $0.titleLabel?.font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: 25)
+            $0.titleLabel?.font = setCustomFont(size: 25)
             $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
             $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         }
@@ -37,13 +37,13 @@ final class SideMenuViewController: UIViewController {
     
     private func setComponentsTextAndImage() {
         moveToDiaryCollectionButton.setTitle("전체 보관함", for: .normal)
-        moveToDiaryCollectionButton.setImage(UIImage(systemName: "tray.fill"), for: .normal)
+        moveToDiaryCollectionButton.setImage(.trayFill, for: .normal)
         
         moveToSearchDiaryButton.setTitle("검색하기", for: .normal)
-        moveToSearchDiaryButton.setImage(UIImage(systemName: "doc.text.magnifyingglass"), for: .normal)
+        moveToSearchDiaryButton.setImage(.docTextMagnify, for: .normal)
         
         moveToSettingButton.setTitle("설정", for: .normal)
-        moveToSettingButton.setImage(UIImage(systemName: "gear"), for: .normal)
+        moveToSettingButton.setImage(.gear, for: .normal)
     }
     
     private func setConstraints() {

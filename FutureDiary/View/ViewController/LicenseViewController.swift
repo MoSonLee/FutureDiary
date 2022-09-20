@@ -9,7 +9,6 @@ import UIKit
 
 final class LicenseViewController: UIViewController {
     
-    
     private let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
     private let licenseList = ["SideMenu", "RxSwift", "Realm", "Toast", "IQKeyboardManager", "Zip"]
     
@@ -28,7 +27,6 @@ final class LicenseViewController: UIViewController {
     }
     
     private func setConstraints() {
-        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),

@@ -56,7 +56,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
         currentContentTextView.delegate = self
         placeholderLabel = UILabel()
         placeholderLabel.text = "내용을 입력하세요"
-        placeholderLabel.font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: 25)
+        placeholderLabel.font = setCustomFont(size: 25)
         placeholderLabel.sizeToFit()
         currentContentTextView.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 8, y: (currentContentTextView.font?.pointSize)! / 2)
@@ -84,12 +84,12 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     
     private func setViewComponents() {
         currentTitleTextField.placeholder = "제목을 입력해주세요"
-        currentTitleTextField.font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: 35)
-        currentContentTextView.font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: 25)
+        currentTitleTextField.font = setCustomFont(size: 30)
+        currentContentTextView.font = setCustomFont(size: 25)
     }
     
     private func setComponentsColor() {
-        view.backgroundColor = UIColor(patternImage:  UIImage(named: "Background")!)
+        view.backgroundColor = UIColor(patternImage:  .backgroundImage)
         currentTitleTextField.textColor = CustomColor.shared.textColor
         currentContentTextView.backgroundColor = .clear
     }

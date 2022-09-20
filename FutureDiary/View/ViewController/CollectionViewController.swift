@@ -46,7 +46,7 @@ final class CollectionViewController: UIViewController {
     }
     
     private func setConfigure() {
-        view.backgroundColor = UIColor(patternImage:  UIImage(named: "Background")!)
+        view.backgroundColor = UIColor(patternImage:  .backgroundImage)
         collectionView.backgroundColor = .clear
         [collectionView].forEach {
             view.addSubview($0)
@@ -65,7 +65,7 @@ final class CollectionViewController: UIViewController {
     
     private func setNavigation() {
         self.navigationItem.title = "보관함"
-        mailButton = UIBarButtonItem(image: UIImage(systemName: "signpost.right.fill"), style: .done, target: self, action: #selector(showToastMessage))
+        mailButton = UIBarButtonItem(image: .signpost, style: .done, target: self, action: #selector(showToastMessage))
         self.navigationItem.rightBarButtonItem = mailButton
         setNavigationColor()
     }

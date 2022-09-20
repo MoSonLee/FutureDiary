@@ -64,7 +64,7 @@ extension UIViewController {
             return layout
         } else {
             let width = UIScreen.main.bounds.width / 3 - 20
-            layout.itemSize = CGSize(width: width, height: width)
+            layout.itemSize = CGSize(width: width, height: width * 1.1)
             layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
             return layout
         }
@@ -80,5 +80,10 @@ extension UIViewController {
     func documentDirectoryPath() -> URL? {
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
         return documentDirectory
+    }
+    
+    func setCustomFont(size: CGFloat) -> UIFont? {
+        let font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: size)
+        return font
     }
 }

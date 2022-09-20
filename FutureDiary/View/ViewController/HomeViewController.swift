@@ -21,7 +21,6 @@ final class HomeViewController: UIViewController {
     private let dateLabel = UILabel()
     private var isChecked: Bool = false
     private let notificationCenter = UNUserNotificationCenter.current()
-    
     private var diarys: Results<Diary>! {
         didSet {
             collectionView.reloadData()
@@ -47,16 +46,7 @@ final class HomeViewController: UIViewController {
         writeDiaryButton.addTarget(self, action: #selector(writeButtonTap), for: .touchUpInside)
         datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
         sendNotification()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: NSNotification.Name(rawValue: "reloadCollectionView"), object: nil)
-        
-        for family in UIFont.familyNames {
-            print("=======\(family)")
-            
-            for name in UIFont.fontNames(forFamilyName: family) {
-                print(name)
-            }
-        }
     }
     
     @objc func reloadCollectionView() {
@@ -117,7 +107,7 @@ final class HomeViewController: UIViewController {
     }
     
     private func setComponentsColor() {
-        view.backgroundColor = UIColor(patternImage:  UIImage(named: "Background")!)
+        view.backgroundColor = UIColor(patternImage: .backgroundImage)
         collectionView.backgroundColor = .clear
         writeDiaryButton.tintColor = CustomColor.shared.buttonTintColor
     }
@@ -157,8 +147,8 @@ final class HomeViewController: UIViewController {
     }
     
     private func setNavigation() {
-        self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: UIImage(systemName: "lineweight"), style: .done, target: self, action: #selector(setSideMenu))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar"), style: .done, target: self, action: #selector(showCalendar))
+        self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: .lineweight, style: .done, target: self, action: #selector(setSideMenu))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .calendar, style: .done, target: self, action: #selector(showCalendar))
         
         self.navigationController?.navigationBar.topItem?.title = "FURY"
         self.navigationItem.leftBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
@@ -177,6 +167,7 @@ final class HomeViewController: UIViewController {
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
         
         NSLayoutConstraint.activate([
+            
             datePicker.topAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.topAnchor),
             datePicker.leadingAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.leadingAnchor),
             datePicker.trailingAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.trailingAnchor),
@@ -228,10 +219,10 @@ final class HomeViewController: UIViewController {
             setCalendar()
             isChecked = !isChecked
             calendarView.setHeight(view.bounds.height * 0.5, animateTime: 0.5)
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.up.circle"), style: .done, target: self, action: #selector(showCalendar))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .chervonUp, style: .done, target: self, action: #selector(showCalendar))
         } else {
             isChecked = !isChecked
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "calendar.circle"), style: .done, target: self, action: #selector(showCalendar))
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .calendar, style: .done, target: self, action: #selector(showCalendar))
             datePicker.removeFromSuperview()
             calendarView.setHeight(0, animateTime: 0.5)
         }

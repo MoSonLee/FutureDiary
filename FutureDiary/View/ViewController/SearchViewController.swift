@@ -48,10 +48,8 @@ class SearchViewController: UIViewController {
     }
     
     private func setConfigure() {
-        view.backgroundColor = UIColor(patternImage:  UIImage(named: "Background")!)
-        
+        view.backgroundColor = UIColor(patternImage:  .backgroundImage)
         collectionView.backgroundColor = .clear
-        
         [collectionView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
