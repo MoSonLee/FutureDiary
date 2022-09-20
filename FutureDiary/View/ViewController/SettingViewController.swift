@@ -81,7 +81,7 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
             view.makeToast("전송에 실패했습니다. 다시 시도해주세요")
             
         @unknown default:
-            print(error?.localizedDescription ?? "ERROR")
+            return
         }
         
         controller.dismiss(animated: true)
@@ -125,7 +125,6 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         do {
             let zipFilePath = try Zip.quickZipFiles(urlPaths, fileName: "Fury")
             showActivityViewController()
-            print("Archive Location: \(zipFilePath)")
         } catch {
             showAlert(title: "압축을 실패했습니다.")
         }
@@ -181,7 +180,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             return movetoCopyrightView()
             
         default:
-            print("error")
+            return
         }
     }
 }
@@ -208,10 +207,9 @@ extension SettingViewController: UIDocumentPickerDelegate{
         if FileManager.default.fileExists(atPath: sandboxFileURL.path) {
             let fileURL = path.appendingPathComponent("Fury.zip")
             do {
-                try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { progress in
-                    print("progress \(progress)")
-                }, fileOutputHandler: { unzippedFile in
-                    print(unzippedFile)
+                try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { _ in
+                   
+                }, fileOutputHandler: { _ in
                     self.showAlert(title: "복구가 완료되었습니다.")
                 })
             } catch {
@@ -222,10 +220,8 @@ extension SettingViewController: UIDocumentPickerDelegate{
                 try FileManager.default.copyItem(at: selectedFileURL, to: sandboxFileURL)
                 let fileURL = path.appendingPathComponent("Fury.zip")
                 
-                try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { progress in
-                    print("progress \(progress)")
-                }, fileOutputHandler: { unzippedFile in
-                    print(unzippedFile)
+                try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { _ in
+                }, fileOutputHandler: { _ in
                     self.showAlert(title: "복구가 완료되었습니다.")
                 })
                 

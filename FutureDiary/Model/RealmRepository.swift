@@ -20,9 +20,8 @@ final class RealmRepository {
             }
             completion(true)
             
-        } catch let error {
+        } catch _ {
             completion(false)
-            print(error)
         }
     }
     
@@ -34,9 +33,8 @@ final class RealmRepository {
             }
             completion(true)
 
-        } catch let error {
+        } catch _ {
             completion(false)
-            print(error)
         }
     }
     
