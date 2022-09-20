@@ -20,7 +20,7 @@
 
 "cancel_title" = "Cancel";
 
-"moveToDiaryCollectionButton_title" = "Full Storage";
+"moveToDiaryCollectionButton_title" = "All Storage";
 
 "moveToSearchDiaryButton_title" = "Search";
 
@@ -83,3 +83,5 @@
 "error_occured_try_again" = "An error has occurred. Please try again";
 
 "send_to_future" = "Sent to the future!";
+
+"collection_toast_head" = "The letter that is expected to arrive is";
