@@ -11,7 +11,6 @@
 		770DF6D328CA650500349D55 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 770DF6D228CA650500349D55 /* RxCocoa */; };
 		770DF6D528CA650500349D55 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 770DF6D428CA650500349D55 /* RxRelay */; };
 		770DF6D728CA650500349D55 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 770DF6D628CA650500349D55 /* RxSwift */; };
-		770DF6D928CA65F500349D55 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6D828CA65F500349D55 /* HomeViewModel.swift */; };
 		770DF6DB28CA676E00349D55 /* SideMenuNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6DA28CA676E00349D55 /* SideMenuNavigationController.swift */; };
 		770DF6DD28CA68B300349D55 /* CurrentDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6DC28CA68B300349D55 /* CurrentDiaryViewController.swift */; };
 		770DF6DF28CA68BE00349D55 /* FutureDiaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6DE28CA68BE00349D55 /* FutureDiaryController.swift */; };
@@ -30,6 +29,7 @@
 		773A6E3F28CC9F2600452D68 /* FuryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E3E28CC9F2600452D68 /* FuryTextField.swift */; };
 		773A6E4328CF6D0E00452D68 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773A6E4228CF6D0E00452D68 /* Color.swift */; };
 		7766CF1A28D8DCF900F89B11 /* CopyrightViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7766CF1928D8DCF900F89B11 /* CopyrightViewViewController.swift */; };
+		7766CF2128DA2D8300F89B11 /* 나눔손글씨 나의 아내 손글씨.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7766CF2028DA2D8300F89B11 /* 나눔손글씨 나의 아내 손글씨.ttf */; };
 		776DF96828CF95B000809EA2 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DF96728CF95B000809EA2 /* CollectionViewController.swift */; };
 		776DF96A28CF980400809EA2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DF96928CF980400809EA2 /* SearchViewController.swift */; };
 		776DF96C28D055EA00809EA2 /* CollectionHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776DF96B28D055EA00809EA2 /* CollectionHeaderReusableView.swift */; };
@@ -46,7 +46,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		770DF6D828CA65F500349D55 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		770DF6DA28CA676E00349D55 /* SideMenuNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuNavigationController.swift; sourceTree = "<group>"; };
 		770DF6DC28CA68B300349D55 /* CurrentDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentDiaryViewController.swift; sourceTree = "<group>"; };
 		770DF6DE28CA68BE00349D55 /* FutureDiaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureDiaryController.swift; sourceTree = "<group>"; };
@@ -64,6 +63,7 @@
 		773A6E4128CF508700452D68 /* ko */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = ko; path = ko.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		773A6E4228CF6D0E00452D68 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		7766CF1928D8DCF900F89B11 /* CopyrightViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyrightViewViewController.swift; sourceTree = "<group>"; };
+		7766CF2028DA2D8300F89B11 /* 나눔손글씨 나의 아내 손글씨.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "나눔손글씨 나의 아내 손글씨.ttf"; sourceTree = "<group>"; };
 		776DF96728CF95B000809EA2 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		776DF96928CF980400809EA2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		776DF96B28D055EA00809EA2 /* CollectionHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionHeaderReusableView.swift; sourceTree = "<group>"; };
@@ -133,8 +133,17 @@
 				7722831B28D36268007A9557 /* Date+Extension.swift */,
 				773A6E3E28CC9F2600452D68 /* FuryTextField.swift */,
 				773A6E4228CF6D0E00452D68 /* Color.swift */,
+				7766CF1B28DA286900F89B11 /* Font */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		7766CF1B28DA286900F89B11 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				7766CF2028DA2D8300F89B11 /* 나눔손글씨 나의 아내 손글씨.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 		779DA60628CA62BB00561000 = {
@@ -197,7 +206,6 @@
 		779DA62928CA633100561000 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				770DF6D828CA65F500349D55 /* HomeViewModel.swift */,
 				770DF6E228CA6A1900349D55 /* CurrentDiaryViewModel.swift */,
 				770DF6E428CA6A2700349D55 /* FutureDiaryViewModel.swift */,
 			);
@@ -291,6 +299,7 @@
 			files = (
 				779DA61F28CA62BC00561000 /* LaunchScreen.storyboard in Resources */,
 				779DA61C28CA62BC00561000 /* Assets.xcassets in Resources */,
+				7766CF2128DA2D8300F89B11 /* 나눔손글씨 나의 아내 손글씨.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,7 +329,6 @@
 				770DF6DB28CA676E00349D55 /* SideMenuNavigationController.swift in Sources */,
 				770DF6E328CA6A1900349D55 /* CurrentDiaryViewModel.swift in Sources */,
 				7766CF1A28D8DCF900F89B11 /* CopyrightViewViewController.swift in Sources */,
-				770DF6D928CA65F500349D55 /* HomeViewModel.swift in Sources */,
 				776DF96C28D055EA00809EA2 /* CollectionHeaderReusableView.swift in Sources */,
 				77260C9B28D6228E007453E7 /* LicenseViewController.swift in Sources */,
 				773A6E3F28CC9F2600452D68 /* FuryTextField.swift in Sources */,

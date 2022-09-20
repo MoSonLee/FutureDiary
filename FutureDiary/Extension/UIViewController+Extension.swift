@@ -43,7 +43,7 @@ extension UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            let width = (UIScreen.main.bounds.width / 2 - spacing)
+            let width = (UIScreen.main.bounds.width / 3 - spacing)
             layout.itemSize = CGSize(width: width, height: width * 0.7)
             return layout
         } else {
@@ -63,7 +63,7 @@ extension UIViewController {
             layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
             return layout
         } else {
-            let width = UIScreen.main.bounds.width / 2 - 20
+            let width = UIScreen.main.bounds.width / 3 - 20
             layout.itemSize = CGSize(width: width, height: width)
             layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
             return layout

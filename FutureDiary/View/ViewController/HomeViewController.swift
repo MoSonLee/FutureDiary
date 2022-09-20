@@ -13,7 +13,6 @@ import Toast
 
 final class HomeViewController: UIViewController {
     
-    private let viewModel = HomeViewModel()
     private let repository = RealmRepository()
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     private let writeDiaryButton = UIButton()
@@ -50,6 +49,14 @@ final class HomeViewController: UIViewController {
         sendNotification()
         
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: NSNotification.Name(rawValue: "reloadCollectionView"), object: nil)
+        
+        for family in UIFont.familyNames {
+            print("=======\(family)")
+            
+            for name in UIFont.fontNames(forFamilyName: family) {
+                print(name)
+            }
+        }
     }
     
     @objc func reloadCollectionView() {
@@ -112,7 +119,7 @@ final class HomeViewController: UIViewController {
     private func setComponentsColor() {
         view.backgroundColor = UIColor(patternImage:  UIImage(named: "Background")!)
         collectionView.backgroundColor = .clear
-        writeDiaryButton.tintColor = .black
+        writeDiaryButton.tintColor = CustomColor.shared.buttonTintColor
     }
     
     private func setComponentsTextAndImage() {
