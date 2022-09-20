@@ -109,7 +109,7 @@ final class HomeViewController: UIViewController {
     private func setComponentsColor() {
         view.backgroundColor = UIColor(patternImage: .backgroundImage)
         collectionView.backgroundColor = .clear
-        writeDiaryButton.tintColor = CustomColor.shared.buttonTintColor
+        writeDiaryButton.tintColor = CustomColor.shared.writeButtonTintColor
     }
     
     private func setComponentsTextAndImage() {
@@ -256,7 +256,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
-        
         cell.configureHomeCollectionViewCell(diarys: diarys, indexPath: indexPath)
         return cell
     }
