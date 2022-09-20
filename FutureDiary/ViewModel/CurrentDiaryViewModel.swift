@@ -44,10 +44,8 @@ final class CurrentDiaryViewModel {
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
                 } else if let diaryTask = self?.diaryTask {
-                    print("UPDATED")
                     self?.updateRealm(diary: diaryTask, title: diary.0, content: diary.1)
                 } else {
-                    print("SAVED")
                     let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: Date())
                     self?.saveRealm(diary: diaryModel)
                 }

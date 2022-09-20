@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ReusableTableViewCell: UITableViewCell {
+final class ReusableTableViewCell: UITableViewCell {
     
     let settingTextLabel = UILabel()
     

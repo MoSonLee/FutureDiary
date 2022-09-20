@@ -15,7 +15,7 @@ import Zip
 final class SettingViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     private let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
-    private let settingList = ["백업", "복구", "문의하기", "리뷰 작성하기", "Open License", "Copyright", "버전 정보"]
+    private let settingList = ["백업", "복구", "개발자에게 문의하기", "리뷰 작성하기", "Open License", "Copyright", "버전"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,7 +116,7 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         }
         let realmFile = path.appendingPathComponent("default.realm")
         guard FileManager.default.fileExists(atPath: realmFile.path) else {
-            showAlert(title: "벡압힐 파일이 없습니다")
+            showAlert(title: "벡업할 파일이 없습니다")
             return
         }
         

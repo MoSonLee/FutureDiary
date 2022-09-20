@@ -72,6 +72,10 @@ extension UICollectionViewCell {
 
 extension String {
     
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+    
     func image(width: Int, height: Int) -> UIImage? {
         let size = CGSize(width: width, height: height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
@@ -82,5 +86,13 @@ extension String {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
+    }
+    
+    func localized(with: String) -> String {
+        return String(format: self.localized, with)
+    }
+    
+    func localized(number: Int) -> String {
+        return String(format: self.localized, number)
     }
 }

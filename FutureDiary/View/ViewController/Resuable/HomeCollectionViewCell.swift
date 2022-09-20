@@ -15,9 +15,9 @@ class HomeCollectionViewCell: UICollectionViewCell {
         return "HomeCollectionViewCell"
     }
     
-    var diaryTitleTextLabel = UILabel()
-    var diaryTextView = UITextView()
-    var diaryDateLabel = UILabel()
+    private var diaryTitleTextLabel = UILabel()
+    private var diaryTextView = UITextView()
+    private var diaryDateLabel = UILabel()
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -141,8 +141,8 @@ class HomeCollectionViewCell: UICollectionViewCell {
         
         self.diaryDateLabel.textAlignment = .right
         self.diaryDateLabel.font = setCustomFont(size: 18)
-        self.diaryTitleTextLabel.font = setCustomFont(size: 30)
-        self.diaryTextView.font = setCustomFont(size: 2)
+        self.diaryTitleTextLabel.font = setCustomFont(size: 25)
+        self.diaryTextView.font = setCustomFont(size: 20)
         setHomeConstraints()
     }
 }
