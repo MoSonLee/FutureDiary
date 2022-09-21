@@ -9,7 +9,6 @@ import UIKit
 
 import RealmSwift
 import SideMenu
-import Toast
 
 final class HomeViewController: UIViewController {
     
@@ -102,6 +101,7 @@ final class HomeViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         dateLabel.textAlignment = .center
+        dateLabel.font = setCustomFont(size: 25)
         setComponentsColor()
         setComponentsTextAndImage()
     }
@@ -109,7 +109,7 @@ final class HomeViewController: UIViewController {
     private func setComponentsColor() {
         view.backgroundColor = UIColor(patternImage: .backgroundImage)
         collectionView.backgroundColor = .clear
-        writeDiaryButton.tintColor = CustomColor.shared.writeButtonTintColor
+        writeDiaryButton.tintColor = CustomColor.shared.blackAndGray
     }
     
     private func setComponentsTextAndImage() {
@@ -151,8 +151,8 @@ final class HomeViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .calendar, style: .done, target: self, action: #selector(showCalendar))
         
         self.navigationController?.navigationBar.topItem?.title = "Home_navigation_title".localized
-        self.navigationItem.leftBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
-        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
+        self.navigationItem.leftBarButtonItem?.tintColor = CustomColor.shared.blackAndWhite
+        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.blackAndWhite
     }
     
     private func setCalendar() {
@@ -160,7 +160,7 @@ final class HomeViewController: UIViewController {
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
-        datePicker.tintColor = CustomColor.shared.writeButtonTintColor
+        datePicker.tintColor = CustomColor.shared.blackAndGray
         datePicker.locale = Locale(identifier: Locale.autoupdatingCurrent.identifier)
         datePicker.timeZone = TimeZone(abbreviation: Locale.autoupdatingCurrent.identifier)
         datePicker.maximumDate = Date()
@@ -184,7 +184,6 @@ final class HomeViewController: UIViewController {
     
     @objc func writeButtonTap() {
         let alert = UIAlertController(title: "writebutton_alertTitle".localized, message: nil, preferredStyle: .actionSheet)
-        
         let current = UIAlertAction(title: "current_title".localized, style: .default , handler: { _ in
             let vc = CurrentDiaryViewController()
             self.navigationController?.pushViewController(vc, animated: true)
@@ -206,7 +205,6 @@ final class HomeViewController: UIViewController {
                 popoverController.sourceView = self.view
                 popoverController.sourceRect = CGRect(x: self.view.bounds.midX, y: self.view.bounds.midY, width: 0, height: 0)
                 popoverController.permittedArrowDirections = []
-                
                 self.present(alert, animated: true, completion: nil)
             }
         } else {
@@ -222,10 +220,10 @@ final class HomeViewController: UIViewController {
         } else {
             isChecked = !isChecked
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .calendar, style: .done, target: self, action: #selector(showCalendar))
-            datePicker.removeFromSuperview()
             calendarView.setHeight(0, animateTime: 0.5)
+            datePicker.removeFromSuperview()
         }
-        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
+        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.blackAndWhite
     }
     
     @objc func datePickerChanged(picker: UIDatePicker) {
@@ -255,7 +253,6 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
-        
         cell.configureHomeCollectionViewCell(diarys: diarys, indexPath: indexPath)
         return cell
     }

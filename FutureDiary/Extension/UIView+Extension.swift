@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIView {
-    
     func setHeight(_ h:CGFloat, animateTime:TimeInterval? = nil) {
         if let c = self.constraints.first(where: { $0.firstAttribute == .height && $0.relation == .equal }) {
             c.constant = CGFloat(h)
@@ -26,12 +25,9 @@ extension UIView {
     func addBackground() {
         let width = UIScreen.main.bounds.size.width
         let height = UIScreen.main.bounds.size.height
-        
         let imageViewBackground = UIImageView(frame: CGRectMake(0, 0, width, height))
         imageViewBackground.image = UIImage(named: "letter")
-        
         imageViewBackground.contentMode = UIView.ContentMode.topLeft
-        
         self.addSubview(imageViewBackground)
         self.sendSubviewToBack(imageViewBackground)
     }

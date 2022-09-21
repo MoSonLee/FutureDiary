@@ -9,7 +9,7 @@ import UIKit
 
 import RealmSwift
 
-class HomeCollectionViewCell: UICollectionViewCell {
+final class HomeCollectionViewCell: UICollectionViewCell {
     
     static var identifider: String {
         return "HomeCollectionViewCell"
@@ -55,7 +55,6 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     private func setConstraints() {
-        
         if UIDevice.current.userInterfaceIdiom == .pad {
             NSLayoutConstraint.activate([
                 diaryTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -100,45 +99,35 @@ class HomeCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCollectionViewCell(diary: Diary) {
-        
         self.diaryTitleTextLabel.text = diary.diaryTitle
         self.diaryTextView.text = diary.diaryContent
         self.diaryDateLabel.text = diary.diaryDate.toShortString
-        
         self.diaryTitleTextLabel.textAlignment = .center
         self.diaryDateLabel.textAlignment = .right
         self.diaryDateLabel.adjustsFontSizeToFitWidth = true
-        
         self.diaryDateLabel.font = setCustomFont(size: 15)
-        self.diaryTitleTextLabel.font = setCustomFont(size: 20)
-        
+        self.diaryTitleTextLabel.font = setCustomFont(size: 15)
         contentView.addBackground(imageName: "mailcard",  contentMode: .scaleToFill)
         setConstraints()
     }
     
     func configureSearchCollectionViewCell(searchedDiary: [Diary], indexPath: IndexPath) {
-        
         self.diaryTitleTextLabel.text = searchedDiary[indexPath.row].diaryTitle
         self.diaryTextView.text = searchedDiary[indexPath.row].diaryContent
         self.diaryDateLabel.text = searchedDiary[indexPath.row].diaryDate.toString
-        
         self.diaryTitleTextLabel.textAlignment = .center
         self.diaryDateLabel.textAlignment = .right
-        
         self.diaryDateLabel.font = setCustomFont(size: 15)
         self.diaryTitleTextLabel.font = setCustomFont(size: 20)
-        
         contentView.addBackground(imageName: "mailcard",  contentMode: .scaleToFill)
         setConstraints()
     }
     
     func configureHomeCollectionViewCell(diarys: Results<Diary>!, indexPath: IndexPath) {
         contentView.addBackground(imageName: "postcard",  contentMode: .scaleToFill)
-        
         self.diaryTitleTextLabel.text = diarys[indexPath.row].diaryTitle
         self.diaryTextView.text = diarys[indexPath.row].diaryContent
         self.diaryDateLabel.text = diarys[indexPath.row].diaryDate.toDetailString
-        
         self.diaryDateLabel.textAlignment = .right
         self.diaryDateLabel.font = setCustomFont(size: 18)
         self.diaryTitleTextLabel.font = setCustomFont(size: 25)

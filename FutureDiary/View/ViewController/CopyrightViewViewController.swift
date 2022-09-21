@@ -58,7 +58,7 @@ extension CopyrightViewViewController: UITableViewDelegate, UITableViewDataSourc
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReusableTableViewCell.identifier) as? ReusableTableViewCell else { return UITableViewCell()}
         
         cell.settingTextLabel.text = copyrightList[indexPath.row]
-        cell.settingTextLabel.textColor = CustomColor.shared.textColor
+        cell.settingTextLabel.textColor = CustomColor.shared.blackAndWhite
         return cell
     }
 }

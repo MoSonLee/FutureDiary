@@ -217,8 +217,8 @@
 		779DA62A28CA633E00561000 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				7766CF1B28DA286900F89B11 /* Font */,
 				779DA61B28CA62BC00561000 /* Assets.xcassets */,
+				7766CF1B28DA286900F89B11 /* Font */,
 			);
 			path = Assets;
 			sourceTree = "<group>";

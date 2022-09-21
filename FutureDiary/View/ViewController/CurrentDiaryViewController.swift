@@ -90,7 +90,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     
     private func setComponentsColor() {
         view.backgroundColor = UIColor(patternImage:  .backgroundImage)
-        currentTitleTextField.textColor = CustomColor.shared.textColor
+        currentTitleTextField.textColor = CustomColor.shared.blackAndWhite
         currentContentTextView.backgroundColor = .clear
     }
     
@@ -121,7 +121,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
         setNavigationColor()
     }
     
-    @objc func showDeleteAlert() {
+    @objc private func showDeleteAlert() {
         let alert =  UIAlertController(title: "deleteAlert_title".localized, message: "deleteAlert_message".localized, preferredStyle: .alert)
         let cancel = UIAlertAction(title: "cancel_title".localized, style: .cancel)
         guard let diary = self.viewModel.diaryTask else { return }

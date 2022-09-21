@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import Toast
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     
     private var datePickerView = UIPickerView()
     private var diaryAllTask: Results<Diary>!
@@ -61,7 +61,7 @@ class SearchViewController: UIViewController {
         searchController.searchBar.placeholder = "moveToSearchDiaryButton_title".localized
         navigationItem.searchController = searchController
         searchController.searchBar.setValue("cancel_title".localized, forKey: "cancelButtonText")
-        searchController.searchBar.tintColor = CustomColor.shared.buttonTintColor
+        searchController.searchBar.tintColor = CustomColor.shared.blackAndWhite
         searchController.hidesNavigationBarDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
         searchController.searchBar.enablesReturnKeyAutomatically = true

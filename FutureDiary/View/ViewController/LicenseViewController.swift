@@ -57,7 +57,7 @@ extension LicenseViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReusableTableViewCell.identifier) as? ReusableTableViewCell else { return UITableViewCell()}
         
         cell.settingTextLabel.text = licenseList[indexPath.row]
-        cell.settingTextLabel.textColor = CustomColor.shared.textColor
+        cell.settingTextLabel.textColor = CustomColor.shared.blackAndWhite
         return cell
     }
 }

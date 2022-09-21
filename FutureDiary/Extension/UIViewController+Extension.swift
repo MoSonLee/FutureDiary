@@ -20,8 +20,8 @@ extension UIViewController {
     }
     
     func setNavigationColor() {
-        self.navigationController?.navigationBar.tintColor = CustomColor.shared.buttonTintColor
-        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
+        self.navigationController?.navigationBar.tintColor = CustomColor.shared.blackAndWhite
+        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.blackAndWhite
         self.navigationController?.navigationBar.backgroundColor = .clear
     }
     
@@ -34,7 +34,7 @@ extension UIViewController {
         datePicker.timeZone = .autoupdatingCurrent
         datePicker.minimumDate = Calendar.current.date(byAdding: .minute, value: 1, to: datePicker.date)
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
-        datePicker.tintColor = CustomColor.shared.buttonTintColor
+        datePicker.tintColor = CustomColor.shared.blackAndWhite
     }
     
     func setHomeCollectionViewLayout() -> UICollectionViewFlowLayout {

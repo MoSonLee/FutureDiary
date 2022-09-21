@@ -15,7 +15,13 @@ import Zip
 final class SettingViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     private let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
-    private let settingList = ["settingList_backup".localized, "settingList_restore".localized, "settingList_contact".localized, "settingList_review".localized, "settingList_license".localized, "settingList_copyright".localized, "settingList_version".localized]
+    private let settingList = ["settingList_backup".localized,
+                               "settingList_restore".localized,
+                               "settingList_contact".localized,
+                               "settingList_review".localized,
+                               "settingList_license".localized,
+                               "settingList_copyright".localized,
+                               "settingList_version".localized]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -148,9 +154,9 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReusableTableViewCell.identifier) as? ReusableTableViewCell else { return UITableViewCell()}
         
         cell.settingTextLabel.text = settingList[indexPath.row]
-        cell.settingTextLabel.textColor = CustomColor.shared.textColor
+        cell.settingTextLabel.textColor = CustomColor.shared.blackAndWhite
         
-        if indexPath.row == 5 {
+        if indexPath.row == 6 {
             cell.textLabel?.text = "1.0.0"
             cell.textLabel?.textAlignment = .right
         }
@@ -158,7 +164,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         switch indexPath.row {
             
         case 0:

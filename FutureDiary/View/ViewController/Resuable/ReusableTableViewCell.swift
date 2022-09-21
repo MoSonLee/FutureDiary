@@ -9,11 +9,11 @@ import UIKit
 
 final class ReusableTableViewCell: UITableViewCell {
     
-    let settingTextLabel = UILabel()
-    
     static var identifier: String {
         return "SettingTableViewCell"
     }
+
+    let settingTextLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

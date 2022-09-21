@@ -26,11 +26,11 @@ final class SideMenuViewController: UIViewController {
         [moveToSettingButton, moveToSearchDiaryButton, moveToDiaryCollectionButton].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.tintColor = CustomColor.shared.buttonTintColor
-            $0.setTitleColor(CustomColor.shared.textColor, for: .normal)
-            $0.titleLabel?.font = setCustomFont(size: 18)
+            $0.tintColor = CustomColor.shared.blackAndWhite
+            $0.setTitleColor(CustomColor.shared.blackAndWhite, for: .normal)
+            $0.titleLabel?.font = setCustomFont(size: 25)
             $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
-            $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+            $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         }
         setComponentsTextAndImage()
     }
@@ -59,17 +59,17 @@ final class SideMenuViewController: UIViewController {
         ])
     }
     
-    @objc final func moveToCollectionView() {
+    @objc private func moveToCollectionView() {
         let vc = CollectionViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc final func moveToSettingView() {
+    @objc private func moveToSettingView() {
         let vc = SettingViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @objc final func moveToSearchView() {
+    @objc private func moveToSearchView() {
         let vc = SearchViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
