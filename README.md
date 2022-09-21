@@ -101,6 +101,4 @@
    - fscalendar 쓰지 않기로 결정
 
    - 남은것
-      - launch screen animation
       - 앱 이름, 설명 다국어지원
-
