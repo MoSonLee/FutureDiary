@@ -34,8 +34,6 @@
 
 "complete" = "Complete";
 
-"delete" = "Delete";
-
 "deleteAlert_title" = "Are you sure you want to delete it?";
 
 "deleteAlert_message" = "If you delete it, you can't recover it!";

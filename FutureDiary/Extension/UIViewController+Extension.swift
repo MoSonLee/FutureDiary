@@ -34,7 +34,7 @@ extension UIViewController {
         datePicker.timeZone = .autoupdatingCurrent
         datePicker.minimumDate = Calendar.current.date(byAdding: .minute, value: 1, to: datePicker.date)
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
-        datePicker.tintColor = CustomColor.shared.blackAndWhite
+        datePicker.tintColor = CustomColor.shared.blackAndGray
     }
     
     func setHomeCollectionViewLayout() -> UICollectionViewFlowLayout {
@@ -56,7 +56,6 @@ extension UIViewController {
     func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
-        
         if UIDevice.current.userInterfaceIdiom == .pad {
             let width = UIScreen.main.bounds.width / 3 - 16
             layout.itemSize = CGSize(width: width, height: width * 2/3 )

@@ -82,7 +82,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     
     private func setViewComponents() {
         futureTitleTextField.placeholder = "title_placeholderLabel_text".localized
-        futureTitleTextField.font = setCustomFont(size: 30)
+        futureTitleTextField.font = setCustomFont(size: 25)
         futureContentTextView.font = setCustomFont(size: 25)
     }
     

@@ -160,11 +160,12 @@ final class HomeViewController: UIViewController {
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
-        datePicker.tintColor = CustomColor.shared.blackAndGray
         datePicker.locale = Locale(identifier: Locale.autoupdatingCurrent.identifier)
         datePicker.timeZone = TimeZone(abbreviation: Locale.autoupdatingCurrent.identifier)
         datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
+        datePicker.tintColor = CustomColor.shared.blackAndGray
+        
         NSLayoutConstraint.activate([
             
             datePicker.topAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.topAnchor),

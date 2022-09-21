@@ -28,7 +28,7 @@ final class SideMenuViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
             $0.tintColor = CustomColor.shared.blackAndWhite
             $0.setTitleColor(CustomColor.shared.blackAndWhite, for: .normal)
-            $0.titleLabel?.font = setCustomFont(size: 25)
+            $0.titleLabel?.font = setCustomFont(size: 20)
             $0.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
             $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 20)
         }

@@ -84,7 +84,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     
     private func setViewComponents() {
         currentTitleTextField.placeholder = "title_placeholderLabel_text".localized
-        currentTitleTextField.font = setCustomFont(size: 30)
+        currentTitleTextField.font = setCustomFont(size: 25)
         currentContentTextView.font = setCustomFont(size: 25)
     }
     
@@ -110,9 +110,10 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     }
     
     private func setNavigation() {
-        saveButton.title = "complete".localized
         self.navigationItem.title = "current_title".localized
-        deleteButton = UIBarButtonItem(title: "delete".localized, style: .done, target: self, action: #selector(showDeleteAlert))
+        saveButton.title = "complete".localized
+        deleteButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(showDeleteAlert))
+        deleteButton.tintColor = .systemRed
         if viewModel.diaryTask != nil {
             navigationItem.rightBarButtonItems = [saveButton, deleteButton]
         } else {

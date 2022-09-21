@@ -34,10 +34,7 @@
 
 "complete" = "완료";
 
-//추가
 "present" = "현재";
-
-"delete" = "삭제";
 
 "deleteAlert_title" = "정말 삭제하실건가요?";
 

@@ -67,9 +67,11 @@ final class HomeCollectionViewCell: UICollectionViewCell {
             ])
         } else {
             NSLayoutConstraint.activate([
+                diaryTitleTextLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -15),
+//                diaryTitleTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
                 diaryTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
                 diaryTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-                diaryTitleTextLabel.bottomAnchor.constraint(equalTo: diaryDateLabel.topAnchor, constant: -0.5),
+//                diaryTitleTextLabel.bottomAnchor.constraint(equalTo: diaryDateLabel.topAnchor, constant: -0.5),
                 
                 diaryDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
                 diaryDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
@@ -106,7 +108,7 @@ final class HomeCollectionViewCell: UICollectionViewCell {
         self.diaryDateLabel.textAlignment = .right
         self.diaryDateLabel.adjustsFontSizeToFitWidth = true
         self.diaryDateLabel.font = setCustomFont(size: 15)
-        self.diaryTitleTextLabel.font = setCustomFont(size: 15)
+        self.diaryTitleTextLabel.font = setCustomFont(size: 20)
         contentView.addBackground(imageName: "mailcard",  contentMode: .scaleToFill)
         setConstraints()
     }
@@ -117,6 +119,7 @@ final class HomeCollectionViewCell: UICollectionViewCell {
         self.diaryDateLabel.text = searchedDiary[indexPath.row].diaryDate.toString
         self.diaryTitleTextLabel.textAlignment = .center
         self.diaryDateLabel.textAlignment = .right
+        self.diaryDateLabel.adjustsFontSizeToFitWidth = true
         self.diaryDateLabel.font = setCustomFont(size: 15)
         self.diaryTitleTextLabel.font = setCustomFont(size: 20)
         contentView.addBackground(imageName: "mailcard",  contentMode: .scaleToFill)

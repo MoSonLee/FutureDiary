@@ -101,8 +101,8 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionHeaderReusableView.identifier, for: indexPath) as? CollectionHeaderReusableView else { return UICollectionReusableView()}
-        
         headerView.setConfigureHeader(diaryDic: diarySortedKey, indexPath: indexPath)
+        headerView.headerLabel.font = setCustomFont(size: 25)
         return headerView
     }
     

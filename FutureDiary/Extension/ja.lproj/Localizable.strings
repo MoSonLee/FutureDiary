@@ -20,7 +20,7 @@
 
 "cancel_title" = "キャンセル";
 
-"moveToDiaryCollectionButton_title" = "すべてのストレージ";
+"moveToDiaryCollectionButton_title" = "保管箱";
 
 "moveToSearchDiaryButton_title" = "検索";
 
@@ -34,7 +34,6 @@
 
 "complete" = "完了";
 
-"delete" = "削除たち";
 
 "deleteAlert_title" = "削除してもよろしいですか?";
 
