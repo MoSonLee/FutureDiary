@@ -6,7 +6,7 @@
   
 */
 
-"Home_navigation_title" = "Future Diary";
+"Home_navigation_title" = "FURY";
 
 "notification_title" = "The diary has arrived!";
 
@@ -21,6 +21,8 @@
 "cancel_title" = "Cancel";
 
 "moveToDiaryCollectionButton_title" = "All Storage";
+
+"storage" = "Storage";
 
 "moveToSearchDiaryButton_title" = "Search";
 
@@ -72,16 +74,16 @@
 
 "backupFile_name" = "Fury.zip";
 
-"backupfile_not_exist" = "There are no files to back up";
-
 "cant_search_file" = "The selected file could not be found.";
 
-"restore_complete_alert" = "Restore completed.";
+"restore_complete_alert" = "Restore completed. Please restart the app!";
 
 "fail_Uncompress" = "Uncompress failed";
+
+"fail_restore" = "Decompression failed";
 
 "error_occured_try_again" = "An error has occurred. Please try again";
 
 "send_to_future" = "Sent to the future!";
 
-"collection_toast_head" = "The letter that is expected to arrive is";
+"collection_toast_head" = "The letter that is expected to arrive is %1d";

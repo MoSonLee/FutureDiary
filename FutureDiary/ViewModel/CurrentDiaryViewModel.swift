@@ -42,7 +42,7 @@ final class CurrentDiaryViewModel {
         input.saveButtonTap
             .emit(onNext: { [weak self] diary in
                 if diary.0.count == 0 {
-                    self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
+                    self?.showAlertRelay.accept(("title_placeholderLabel_text".localized, false))
                 } else if let diaryTask = self?.diaryTask {
                     self?.updateRealm(diary: diaryTask, title: diary.0, content: diary.1)
                 } else {
@@ -63,9 +63,9 @@ extension CurrentDiaryViewModel {
     private func saveRealm(diary: Diary) {
         respository.create(diary: diary) { isSaved in
             if isSaved {
-                self.showAlertRelay.accept(("저장되었습니다", true))
+                self.showAlertRelay.accept(("mail_store".localized, true))
             } else {
-                self.showToastRelay.accept("오류가 발생했습니다. 다시 시도해주세요")
+                self.showToastRelay.accept("error_occured_try_again".localized)
             }
         }
     }
@@ -73,9 +73,9 @@ extension CurrentDiaryViewModel {
     private func updateRealm(diary: Diary, title: String, content: String) {
         respository.update(diary: diary, title: title, content: content) { isSaved in
             if isSaved {
-                self.showAlertRelay.accept(("저장되었습니다", true))
+                self.showAlertRelay.accept(("mail_store".localized, true))
             } else {
-                self.showToastRelay.accept("오류가 발생했습니다. 다시 시도해주세요")
+                self.showToastRelay.accept("error_occured_try_again".localized)
             }
         }
     }

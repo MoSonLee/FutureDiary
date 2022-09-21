@@ -55,8 +55,8 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     private func setTextViewPlaceholder() {
         currentContentTextView.delegate = self
         placeholderLabel = UILabel()
-        placeholderLabel.text = "내용을 입력하세요"
-        placeholderLabel.font = setCustomFont(size: 25)
+        placeholderLabel.text = "placeholderLabel_text".localized
+        placeholderLabel.font = setCustomFont(size: 20)
         placeholderLabel.sizeToFit()
         currentContentTextView.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 8, y: (currentContentTextView.font?.pointSize)! / 2)
@@ -83,7 +83,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     }
     
     private func setViewComponents() {
-        currentTitleTextField.placeholder = "제목을 입력해주세요"
+        currentTitleTextField.placeholder = "title_placeholderLabel_text".localized
         currentTitleTextField.font = setCustomFont(size: 30)
         currentContentTextView.font = setCustomFont(size: 25)
     }
@@ -110,9 +110,9 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     }
     
     private func setNavigation() {
-        saveButton.title = "완료"
-        self.navigationItem.title = "현재"
-        deleteButton = UIBarButtonItem(title: "삭제", style: .done, target: self, action: #selector(showDeleteAlert))
+        saveButton.title = "complete".localized
+        self.navigationItem.title = "current_title".localized
+        deleteButton = UIBarButtonItem(title: "delete".localized, style: .done, target: self, action: #selector(showDeleteAlert))
         if viewModel.diaryTask != nil {
             navigationItem.rightBarButtonItems = [saveButton, deleteButton]
         } else {
@@ -122,11 +122,11 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     }
     
     @objc func showDeleteAlert() {
-        let alert =  UIAlertController(title: "정말 삭제하실건가요?", message: "삭제하시면 복구할 수 없어요!", preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        let alert =  UIAlertController(title: "deleteAlert_title".localized, message: "deleteAlert_message".localized, preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "cancel_title".localized, style: .cancel)
         guard let diary = self.viewModel.diaryTask else { return }
         
-        let ok = UIAlertAction(title: "확인", style:.destructive, handler: { _ in
+        let ok = UIAlertAction(title: "okAlert_title".localized, style:.destructive, handler: { _ in
             self.repository.delete(diary: diary)
             self.navigationController?.popViewController(animated: true)
         })
@@ -139,7 +139,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
         output.showAlert
             .emit(onNext: {[weak self] text, isSaved in
                 let alert = UIAlertController(title: text, message: nil, preferredStyle: .alert)
-                let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
+                let confirmAction = UIAlertAction(title: "okAlert_title".localized, style: .destructive) { _ in
                     if isSaved {
                         self?.navigationController?.popViewController(animated: true)
                     }
@@ -160,7 +160,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
         let toolbar = UIToolbar()
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                                         target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .done,
+        let doneButton = UIBarButtonItem(title: "doneButton_title".localized, style: .done,
                                          target: self, action: #selector(doneButtonTapped))
         toolbar.setItems([flexSpace, doneButton], animated: true)
         toolbar.sizeToFit()

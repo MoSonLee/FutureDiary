@@ -58,9 +58,9 @@ class SearchViewController: UIViewController {
     
     private func setupSearchController() {
         searchController.searchResultsUpdater = self
-        searchController.searchBar.placeholder = "검색하기"
+        searchController.searchBar.placeholder = "moveToSearchDiaryButton_title".localized
         navigationItem.searchController = searchController
-        searchController.searchBar.setValue("취소", forKey: "cancelButtonText")
+        searchController.searchBar.setValue("cancel_title".localized, forKey: "cancelButtonText")
         searchController.searchBar.tintColor = CustomColor.shared.buttonTintColor
         searchController.hidesNavigationBarDuringPresentation = false
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -78,7 +78,7 @@ class SearchViewController: UIViewController {
     }
     
     private func setNavigation() {
-        self.navigationItem.title = "검색하기"
+        self.navigationItem.title = "moveToSearchDiaryButton_title".localized
         setNavigationColor()
     }
     

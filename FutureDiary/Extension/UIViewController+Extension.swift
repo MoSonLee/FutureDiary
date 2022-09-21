@@ -44,11 +44,11 @@ extension UIViewController {
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             let width = (UIScreen.main.bounds.width / 3 - spacing)
-            layout.itemSize = CGSize(width: width, height: width * 0.7)
+            layout.itemSize = CGSize(width: width, height: width * 2/3)
             return layout
         } else {
             let width = UIScreen.main.bounds.width - spacing
-            layout.itemSize = CGSize(width: width, height: width * 0.5)
+            layout.itemSize = CGSize(width: width, height: width * 2/3)
             return layout
         }
     }
@@ -59,12 +59,12 @@ extension UIViewController {
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             let width = UIScreen.main.bounds.width / 3 - 16
-            layout.itemSize = CGSize(width: width, height: width * 0.7 )
+            layout.itemSize = CGSize(width: width, height: width * 2/3 )
             layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
             return layout
         } else {
             let width = UIScreen.main.bounds.width / 3 - 20
-            layout.itemSize = CGSize(width: width, height: width * 1.1)
+            layout.itemSize = CGSize(width: width, height: width * 2/3)
             layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
             return layout
         }

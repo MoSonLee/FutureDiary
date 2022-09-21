@@ -15,7 +15,7 @@ import Zip
 final class SettingViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
     private let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
-    private let settingList = ["백업", "복구", "개발자에게 문의하기", "리뷰 작성하기", "Open License", "Copyright", "버전"]
+    private let settingList = ["settingList_backup".localized, "settingList_restore".localized, "settingList_contact".localized, "settingList_review".localized, "settingList_license".localized, "settingList_copyright".localized, "settingList_version".localized]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
     }
     
     private func setNavigation() {
-        self.navigationItem.title = "설정"
+        self.navigationItem.title = "moveToSettingButton_title".localized
         setNavigationColor()
     }
     
@@ -56,12 +56,12 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.setToRecipients(["ronlee6235@gmail.com"])
-            mail.setSubject("문의사항")
+            mail.setSubject("Question".localized)
             mail.mailComposeDelegate = self
             self.present(mail, animated: true)
             
         } else {
-            view.makeToast("메일을 등록해주세요")
+            view.makeToast("register_mail".localized)
         }
     }
     
@@ -69,16 +69,16 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         switch result {
             
         case .cancelled:
-            view.makeToast("취소되었습니다.")
+            view.makeToast("mail_cancel".localized)
             
         case .saved:
-            view.makeToast("저장되었습니다")
+            view.makeToast("mail_store".localized)
             
         case .sent:
-            view.makeToast("전송되었습니다.")
+            view.makeToast("mail_send".localized)
             
         case .failed:
-            view.makeToast("전송에 실패했습니다. 다시 시도해주세요")
+            view.makeToast("mail_error".localized)
             
         @unknown default:
             return
@@ -99,7 +99,7 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
     
     private func showActivityViewController() {
         guard let path = documentDirectoryPath() else {
-            showAlert(title: "도큐먼트 위치에 오류가 있습니다.")
+            showAlert(title: "documentAlertError".localized)
             return
         }
         
@@ -111,22 +111,22 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
     private func backupButtonClicked() {
         var urlPaths = [URL]()
         guard let path = documentDirectoryPath() else {
-            showAlert(title: "도큐먼트 위치에 오류가 있습니다.")
+            showAlert(title: "documentAlertError".localized)
             return
         }
         let realmFile = path.appendingPathComponent("default.realm")
         guard FileManager.default.fileExists(atPath: realmFile.path) else {
-            showAlert(title: "벡업할 파일이 없습니다")
+            showAlert(title: "cant_search_file".localized)
             return
         }
         
         urlPaths.append(URL(string: realmFile.path)!)
         
         do {
-            let zipFilePath = try Zip.quickZipFiles(urlPaths, fileName: "Fury")
+            let _ = try Zip.quickZipFiles(urlPaths, fileName: "Fury")
             showActivityViewController()
         } catch {
-            showAlert(title: "압축을 실패했습니다.")
+            showAlert(title: "fail_Uncompress".localized)
         }
     }
     
@@ -188,17 +188,17 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
 extension SettingViewController: UIDocumentPickerDelegate{
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-        view.makeToast("취소되었습니다.")
+        view.makeToast("mail_cancel".localized)
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         guard let selectedFileURL = urls.first else {
-            showAlert(title: "선택하신 파일을 찾을 수 없습니다.")
+            showAlert(title: "cant_searchfile".localized)
             return
         }
         
         guard let path = documentDirectoryPath() else {
-            showAlert(title: "도큐먼트 위치에 오류가 있습니다.")
+            showAlert(title: "documentAlertError".localized)
             return
         }
         
@@ -210,10 +210,10 @@ extension SettingViewController: UIDocumentPickerDelegate{
                 try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { _ in
                    
                 }, fileOutputHandler: { _ in
-                    self.showAlert(title: "복구가 완료되었습니다.")
+                    self.showAlert(title: "restore_complete_alert".localized)
                 })
             } catch {
-                showAlert(title: "압축 해제에 실패")
+                showAlert(title: "fail_restore".localized)
             }
         } else {
             do {
@@ -222,11 +222,11 @@ extension SettingViewController: UIDocumentPickerDelegate{
                 
                 try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { _ in
                 }, fileOutputHandler: { _ in
-                    self.showAlert(title: "복구가 완료되었습니다.")
+                    self.showAlert(title: "restore_complete_alert".localized)
                 })
                 
             } catch {
-                showAlert(title: "압축 해제에 실패했습니다.")
+                showAlert(title: "fail_restore".localized)
             }
         }
     }

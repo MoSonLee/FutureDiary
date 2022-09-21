@@ -6,82 +6,84 @@
   
 */
 
-"Home_navigation_title" = "Future Diary";
+"Home_navigation_title" = "未来日記";
 
-"notification_title" = "The diary has arrived!";
+"notification_title" = "日記が届きました！";
 
-"notification_body" = "Check out the letters from the past";
+"notification_body" = "過去の手紙をチェックする";
 
-"writebutton_alertTitle" = "Please choose the type of diary you want to write";
+"writebutton_alertTitle" = "書きたい日記の種類を選択してください";
 
-"current_title" = "Today";
+"current_title" = "今日";
 
-"future_title" = "Future";
+"future_title" = "フューチャー";
 
-"cancel_title" = "Cancel";
+"cancel_title" = "キャンセル";
 
-"moveToDiaryCollectionButton_title" = "All Storage";
+"moveToDiaryCollectionButton_title" = "すべてのストレージ";
 
-"moveToSearchDiaryButton_title" = "Search";
+"moveToSearchDiaryButton_title" = "検索";
 
-"moveToSettingButton_title" = "Setting";
+"storage" = "保管箱";
 
-"placeholderLabel_text" = "Please enter the content";
+"moveToSettingButton_title" = "設定";
 
-"title_placeholderLabel_text" = "Please enter a title";
+"placeholderLabel_text" = "内容を入力してください";
 
-"complete" = "Complete";
+"title_placeholderLabel_text" = "タイトルを入力してください";
 
-"delete" = "Delete";
+"complete" = "完了";
 
-"deleteAlert_title" = "Are you sure you want to delete it?";
+"delete" = "削除たち";
 
-"deleteAlert_message" = "If you delete it, you can't recover it!";
+"deleteAlert_title" = "削除してもよろしいですか?";
 
-"okAlert_title" = "Confirm";
+"deleteAlert_message" = "削除すると復旧できません!";
 
-"doneButton_title" = "Done";
+"okAlert_title" = "確認する";
 
-"settingList_backup" = "Backup";
+"doneButton_title" = "完了";
 
-"settingList_restore" = "Restore";
+"settingList_backup" = "バックアップ";
 
-"settingList_contact" = "Contact Developer";
+"settingList_restore" = "復元";
 
-"settingList_review" = "Create a Review";
+"settingList_contact" = "開発者へのお問い合わせ";
 
-"settingList_license" = "Open License";
+"settingList_review" = "レビューの作成";
 
-"settingList_copyright" = "Copyright";
+"settingList_license" = "オープンライセンス";
 
-"settingList_version" = "Version";
+"settingList_copyright" = "著作権";
 
-"Question" = "Question";
+"settingList_version" = "バージョン";
 
-"register_mail" = "Please register your mail";
+"Question" = "お問い合わせ";
 
-"mail_cancel" = "Canceled";
+"register_mail" = "メールを登録してください";
 
-"mail_store" = "Saved";
+"mail_cancel" = "キャンセル済み";
 
-"mail_send" = "Sent";
+"mail_store" = "保存済み";
 
-"mail_error" = "Send failed. Please try again";
+"mail_send" = "送信済み";
 
-"documentAlertError" = "There is an error in the document location.";
+"mail_error" = "送信に失敗しました。 もう一度お試しください";
+
+"documentAlertError" = "文書の場所にエラーがあります。";
 
 "backupFile_name" = "Fury.zip";
 
-"backupfile_not_exist" = "There are no files to back up";
+"cant_search_file" = "選択したファイルを見つけることができません。";
 
-"cant_search_file" = "The selected file could not be found.";
+"restore_complete_alert" = "復元が完了しました。アプリを再始動してください！";
 
-"restore_complete_alert" = "Restore completed.";
+"fail_Uncompress" = "解凍に失敗しました";
 
-"fail_Uncompress" = "Uncompress failed";
+"fail_restore" = "圧縮解除に失敗しました";
 
-"error_occured_try_again" = "An error has occurred. Please try again";
+"error_occured_try_again" = "エラーが発生しました。 もう一度お試しください";
 
-"send_to_future" = "Sent to the future!";
+"send_to_future" = "未来へ！";
 
-"collection_toast_head" = "The letter that is expected to arrive is";
+"collection_toast_head" = "届く予定の手紙は %1d 本数となります。";

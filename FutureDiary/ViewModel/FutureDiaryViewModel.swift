@@ -32,7 +32,7 @@ final class FutureDiaryViewModel {
         input.saveButtonTap
             .emit(onNext: { [weak self] diary in
                 if diary.0.count == 0 {
-                    self?.showAlertRelay.accept(("제목을 필수로 입력해주세요", false))
+                    self?.showAlertRelay.accept(("title_placeholderLabel_text".localized, false))
                 } else {
                     let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2)
                     self?.saveRealm(diary: diaryModel)
@@ -51,9 +51,9 @@ extension FutureDiaryViewModel {
     private func saveRealm(diary: Diary) {
         respository.create(diary: diary) { isSaved in
             if isSaved {
-                self.showAlertRelay.accept(("미래로 전송되었습니다!", true))
+                self.showAlertRelay.accept(("send_to_future".localized, true))
             } else {
-                self.showToastRelay.accept("오류가 발생했습니다. 다시 시도해주세요")
+                self.showToastRelay.accept("error_occured_try_again".localized)
             }
         }
     }

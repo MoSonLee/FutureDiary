@@ -126,7 +126,7 @@ class HomeCollectionViewCell: UICollectionViewCell {
         self.diaryDateLabel.textAlignment = .right
         
         self.diaryDateLabel.font = setCustomFont(size: 15)
-        self.diaryTitleTextLabel.font = setCustomFont(size: 2)
+        self.diaryTitleTextLabel.font = setCustomFont(size: 20)
         
         contentView.addBackground(imageName: "mailcard",  contentMode: .scaleToFill)
         setConstraints()

@@ -64,7 +64,7 @@ final class CollectionViewController: UIViewController {
     }
     
     private func setNavigation() {
-        self.navigationItem.title = "보관함"
+        self.navigationItem.title = "storage".localized
         mailButton = UIBarButtonItem(image: .signpost, style: .done, target: self, action: #selector(showToastMessage))
         self.navigationItem.rightBarButtonItem = mailButton
         setNavigationColor()
@@ -79,7 +79,7 @@ final class CollectionViewController: UIViewController {
     }
     
     @objc func showToastMessage() {
-        view.makeToast("도착 예정 편지는 \(diaryAllTask.count - diaryTask.count)개입니다!")
+        view.makeToast("collection_toast_head".localized(number: diaryAllTask.count - diaryTask.count))
     }
     
     private func moveToEditDiary(indexPath: IndexPath) {
@@ -100,6 +100,7 @@ extension CollectionViewController: UICollectionViewDataSource, UICollectionView
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         diarySortedKey.count
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: CollectionHeaderReusableView.identifier, for: indexPath) as? CollectionHeaderReusableView else { return UICollectionReusableView()}

@@ -53,8 +53,8 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     private func setTextViewPlaceholder() {
         futureContentTextView.delegate = self
         placeholderLabel = UILabel()
-        placeholderLabel.text = "내용을 입력하세요"
-        placeholderLabel.font = setCustomFont(size: 25)
+        placeholderLabel.text = "placeholderLabel_text".localized
+        placeholderLabel.font = setCustomFont(size: 20)
         placeholderLabel.sizeToFit()
         futureContentTextView.addSubview(placeholderLabel)
         placeholderLabel.frame.origin = CGPoint(x: 8, y: (futureContentTextView.font?.pointSize)! / 2)
@@ -81,7 +81,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     }
     
     private func setViewComponents() {
-        futureTitleTextField.placeholder = "제목을 입력해주세요"
+        futureTitleTextField.placeholder = "title_placeholderLabel_text".localized
         futureTitleTextField.font = setCustomFont(size: 30)
         futureContentTextView.font = setCustomFont(size: 25)
     }
@@ -112,8 +112,8 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     }
     
     private func setNavigation() {
-        saveButton.title = "완료"
-        self.navigationItem.title = "미래"
+        saveButton.title = "complete".localized
+        self.navigationItem.title = "future_title".localized
         navigationItem.rightBarButtonItem = saveButton
         setNavigationColor()
     }
@@ -122,7 +122,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
         output.showAlert
             .emit(onNext: {[weak self] text, isSaved in
                 let alert = UIAlertController(title: text, message: nil, preferredStyle: .alert)
-                let confirmAction = UIAlertAction(title: "확인", style: .destructive) { _ in
+                let confirmAction = UIAlertAction(title: "okAlert_title".localized, style: .destructive) { _ in
                     if isSaved {
                         self?.navigationController?.popToRootViewController(animated: true)
                     }
@@ -143,7 +143,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
         let toolbar = UIToolbar()
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
                                         target: nil, action: nil)
-        let doneButton = UIBarButtonItem(title: "Done", style: .done,
+        let doneButton = UIBarButtonItem(title: "doneButton_title".localized, style: .done,
                                          target: self, action: #selector(doneButtonTapped))
         toolbar.setItems([flexSpace, doneButton], animated: true)
         toolbar.sizeToFit()

@@ -68,8 +68,8 @@ final class HomeViewController: UIViewController {
     
     func sendNotification() {
         let notificationContent = UNMutableNotificationContent()
-        notificationContent.title = "일기가 도착했습니다!"
-        notificationContent.body = "과거로부터 온 편지를 확인해보세요"
+        notificationContent.title = "notification_title".localized
+        notificationContent.body = "notification_body".localized
         notificationContent.sound = .default
         notificationContent.badge = 1
         
@@ -150,7 +150,7 @@ final class HomeViewController: UIViewController {
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: .lineweight, style: .done, target: self, action: #selector(setSideMenu))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .calendar, style: .done, target: self, action: #selector(showCalendar))
         
-        self.navigationController?.navigationBar.topItem?.title = "FURY"
+        self.navigationController?.navigationBar.topItem?.title = "Home_navigation_title".localized
         self.navigationItem.leftBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.buttonTintColor
     }
@@ -160,12 +160,11 @@ final class HomeViewController: UIViewController {
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         datePicker.preferredDatePickerStyle = .inline
         datePicker.datePickerMode = .date
-        datePicker.tintColor = CustomColor.shared.buttonTintColor
+        datePicker.tintColor = CustomColor.shared.writeButtonTintColor
         datePicker.locale = Locale(identifier: Locale.autoupdatingCurrent.identifier)
         datePicker.timeZone = TimeZone(abbreviation: Locale.autoupdatingCurrent.identifier)
         datePicker.maximumDate = Date()
         datePicker.addTarget(self, action: #selector(method), for: .valueChanged)
-        
         NSLayoutConstraint.activate([
             
             datePicker.topAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.topAnchor),
@@ -184,17 +183,17 @@ final class HomeViewController: UIViewController {
     }
     
     @objc func writeButtonTap() {
-        let alert = UIAlertController(title: "작성하실 일기 종류를 선택해주세요", message: nil, preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "writebutton_alertTitle".localized, message: nil, preferredStyle: .actionSheet)
         
-        let current = UIAlertAction(title: "오늘", style: .default , handler: { _ in
+        let current = UIAlertAction(title: "current_title".localized, style: .default , handler: { _ in
             let vc = CurrentDiaryViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         })
-        let future = UIAlertAction(title: "미래", style: .default , handler: { _ in
+        let future = UIAlertAction(title: "future_title".localized, style: .default , handler: { _ in
             let vc = FutureDiaryController()
             self.navigationController?.pushViewController(vc, animated: true)
         })
-        let cancel = UIAlertAction(title: "취소", style: .cancel , handler: { _ in
+        let cancel = UIAlertAction(title: "cancel_title".localized, style: .cancel , handler: { _ in
             self.dismiss(animated: true)
         })
         
@@ -256,6 +255,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
+        
         cell.configureHomeCollectionViewCell(diarys: diarys, indexPath: indexPath)
         return cell
     }

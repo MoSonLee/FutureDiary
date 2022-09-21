@@ -6,82 +6,89 @@
   
 */
 
-"Home_navigation_title" = "Future Diary";
+"Home_navigation_title" = "FURY";
 
-"notification_title" = "The diary has arrived!";
+"notification_title" = "일기가 도착했습니다!";
 
-"notification_body" = "Check out the letters from the past";
+"notification_body" = "과거로부터 온 편지를 확인해보세요";
 
-"writebutton_alertTitle" = "Please choose the type of diary you want to write";
+"writebutton_alertTitle" = "작성하실 일기 종류를 선택해주세요";
 
-"current_title" = "Today";
+"current_title" = "오늘";
 
-"future_title" = "Future";
+"future_title" = "미래";
 
-"cancel_title" = "Cancel";
+"cancel_title" = "취소";
 
-"moveToDiaryCollectionButton_title" = "All Storage";
+"moveToDiaryCollectionButton_title" = "전체 보관함";
 
-"moveToSearchDiaryButton_title" = "Search";
+"storage" = "보관함";
 
-"moveToSettingButton_title" = "Setting";
+"moveToSearchDiaryButton_title" = "검색하기";
 
-"placeholderLabel_text" = "Please enter the content";
+"moveToSettingButton_title" = "설정";
 
-"title_placeholderLabel_text" = "Please enter a title";
+"placeholderLabel_text" = "내용을 입력하세요";
 
-"complete" = "Complete";
+"title_placeholderLabel_text" = "제목을 입력해주세요";
 
-"delete" = "Delete";
+"complete" = "완료";
 
-"deleteAlert_title" = "Are you sure you want to delete it?";
+//추가
+"present" = "현재";
 
-"deleteAlert_message" = "If you delete it, you can't recover it!";
+"delete" = "삭제";
 
-"okAlert_title" = "Confirm";
+"deleteAlert_title" = "정말 삭제하실건가요?";
+
+"deleteAlert_message" = "삭제하시면 복구할 수 없어요!";
+
+"okAlert_title" = "확인";
 
 "doneButton_title" = "Done";
 
-"settingList_backup" = "Backup";
+"settingList_backup" = "백업";
 
-"settingList_restore" = "Restore";
+"settingList_restore" = "복구";
 
-"settingList_contact" = "Contact Developer";
+"settingList_contact" = "개발자에게 문의하기";
 
-"settingList_review" = "Create a Review";
+"settingList_review" = "리뷰 작성하기";
 
 "settingList_license" = "Open License";
 
 "settingList_copyright" = "Copyright";
 
-"settingList_version" = "Version";
+"settingList_version" = "버전";
 
-"Question" = "Question";
+"Question" = "문의사항";
 
-"register_mail" = "Please register your mail";
+"register_mail" = "메일을 등록해주세요";
 
-"mail_cancel" = "Canceled";
+"mail_cancel" = "취소되었습니다";
 
-"mail_store" = "Saved";
+"mail_store" = "저장되었습니다";
 
-"mail_send" = "Sent";
+"mail_send" = "전송되었습니다";
 
-"mail_error" = "Send failed. Please try again";
+"mail_error" = "전송에 실패했습니다. 다시 시도해주세요";
 
-"documentAlertError" = "There is an error in the document location.";
+"documentAlertError" = "도큐먼트 위치에 오류가 있습니다.";
 
 "backupFile_name" = "Fury.zip";
 
-"backupfile_not_exist" = "There are no files to back up";
+"cant_searchfile" = "선택하신 파일을 찾을 수 없습니다.";
 
-"cant_search_file" = "The selected file could not be found.";
+"cant_search_file" = "벡업할 파일이 없습니다";
 
-"restore_complete_alert" = "Restore completed.";
+"restore_complete_alert" = "복구가 완료되었습니다. 앱을 재시동해주세요!";
 
-"fail_Uncompress" = "Uncompress failed";
+"fail_Uncompress" = "압축을 실패했습니다.";
 
-"error_occured_try_again" = "An error has occurred. Please try again";
+"fail_restore" = "압축 해제에 실패했습니다";
 
-"send_to_future" = "Sent to the future!";
+"error_occured_try_again" = "오류가 발생했습니다. 다시 시도해주세요";
 
-"collection_toast_head" = "The letter that is expected to arrive is";
+"send_to_future" = "미래로 전송되었습니다!";
+
+"collection_toast_head" = "도착 예정 편지는 %1d 개입니다.";

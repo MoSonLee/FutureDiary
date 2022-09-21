@@ -6,82 +6,84 @@
   
 */
 
-"Home_navigation_title" = "未来日記";
+"Home_navigation_title" = "未来日记";
 
-"notification_title" = "日記が届きました！";
+"notification_title" = "日记来了！";
 
-"notification_body" = "過去の手紙をチェックする";
+"notification_body" = "查一下过去的来信";
 
-"writebutton_alertTitle" = "書きたい日記の種類を選択してください";
+"writebutton_alertTitle" = "请选择你想写的日记类型";
 
 "current_title" = "今日";
 
-"future_title" = "フューチャー";
+"future_title" = "未来";
 
-"cancel_title" = "キャンセル";
+"cancel_title" = "取消";
 
-"moveToDiaryCollectionButton_title" = "すべてのストレージ";
+"moveToDiaryCollectionButton_title" = "所有储存器";
 
-"moveToSearchDiaryButton_title" = "検索";
+"storage" = "保管箱";
 
-"moveToSettingButton_title" = "設定";
+"moveToSearchDiaryButton_title" = "搜寻";
 
-"placeholderLabel_text" = "内容を入力してください";
+"moveToSettingButton_title" = "设定";
 
-"title_placeholderLabel_text" = "タイトルを入力してください";
+"placeholderLabel_text" = "请输入内容";
 
-"complete" = "完了";
+"title_placeholderLabel_text" = "请输入标题";
 
-"delete" = "削除たち";
+"complete" = "完成";
 
-"deleteAlert_title" = "削除してもよろしいですか?";
+"delete" = "删除";
 
-"deleteAlert_message" = "削除すると復旧できません!";
+"deleteAlert_title" = "你确定要删除它吗？";
 
-"okAlert_title" = "確認する";
+"deleteAlert_message" = "如果你删除了它，你就无法恢复它！";
 
-"doneButton_title" = "完了";
+"okAlert_title" = "确认";
 
-"settingList_backup" = "バックアップ";
+"doneButton_title" = "好了";
 
-"settingList_restore" = "復元";
+"settingList_backup" = "支援";
 
-"settingList_contact" = "開発者へのお問い合わせ";
+"settingList_restore" = "还原";
 
-"settingList_review" = "レビューの作成";
+"settingList_contact" = "联系开发人员";
 
-"settingList_license" = "オープンライセンス";
+"settingList_review" = "创建评论";
 
-"settingList_copyright" = "著作権";
+"settingList_license" = "开放式许可证";
 
-"settingList_version" = "バージョン";
+"settingList_copyright" = "版权";
 
-"Question" = "お問い合わせ";
+"settingList_version" = "版本";
 
-"register_mail" = "メールを登録してください";
+"Question" = "问题";
 
-"mail_cancel" = "キャンセル済み";
+"register_mail" = "请登记你的邮件。";
 
-"mail_store" = "保存済み";
+"mail_cancel" = "取消";
 
-"mail_send" = "送信済み";
+"mail_store" = "已保存";
 
-"mail_error" = "送信に失敗しました。 もう一度お試しください";
+"mail_send" = "发送";
 
-"documentAlertError" = "文書の場所にエラーがあります。";
+"mail_error" = "发送失败。 请再试一次";
+
+"documentAlertError" = "文档位置有错误。";
 
 "backupFile_name" = "Fury.zip";
 
-"backupfile_not_exist" = "バックアップするファイルがありません。";
+"cant_search_file" = "找不到选定的文件。";
 
-"cant_search_file" = "選択したファイルを見つけることができません。";
+"restore_complete_alert" = "复原完毕 请重新启动应用程序！";
 
-"restore_complete_alert" = "復元が完了しました。";
+"fail_Uncompress" = "解压缩失败";
 
-"fail_Uncompress" = "解凍に失敗しました";
+"fail_restore" = "解压缩失败";
 
-"error_occured_try_again" = "エラーが発生しました。 もう一度お試しください";
+"error_occured_try_again" = "发生了错误。 请再试一次";
 
-"send_to_future" = "未来へ！";
+"send_to_future" = "被派往未来！";
 
-"collection_toast_head" = "届く予定の手紙は";
+"collection_toast_head" = "预计寄来的信是 %1d 就是这些";
