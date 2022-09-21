@@ -48,6 +48,7 @@ extension UIView {
 }
 
 extension UIImage {
+    static let trash = UIImage(systemName: "trash")
     static let lineweight = UIImage(systemName: "lineweight")
     static let calendar = UIImage(systemName: "calendar")
     static let chervonUp = UIImage(systemName: "chevron.up.circle")

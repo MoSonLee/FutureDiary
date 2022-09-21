@@ -112,7 +112,7 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     private func setNavigation() {
         self.navigationItem.title = "current_title".localized
         saveButton.title = "complete".localized
-        deleteButton = UIBarButtonItem(image: UIImage(systemName: "trash"), style: .done, target: self, action: #selector(showDeleteAlert))
+        deleteButton = UIBarButtonItem(image: .trash, style: .done, target: self, action: #selector(showDeleteAlert))
         deleteButton.tintColor = .systemRed
         if viewModel.diaryTask != nil {
             navigationItem.rightBarButtonItems = [saveButton, deleteButton]
