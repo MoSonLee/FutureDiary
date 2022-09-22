@@ -108,3 +108,4 @@
 
 ## 9/23
    - 전체 보애서 cell을 삭제하면 오류 발생(realm 관련)⚠ -> 초기화 구문을 넣어줘서 해결완료
+   - IQkeybordManager 사용하지 않고 notification ovserver 사용하여 키보드 높이를 계산해줘서 구현
