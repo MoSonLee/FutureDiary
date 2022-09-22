@@ -48,7 +48,7 @@ extension UIViewController {
             return layout
         } else {
             let width = UIScreen.main.bounds.width - spacing
-            layout.itemSize = CGSize(width: width, height: width * 2/3)
+            layout.itemSize = CGSize(width: width, height: width * 1/2)
             return layout
         }
     }

@@ -48,6 +48,10 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
         bind()
         keybordFunction()
         setTextViewPlaceholder()
+        setNotification()
+    }
+    
+    private func setNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(adjustKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(adjustKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
