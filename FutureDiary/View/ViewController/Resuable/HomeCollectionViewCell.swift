@@ -105,8 +105,14 @@ final class HomeCollectionViewCell: UICollectionViewCell {
         self.diaryTitleTextLabel.textAlignment = .center
         self.diaryDateLabel.textAlignment = .right
         self.diaryDateLabel.adjustsFontSizeToFitWidth = true
-        self.diaryDateLabel.font = setCustomFont(size: 15)
-        self.diaryTitleTextLabel.font = setCustomFont(size: 20)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            self.diaryDateLabel.font = setCustomFont(size: 20)
+            self.diaryTitleTextLabel.font = setCustomFont(size: 25)
+        } else {
+            self.diaryDateLabel.font = setCustomFont(size: 15)
+            self.diaryTitleTextLabel.font = setCustomFont(size: 20)
+        }
         contentView.addBackground(imageName: "mailcard",  contentMode: .scaleToFill)
         setConstraints()
     }
@@ -118,8 +124,14 @@ final class HomeCollectionViewCell: UICollectionViewCell {
         self.diaryTitleTextLabel.textAlignment = .center
         self.diaryDateLabel.textAlignment = .right
         self.diaryDateLabel.adjustsFontSizeToFitWidth = true
-        self.diaryDateLabel.font = setCustomFont(size: 15)
-        self.diaryTitleTextLabel.font = setCustomFont(size: 20)
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            self.diaryDateLabel.font = setCustomFont(size: 20)
+            self.diaryTitleTextLabel.font = setCustomFont(size: 25)
+        } else {
+            self.diaryDateLabel.font = setCustomFont(size: 15)
+            self.diaryTitleTextLabel.font = setCustomFont(size: 20)
+        }
         contentView.addBackground(imageName: "mailcard",  contentMode: .scaleToFill)
         setConstraints()
     }

@@ -72,7 +72,7 @@ extension UIViewController {
     func showAlert(title: String) {
         let alert =  UIAlertController(title: title, message: nil, preferredStyle: .alert)
         //현지화하자
-        let ok = UIAlertAction(title: "확인", style:.destructive, handler: nil)
+        let ok = UIAlertAction(title: "okAlert_title".localized, style:.destructive, handler: nil)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
     }
