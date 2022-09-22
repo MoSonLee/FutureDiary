@@ -7,7 +7,6 @@
 
 import UIKit
 
-import IQKeyboardManagerSwift
 import RealmSwift
 import RxCocoa
 import RxSwift
@@ -37,7 +36,6 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     )
     
     private lazy var output = viewModel.transform(input: input)
-    private var keybord = IQKeyboardManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,8 +65,6 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
         self.hideKeyboardWhenTappedAround()
         futureContentTextView.delegate = self
         setUpTextFieldAndView()
-        keybord.enable = true
-        keybord.enableAutoToolbar = false
     }
     
     private func setConfigure() {
@@ -87,7 +83,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     }
     
     private func setViewComponentsColor() {
-        view.backgroundColor = UIColor(patternImage:  .futureImage)
+        view.addBackground(imageName: "future",  contentMode: .scaleToFill)
         futureContentTextView.backgroundColor = .clear
         datePicker.backgroundColor = .clear
     }

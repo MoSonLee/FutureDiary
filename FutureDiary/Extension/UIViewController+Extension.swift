@@ -43,7 +43,7 @@ extension UIViewController {
         layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            let width = (UIScreen.main.bounds.width / 3 - spacing)
+            let width = (UIScreen.main.bounds.width / 2 - spacing)
             layout.itemSize = CGSize(width: width, height: width * 2/3)
             return layout
         } else {
@@ -71,6 +71,7 @@ extension UIViewController {
     
     func showAlert(title: String) {
         let alert =  UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        //현지화하자
         let ok = UIAlertAction(title: "확인", style:.destructive, handler: nil)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)

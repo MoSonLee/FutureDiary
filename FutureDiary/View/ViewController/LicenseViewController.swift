@@ -10,7 +10,7 @@ import UIKit
 final class LicenseViewController: UIViewController {
     
     private let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), style: .plain)
-    private let licenseList = ["SideMenu", "RxSwift", "Realm", "Toast", "IQKeyboardManager", "Zip"]
+    private let licenseList = ["SideMenu", "RxSwift", "Realm", "Toast", "Zip"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +36,7 @@ final class LicenseViewController: UIViewController {
     }
     
     private func setNavigation() {
-        self.navigationItem.title = "설정"
+        self.navigationItem.title = "moveToSettingButton_title".localized
         setNavigationColor()
     }
     

@@ -16,7 +16,7 @@ final class CollectionViewController: UIViewController {
     private var datePickerView = UIPickerView()
     private var mailButton = UIBarButtonItem()
     private var diaryDictionary: [String : [Diary]] = [ : ]
-    private lazy var diarySortedKey = diaryDictionary.keys.sorted(by: >)
+    private var diarySortedKey: [String] = []
     
     private let repository = RealmRepository()
     private var diaryAllTask: Results<Diary>!
@@ -36,12 +36,13 @@ final class CollectionViewController: UIViewController {
     }
     
     private func fetchRealm() {
+        diaryDictionary = [ : ]
         diaryTask = repository.fetch(date: Date())
         diaryAllTask = repository.fetch()
-        
         diaryTask.forEach { value in
             diaryDictionary[value.diaryDate.toString] = Array(diaryTask.filter{ $0.diaryDate.toString == value.diaryDate.toString })
         }
+        diarySortedKey = diaryDictionary.keys.sorted(by: >)
         collectionView.reloadData()
     }
     

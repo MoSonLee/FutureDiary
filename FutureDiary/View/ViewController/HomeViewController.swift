@@ -65,7 +65,7 @@ final class HomeViewController: UIViewController {
         }
     }
     
-    func sendNotification() {
+    private func sendNotification() {
         let notificationContent = UNMutableNotificationContent()
         notificationContent.title = "notification_title".localized
         notificationContent.body = "notification_body".localized
@@ -167,7 +167,6 @@ final class HomeViewController: UIViewController {
         datePicker.tintColor = CustomColor.shared.blackAndGray
         
         NSLayoutConstraint.activate([
-            
             datePicker.topAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.topAnchor),
             datePicker.leadingAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.leadingAnchor),
             datePicker.trailingAnchor.constraint(equalTo: calendarView.safeAreaLayoutGuide.trailingAnchor),

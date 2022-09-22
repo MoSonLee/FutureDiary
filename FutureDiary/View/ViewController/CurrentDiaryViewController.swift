@@ -7,7 +7,6 @@
 
 import UIKit
 
-import IQKeyboardManagerSwift
 import RealmSwift
 import RxCocoa
 import RxSwift
@@ -22,11 +21,10 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     private let saveButton = UIBarButtonItem()
     private let repository = RealmRepository()
     private let disposdeBag = DisposeBag()
-    private let keybord = IQKeyboardManager.shared
     
     private var placeholderLabel : UILabel!
     private var deleteButton = UIBarButtonItem()
-
+    
     private lazy var input = CurrentDiaryViewModel.Input(
         saveButtonTap: saveButton.rx.tap
             .withLatestFrom(
@@ -50,6 +48,8 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
         bind()
         keybordFunction()
         setTextViewPlaceholder()
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(adjustKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func setTextViewPlaceholder() {
@@ -69,8 +69,6 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
         self.hideKeyboardWhenTappedAround()
         currentContentTextView.delegate = self
         setUpTextFieldAndView()
-        keybord.enable = true
-        keybord.enableAutoToolbar = false
     }
     
     private func setConfigure() {
@@ -134,6 +132,17 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
         alert.addAction(cancel)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
+    }
+    
+    @objc private func adjustKeyboard(noti: Notification) {
+        guard let userInfo = noti.userInfo else { return }
+        guard let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        let adjustmentHeight = keyboardFrame.height
+        if noti.name == UIResponder.keyboardWillShowNotification {
+            currentContentTextView.contentInset.bottom = adjustmentHeight - 60
+        } else {
+            currentContentTextView.contentInset.bottom = 0
+        }
     }
     
     private func bind() {

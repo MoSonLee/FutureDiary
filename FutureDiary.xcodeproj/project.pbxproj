@@ -19,7 +19,6 @@
 		770DF6E528CA6A2700349D55 /* FutureDiaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6E428CA6A2700349D55 /* FutureDiaryViewModel.swift */; };
 		770DF6EB28CA6BF900349D55 /* HomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770DF6EA28CA6BF900349D55 /* HomeCollectionViewCell.swift */; };
 		7722831C28D36268007A9557 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722831B28D36268007A9557 /* Date+Extension.swift */; };
-		7722832228D505D8007A9557 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7722832128D505D8007A9557 /* IQKeyboardManagerSwift */; };
 		7722832428D50843007A9557 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7722832328D50843007A9557 /* UIViewController+Extension.swift */; };
 		77260C9428D5F199007453E7 /* ReusableTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77260C9328D5F199007453E7 /* ReusableTableViewCell.swift */; };
 		77260C9928D61D3E007453E7 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 77260C9828D61D3E007453E7 /* Zip */; };
@@ -89,7 +88,6 @@
 				770DF6D528CA650500349D55 /* RxRelay in Frameworks */,
 				770DF6D328CA650500349D55 /* RxCocoa in Frameworks */,
 				770DF6D728CA650500349D55 /* RxSwift in Frameworks */,
-				7722832228D505D8007A9557 /* IQKeyboardManagerSwift in Frameworks */,
 				77260C9928D61D3E007453E7 /* Zip in Frameworks */,
 				770DF6D028CA64EE00349D55 /* SideMenu in Frameworks */,
 				7781265628CB2FB80078CAD6 /* Toast in Frameworks */,
@@ -247,7 +245,6 @@
 				7781264C28CB22A30078CAD6 /* Realm */,
 				7781264E28CB22A30078CAD6 /* RealmSwift */,
 				7781265528CB2FB80078CAD6 /* Toast */,
-				7722832128D505D8007A9557 /* IQKeyboardManagerSwift */,
 				77260C9828D61D3E007453E7 /* Zip */,
 			);
 			productName = FutureDiary;
@@ -285,7 +282,6 @@
 				770DF6D128CA650500349D55 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				7781264B28CB22A30078CAD6 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				7781265428CB2FB80078CAD6 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
-				7722832028D505D8007A9557 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				77260C9728D61D3E007453E7 /* XCRemoteSwiftPackageReference "Zip" */,
 			);
 			productRefGroup = 779DA61028CA62BB00561000 /* Products */;
@@ -579,14 +575,6 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		7722832028D505D8007A9557 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		77260C9728D61D3E007453E7 /* XCRemoteSwiftPackageReference "Zip" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/marmelroy/Zip.git";
@@ -633,11 +621,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 770DF6D128CA650500349D55 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
-		};
-		7722832128D505D8007A9557 /* IQKeyboardManagerSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 7722832028D505D8007A9557 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
-			productName = IQKeyboardManagerSwift;
 		};
 		77260C9828D61D3E007453E7 /* Zip */ = {
 			isa = XCSwiftPackageProductDependency;

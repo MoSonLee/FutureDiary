@@ -38,5 +38,4 @@ final class ReusableTableViewCell: UITableViewCell {
             settingTextLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -2),
         ])
     }
-
 }

@@ -68,10 +68,8 @@ final class HomeCollectionViewCell: UICollectionViewCell {
         } else {
             NSLayoutConstraint.activate([
                 diaryTitleTextLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -15),
-//                diaryTitleTextLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
                 diaryTitleTextLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
                 diaryTitleTextLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-//                diaryTitleTextLabel.bottomAnchor.constraint(equalTo: diaryDateLabel.topAnchor, constant: -0.5),
                 
                 diaryDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
                 diaryDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
