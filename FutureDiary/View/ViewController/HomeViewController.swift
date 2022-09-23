@@ -86,7 +86,6 @@ final class HomeViewController: UIViewController {
         } else {
             diarys = repository.dateFilteredFetch(todayStartTime: datePicker.date.toStartOfDay, currentDate: Date())
         }
-        
         futureDiary = repository.filterFuture(date: Date())
         futureDiary.forEach {
             futureDiaryTime.append($0.diaryDate)
