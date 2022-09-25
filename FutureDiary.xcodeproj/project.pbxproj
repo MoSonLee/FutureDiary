@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		770DF6D028CA64EE00349D55 /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 770DF6CF28CA64EE00349D55 /* SideMenu */; };
 		770DF6D328CA650500349D55 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 770DF6D228CA650500349D55 /* RxCocoa */; };
 		770DF6D528CA650500349D55 /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 770DF6D428CA650500349D55 /* RxRelay */; };
 		770DF6D728CA650500349D55 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 770DF6D628CA650500349D55 /* RxSwift */; };
@@ -42,6 +41,7 @@
 		779DA61728CA62BB00561000 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779DA61628CA62BB00561000 /* HomeViewController.swift */; };
 		779DA61C28CA62BC00561000 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 779DA61B28CA62BC00561000 /* Assets.xcassets */; };
 		779DA61F28CA62BC00561000 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 779DA61D28CA62BC00561000 /* LaunchScreen.storyboard */; };
+		77FFCD1628E07B9B00E25C0B /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 77FFCD1528E07B9B00E25C0B /* SideMenu */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,10 +86,10 @@
 			files = (
 				7781264F28CB22A30078CAD6 /* RealmSwift in Frameworks */,
 				770DF6D528CA650500349D55 /* RxRelay in Frameworks */,
+				77FFCD1628E07B9B00E25C0B /* SideMenu in Frameworks */,
 				770DF6D328CA650500349D55 /* RxCocoa in Frameworks */,
 				770DF6D728CA650500349D55 /* RxSwift in Frameworks */,
 				77260C9928D61D3E007453E7 /* Zip in Frameworks */,
-				770DF6D028CA64EE00349D55 /* SideMenu in Frameworks */,
 				7781265628CB2FB80078CAD6 /* Toast in Frameworks */,
 				7781264D28CB22A30078CAD6 /* Realm in Frameworks */,
 			);
@@ -238,7 +238,6 @@
 			);
 			name = FutureDiary;
 			packageProductDependencies = (
-				770DF6CF28CA64EE00349D55 /* SideMenu */,
 				770DF6D228CA650500349D55 /* RxCocoa */,
 				770DF6D428CA650500349D55 /* RxRelay */,
 				770DF6D628CA650500349D55 /* RxSwift */,
@@ -246,6 +245,7 @@
 				7781264E28CB22A30078CAD6 /* RealmSwift */,
 				7781265528CB2FB80078CAD6 /* Toast */,
 				77260C9828D61D3E007453E7 /* Zip */,
+				77FFCD1528E07B9B00E25C0B /* SideMenu */,
 			);
 			productName = FutureDiary;
 			productReference = 779DA60F28CA62BB00561000 /* FutureDiary.app */;
@@ -278,11 +278,11 @@
 			);
 			mainGroup = 779DA60628CA62BB00561000;
 			packageReferences = (
-				770DF6CE28CA64EE00349D55 /* XCRemoteSwiftPackageReference "SideMenu" */,
 				770DF6D128CA650500349D55 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				7781264B28CB22A30078CAD6 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				7781265428CB2FB80078CAD6 /* XCRemoteSwiftPackageReference "Toast-Swift" */,
 				77260C9728D61D3E007453E7 /* XCRemoteSwiftPackageReference "Zip" */,
+				77FFCD1428E07B9B00E25C0B /* XCRemoteSwiftPackageReference "SideMenu" */,
 			);
 			productRefGroup = 779DA61028CA62BB00561000 /* Products */;
 			projectDirPath = "";
@@ -559,14 +559,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		770DF6CE28CA64EE00349D55 /* XCRemoteSwiftPackageReference "SideMenu" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 6.5.0;
-			};
-		};
 		770DF6D128CA650500349D55 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -599,14 +591,17 @@
 				kind = branch;
 			};
 		};
+		77FFCD1428E07B9B00E25C0B /* XCRemoteSwiftPackageReference "SideMenu" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jonkykong/SideMenu.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		770DF6CF28CA64EE00349D55 /* SideMenu */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 770DF6CE28CA64EE00349D55 /* XCRemoteSwiftPackageReference "SideMenu" */;
-			productName = SideMenu;
-		};
 		770DF6D228CA650500349D55 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 770DF6D128CA650500349D55 /* XCRemoteSwiftPackageReference "RxSwift" */;
@@ -641,6 +636,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7781265428CB2FB80078CAD6 /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
+		};
+		77FFCD1528E07B9B00E25C0B /* SideMenu */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 77FFCD1428E07B9B00E25C0B /* XCRemoteSwiftPackageReference "SideMenu" */;
+			productName = SideMenu;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

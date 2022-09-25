@@ -27,7 +27,6 @@ final class CopyrightViewViewController: UIViewController {
     }
     
     private func setConstraints() {
-        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -56,9 +55,7 @@ extension CopyrightViewViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReusableTableViewCell.identifier) as? ReusableTableViewCell else { return UITableViewCell()}
-        
-        cell.settingTextLabel.text = copyrightList[indexPath.row]
-        cell.settingTextLabel.textColor = CustomColor.shared.blackAndWhite
+        cell.setCopyRight(copyrightList: copyrightList, indexPath: indexPath)
         return cell
     }
 }

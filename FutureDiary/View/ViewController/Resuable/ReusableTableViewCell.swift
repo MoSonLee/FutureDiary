@@ -38,4 +38,14 @@ final class ReusableTableViewCell: UITableViewCell {
             settingTextLabel.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -2),
         ])
     }
+    
+    func setCopyRight(copyrightList: [String], indexPath: IndexPath) {
+        self.settingTextLabel.text = copyrightList[indexPath.row]
+        self.settingTextLabel.textColor = CustomColor.shared.blackAndWhite
+    }
+    
+    func setLicense(licenseList: [String], indexPath: IndexPath) {
+        self.settingTextLabel.text = licenseList[indexPath.row]
+        self.settingTextLabel.textColor = CustomColor.shared.blackAndWhite
+    }
 }

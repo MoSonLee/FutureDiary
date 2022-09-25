@@ -193,6 +193,15 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
     }
+    private func showRestoreCompleteAlert() {
+        let alert =  UIAlertController(title: "restore_complete_alert".localized, message: nil, preferredStyle: .alert)
+        
+        let ok = UIAlertAction(title: "okAlert_title".localized, style:.destructive, handler: { _ in
+            exit(1)
+        })
+        alert.addAction(ok)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension SettingViewController: UIDocumentPickerDelegate{
@@ -218,9 +227,9 @@ extension SettingViewController: UIDocumentPickerDelegate{
             let fileURL = path.appendingPathComponent("Fury.zip")
             do {
                 try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { _ in
-                   
+                    
                 }, fileOutputHandler: { _ in
-                    self.showAlert(title: "restore_complete_alert".localized)
+                    self.showRestoreCompleteAlert()
                 })
             } catch {
                 showAlert(title: "fail_restore".localized)
@@ -232,7 +241,7 @@ extension SettingViewController: UIDocumentPickerDelegate{
                 
                 try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { _ in
                 }, fileOutputHandler: { _ in
-                    self.showAlert(title: "restore_complete_alert".localized)
+                    self.showRestoreCompleteAlert()
                 })
                 
             } catch {

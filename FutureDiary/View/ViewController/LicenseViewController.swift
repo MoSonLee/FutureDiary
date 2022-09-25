@@ -55,9 +55,7 @@ extension LicenseViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ReusableTableViewCell.identifier) as? ReusableTableViewCell else { return UITableViewCell()}
-        
-        cell.settingTextLabel.text = licenseList[indexPath.row]
-        cell.settingTextLabel.textColor = CustomColor.shared.blackAndWhite
+        cell.setLicense(licenseList: licenseList, indexPath: indexPath)
         return cell
     }
 }
