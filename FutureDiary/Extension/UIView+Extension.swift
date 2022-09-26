@@ -92,18 +92,3 @@ extension String {
         return String(format: self.localized, number)
     }
 }
-
-public extension String {
-    var base64Decoded: String? {
-        guard let base64 = Data(base64Encoded: self) else { return nil }
-        let utf8 = String(data: base64, encoding: .utf8)
-        return utf8
-    }
-
-    var base64Encoded: String? {
-        let utf8 = self.data(using: .utf8)
-        let base64 = utf8?.base64EncodedString()
-        return base64
-    }
-
-}

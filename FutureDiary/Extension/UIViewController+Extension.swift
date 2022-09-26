@@ -41,14 +41,23 @@ extension UIViewController {
         let layout = UICollectionViewFlowLayout()
         let spacing: CGFloat = 16
         layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        layout.invalidateLayout()
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            let width = (UIScreen.main.bounds.width / 2 - spacing)
-            layout.itemSize = CGSize(width: width, height: width * 2/3)
-            return layout
+            if UIDevice.current.orientation.isPortrait {
+                let width = (UIScreen.main.bounds.width / 3 - 16)
+                layout.itemSize = CGSize(width: width, height: width * 2/3)
+                return layout
+            }
+            else {
+                let width = (UIScreen.main.bounds.width / 4 - 16)
+                layout.itemSize = CGSize(width: width, height: width * 2/3)
+                return layout
+            }
         } else {
             let width = UIScreen.main.bounds.width - spacing
             layout.itemSize = CGSize(width: width, height: width * 1/2)
+            layout.invalidateLayout()
             return layout
         }
     }
@@ -56,11 +65,21 @@ extension UIViewController {
     func setCollectionViewLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        layout.invalidateLayout()
+        
         if UIDevice.current.userInterfaceIdiom == .pad {
-            let width = UIScreen.main.bounds.width / 3 - 16
-            layout.itemSize = CGSize(width: width, height: width * 2/3 )
-            layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
-            return layout
+            if UIDevice.current.orientation.isPortrait {
+                let width = UIScreen.main.bounds.width / 3 - 16
+                layout.itemSize = CGSize(width: width, height: width * 2/3 )
+                layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
+                return layout
+            }
+            else {
+                let width = UIScreen.main.bounds.width / 4 - 16
+                layout.itemSize = CGSize(width: width, height: width * 2/3 )
+                layout.headerReferenceSize = CGSize(width: view.bounds.width / 3, height: 30)
+                return layout
+            }
         } else {
             let width = UIScreen.main.bounds.width / 3 - 20
             layout.itemSize = CGSize(width: width, height: width * 2/3)
@@ -71,7 +90,6 @@ extension UIViewController {
     
     func showAlert(title: String) {
         let alert =  UIAlertController(title: title, message: nil, preferredStyle: .alert)
-        //현지화하자
         let ok = UIAlertAction(title: "okAlert_title".localized, style:.destructive, handler: nil)
         alert.addAction(ok)
         present(alert, animated: true, completion: nil)
