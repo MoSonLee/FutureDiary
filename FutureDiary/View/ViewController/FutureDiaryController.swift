@@ -106,7 +106,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
             datePicker.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
         ])
     }
-    
+
     private func setNavigation() {
         saveButton.title = "complete".localized
         self.navigationItem.title = "future_title".localized

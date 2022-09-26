@@ -11,8 +11,10 @@ import RealmSwift
 
 final class RealmRepository {
     
-    private let realm = try! Realm()
-    
+    let key = Data(count: 64)
+    lazy var config = Realm.Configuration(encryptionKey: key)
+    lazy var realm = try! Realm(configuration: config)
+
     func create(diary: Diary, completion: ((Bool) -> Void)) {
         do {
             try realm.write {

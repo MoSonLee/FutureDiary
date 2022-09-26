@@ -110,6 +110,7 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         }
         
         let backUpFileURL = path.appendingPathComponent("Fury.zip")
+        
         let vc = UIActivityViewController(activityItems: [backUpFileURL], applicationActivities: [])
         if UIDevice.current.userInterfaceIdiom == .pad {
             vc.popoverPresentationController?.sourceView = UIApplication.shared.windows.first
