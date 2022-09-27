@@ -150,4 +150,4 @@
    
    - 남은것
       - app 리뷰 작성하러 가기
-      - 앱 스토에 등록할 screenshot
+      - 앱 스토에 등록할 screenshot -> 완료
