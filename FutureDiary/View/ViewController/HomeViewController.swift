@@ -90,7 +90,6 @@ final class HomeViewController: UIViewController {
         futureDiary.forEach {
             futureDiaryTime.append($0.diaryDate)
         }
-        
         collectionView.reloadData()
     }
     
