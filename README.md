@@ -150,3 +150,6 @@
    
    - 남은것
       - app 리뷰 작성하러 가기
+      - open source license 뷰
+      - 온보딩뷰
+      - 앱 스토에 등록할 screenshot
