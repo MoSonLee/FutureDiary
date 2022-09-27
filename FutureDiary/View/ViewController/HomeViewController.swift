@@ -46,6 +46,7 @@ final class HomeViewController: UIViewController {
         datePicker.addTarget(self, action: #selector(datePickerChanged), for: .valueChanged)
         sendNotification()
         NotificationCenter.default.addObserver(self, selector: #selector(reloadCollectionView), name: NSNotification.Name(rawValue: "reloadCollectionView"), object: nil)
+        moveToWriteReview()
     }
     
     @objc func reloadCollectionView() {
@@ -178,6 +179,19 @@ final class HomeViewController: UIViewController {
         vc.currentContentTextView.text = diarys[indexPath.row].diaryContent
         vc.viewModel.diaryTask = diarys[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func moveToWriteReview() {
+        if let appstoreUrl = URL(string: "https://apps.apple.com/app/id{6443563805}") {
+            var urlComp = URLComponents(url: appstoreUrl, resolvingAgainstBaseURL: false)
+            urlComp?.queryItems = [
+                URLQueryItem(name: "action", value: "write-review")
+            ]
+            guard let reviewUrl = urlComp?.url else {
+                return
+            }
+            UIApplication.shared.open(reviewUrl, options: [:], completionHandler: nil)
+        }
     }
     
     @objc func writeButtonTap() {

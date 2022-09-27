@@ -148,6 +148,12 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         documentPicker.allowsMultipleSelection = false
         self.present(documentPicker, animated: true)
     }
+    
+    private func moveToReview() {
+        if let reviewURL = URL(string: "itms-apps://itunes.apple.com/app/itunes-u/id\(6443563805)?ls=1&mt=8&action=write-review"), UIApplication.shared.canOpenURL(reviewURL) {
+            UIApplication.shared.open(reviewURL, options: [:], completionHandler: nil)
+        }
+    }
 }
 
 extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
@@ -182,7 +188,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
             return sendMail()
             
         case 3:
-            return
+            return moveToReview()
             
         case 4:
             return moveToLicenseView()

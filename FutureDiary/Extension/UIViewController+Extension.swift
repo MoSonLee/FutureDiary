@@ -45,7 +45,7 @@ extension UIViewController {
         
         if UIDevice.current.userInterfaceIdiom == .pad {
             if UIDevice.current.orientation.isPortrait {
-                let width = (UIScreen.main.bounds.width / 3 - spacing)
+                let width = (UIScreen.main.bounds.width / 2 - spacing)
                 layout.itemSize = CGSize(width: width, height: width * 2/3)
                 return layout
             }
