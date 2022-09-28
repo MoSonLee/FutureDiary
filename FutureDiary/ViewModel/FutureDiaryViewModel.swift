@@ -33,7 +33,10 @@ final class FutureDiaryViewModel {
             .emit(onNext: { [weak self] diary in
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("title_placeholderLabel_text".localized, false))
-                } else {
+                } else if diary.2 <= Date() {
+                    self?.showToastRelay.accept("미래 시간으로 선택해주세요!")
+                }
+                else {
                     let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2)
                     self?.saveRealm(diary: diaryModel)
                 }
