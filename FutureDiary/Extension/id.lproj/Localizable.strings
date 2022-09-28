@@ -85,3 +85,5 @@
 "send_to_future" = "Dikirim ke masa depan!";
 
 "collection_toast_head" = "Huruf yang diharapkan tiba adalah %1d";
+
+"show_future_alert" = "Silakan pilih masa depan!";

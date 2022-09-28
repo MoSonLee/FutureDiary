@@ -85,3 +85,5 @@
 "send_to_future" = "Được gửi đến tương lai!";
 
 "collection_toast_head" = "Lá thư dự kiến sẽ đến là %1d";
+
+"show_future_alert" = "Hãy chọn thời gian trong tương lai!";

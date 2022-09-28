@@ -89,3 +89,5 @@
 "send_to_future" = "미래로 전송되었습니다!";
 
 "collection_toast_head" = "도착 예정 편지는 %1d 개입니다.";
+
+"show_future_alert" = "미래 시간으로 선택해주세요!";

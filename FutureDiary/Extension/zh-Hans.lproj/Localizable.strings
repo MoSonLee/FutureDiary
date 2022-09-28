@@ -86,3 +86,5 @@
 "send_to_future" = "被派往未来！";
 
 "collection_toast_head" = "预计寄来的信是 %1d 就是这些";
+
+"show_future_alert" = "请选择未来的时间！";

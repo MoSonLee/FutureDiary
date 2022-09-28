@@ -85,3 +85,5 @@
 "send_to_future" = "Sent to the future!";
 
 "collection_toast_head" = "The letter that is expected to arrive is %1d";
+
+"show_future_alert" = "Please choose the future time!";

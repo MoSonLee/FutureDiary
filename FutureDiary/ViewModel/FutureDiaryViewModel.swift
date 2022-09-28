@@ -34,7 +34,7 @@ final class FutureDiaryViewModel {
                 if diary.0.count == 0 {
                     self?.showAlertRelay.accept(("title_placeholderLabel_text".localized, false))
                 } else if diary.2 <= Date() {
-                    self?.showToastRelay.accept("미래 시간으로 선택해주세요!")
+                    self?.showToastRelay.accept("show_future_alert".localized)
                 }
                 else {
                     let diaryModel =  Diary(diaryTitle: diary.0, diaryContent: diary.1, diaryDate: diary.2)

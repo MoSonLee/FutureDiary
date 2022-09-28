@@ -85,3 +85,5 @@
 "send_to_future" = "ส่งไปสู่อนาคต!";
 
 "collection_toast_head" = "จดหมายที่คาดว่าจะมาถึงคือ %1d";
+
+"show_future_alert" = "โปรดเลือกเวลาในอนาคต!";

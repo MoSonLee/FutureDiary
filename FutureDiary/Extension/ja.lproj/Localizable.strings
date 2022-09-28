@@ -86,3 +86,5 @@
 "send_to_future" = "未来へ！";
 
 "collection_toast_head" = "届く予定の手紙は %1d 本数となります。";
+
+"show_future_alert" = "今後の時間をお選びください!";
