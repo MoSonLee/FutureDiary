@@ -23,6 +23,8 @@ extension UIViewController {
         self.navigationController?.navigationBar.tintColor = CustomColor.shared.blackAndWhite
         self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.blackAndWhite
         self.navigationController?.navigationBar.backgroundColor = .clear
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
     
     func setDatePicker(datePicker: UIDatePicker) {

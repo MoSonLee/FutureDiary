@@ -20,6 +20,7 @@ final class CustomColor {
     
     lazy var backgroundColor: UIColor = checkUserMode(lightModeColor: .white, darkModeColor: .black)
     lazy var blackAndWhite: UIColor = checkUserMode(lightModeColor: .black, darkModeColor: .white)
+    lazy var whiteAndBlack: UIColor = checkUserMode(lightModeColor: .white, darkModeColor: .black)
     lazy var blackAndGray: UIColor = checkUserMode(lightModeColor: .black, darkModeColor: .systemGray)
 }
 

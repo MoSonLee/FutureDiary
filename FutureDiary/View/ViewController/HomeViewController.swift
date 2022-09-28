@@ -108,12 +108,14 @@ final class HomeViewController: UIViewController {
     private func setComponentsColor() {
         view.backgroundColor = UIColor(patternImage: .backgroundImage)
         collectionView.backgroundColor = .clear
-        writeDiaryButton.tintColor = CustomColor.shared.blackAndGray
+        writeDiaryButton.tintColor = CustomColor.shared.blackAndWhite
+        writeDiaryButton.backgroundColor = CustomColor.shared.whiteAndBlack
+        writeDiaryButton.layer.cornerRadius = 22
     }
     
     private func setComponentsTextAndImage() {
-        let largeConfig = UIImage.SymbolConfiguration(pointSize: 44, weight: .bold, scale: .large)
-        let largeBoldDoc = UIImage(systemName: "pencil.circle.fill", withConfiguration: largeConfig)
+        let largeConfig = UIImage.SymbolConfiguration(pointSize: 22, weight: .bold, scale: .large)
+        let largeBoldDoc = UIImage(systemName: "pencil", withConfiguration: largeConfig)
         writeDiaryButton.setImage(largeBoldDoc, for: .normal)
         dateLabel.text = datePicker.date.toString
     }
@@ -134,7 +136,9 @@ final class HomeViewController: UIViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
             writeDiaryButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant:  -16),
-            writeDiaryButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16)
+            writeDiaryButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            writeDiaryButton.widthAnchor.constraint(equalToConstant: 44),
+            writeDiaryButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
     
@@ -150,8 +154,7 @@ final class HomeViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .calendar, style: .done, target: self, action: #selector(showCalendar))
         
         self.navigationController?.navigationBar.topItem?.title = "Home_navigation_title".localized
-        self.navigationItem.leftBarButtonItem?.tintColor = CustomColor.shared.blackAndWhite
-        self.navigationItem.rightBarButtonItem?.tintColor = CustomColor.shared.blackAndWhite
+        setNavigationColor()
     }
     
     private func setCalendar() {
