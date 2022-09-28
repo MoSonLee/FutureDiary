@@ -118,7 +118,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
         output.showAlert
             .emit(onNext: {[weak self] text, isSaved in
                 let alert = UIAlertController(title: text, message: nil, preferredStyle: .alert)
-                let confirmAction = UIAlertAction(title: "okAlert_title".localized, style: .destructive) { _ in
+                let confirmAction = UIAlertAction(title: "okAlert_title".localized, style: .default) { _ in
                     if isSaved {
                         self?.navigationController?.popToRootViewController(animated: true)
                     }
