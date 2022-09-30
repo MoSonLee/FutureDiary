@@ -251,7 +251,6 @@ final class HomeViewController: UIViewController {
         menu.leftSide = true
         menu.isNavigationBarHidden = true
         menu.blurEffectStyle = .systemMaterial
-        menu.presentationStyle = .menuSlideIn
         present(menu, animated: true, completion: nil)
     }
 }
