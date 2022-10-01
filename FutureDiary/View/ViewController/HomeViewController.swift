@@ -152,7 +152,6 @@ final class HomeViewController: UIViewController {
     private func setNavigation() {
         self.navigationItem.leftBarButtonItem  = UIBarButtonItem(image: .lineweight, style: .done, target: self, action: #selector(setSideMenu))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: .calendar, style: .done, target: self, action: #selector(showCalendar))
-        
         self.navigationController?.navigationBar.topItem?.title = "Home_navigation_title".localized
         setNavigationColor()
     }
@@ -251,6 +250,7 @@ final class HomeViewController: UIViewController {
         menu.leftSide = true
         menu.isNavigationBarHidden = true
         menu.blurEffectStyle = .systemMaterial
+        menu.presentationStyle = .viewSlideOutMenuIn
         present(menu, animated: true, completion: nil)
     }
 }

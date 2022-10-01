@@ -46,16 +46,9 @@ extension UIViewController {
         layout.invalidateLayout()
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            if UIDevice.current.orientation.isPortrait {
-                let width = (UIScreen.main.bounds.width / 2 - spacing)
-                layout.itemSize = CGSize(width: width, height: width * 2/3)
-                return layout
-            }
-            else {
-                let width = (UIScreen.main.bounds.width / 4 - spacing)
-                layout.itemSize = CGSize(width: width, height: width * 2/3)
-                return layout
-            }
+            let width = (UIScreen.main.bounds.width / 2 - spacing)
+            layout.itemSize = CGSize(width: width, height: width * 2/3)
+            return layout
         } else {
             let width = UIScreen.main.bounds.width - spacing
             layout.itemSize = CGSize(width: width, height: width * 1/2)
@@ -70,16 +63,9 @@ extension UIViewController {
         layout.invalidateLayout()
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            if UIDevice.current.orientation.isPortrait {
-                let width = UIScreen.main.bounds.width / 3 - 16
-                layout.itemSize = CGSize(width: width, height: width * 2/3 )
-                return layout
-            }
-            else {
-                let width = UIScreen.main.bounds.width / 4 - 16
-                layout.itemSize = CGSize(width: width, height: width * 2/3 )
-                return layout
-            }
+            let width = UIScreen.main.bounds.width / 4 - 16
+            layout.itemSize = CGSize(width: width, height: width * 2/3 )
+            return layout
         } else {
             let width = UIScreen.main.bounds.width / 3 - 20
             layout.itemSize = CGSize(width: width, height: width * 2/3)
