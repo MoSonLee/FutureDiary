@@ -162,3 +162,7 @@
 ## 10/1
    - side menu present 방식 변경
    - ipad layout이 깨지는 기종 수정 예정
+   
+## 10/3
+   - side menu color -> 수정 1.0.1
+   - ipad layout 수정 -> 1.0.3
