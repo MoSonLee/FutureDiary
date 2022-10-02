@@ -249,8 +249,8 @@ final class HomeViewController: UIViewController {
         let menu = SideMenuNavigationController(rootViewController: SideMenuViewController())
         menu.leftSide = true
         menu.isNavigationBarHidden = true
-        menu.blurEffectStyle = .systemMaterial
         menu.presentationStyle = .viewSlideOutMenuIn
+        menu.presentationStyle.backgroundColor = CustomColor.shared.sideMenuColor
         present(menu, animated: true, completion: nil)
     }
 }
