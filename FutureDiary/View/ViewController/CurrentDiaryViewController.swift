@@ -69,10 +69,11 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
     }
     
     private func keybordFunction() {
+        setUpTextFieldAndView()
         currentTitleTextField.becomeFirstResponder()
         self.hideKeyboardWhenTappedAround()
         currentContentTextView.delegate = self
-        setUpTextFieldAndView()
+        currentTitleTextField.delegate = self
     }
     
     private func setConfigure() {
@@ -178,8 +179,6 @@ final class CurrentDiaryViewController: UIViewController, UITextViewDelegate {
                                          target: self, action: #selector(doneButtonTapped))
         toolbar.setItems([flexSpace, doneButton], animated: true)
         toolbar.sizeToFit()
-        
-        currentTitleTextField.inputAccessoryView = toolbar
         currentContentTextView.inputAccessoryView = toolbar
     }
     
@@ -193,3 +192,13 @@ extension CurrentDiaryViewController  {
         placeholderLabel.isHidden = !textView.text.isEmpty
     }
 }
+
+extension CurrentDiaryViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == currentTitleTextField {
+            currentContentTextView.becomeFirstResponder()
+        }
+        return true
+    }
+}
+

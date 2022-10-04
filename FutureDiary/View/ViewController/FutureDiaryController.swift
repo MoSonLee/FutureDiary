@@ -61,10 +61,11 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
     }
     
     private func keybordFunction() {
+        setUpTextFieldAndView()
         futureTitleTextField.becomeFirstResponder()
         self.hideKeyboardWhenTappedAround()
         futureContentTextView.delegate = self
-        setUpTextFieldAndView()
+        futureTitleTextField.delegate = self
     }
     
     private func setConfigure() {
@@ -106,7 +107,7 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
             datePicker.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
         ])
     }
-
+    
     private func setNavigation() {
         saveButton.title = "complete".localized
         self.navigationItem.title = "future_title".localized
@@ -143,7 +144,6 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
                                          target: self, action: #selector(doneButtonTapped))
         toolbar.setItems([flexSpace, doneButton], animated: true)
         toolbar.sizeToFit()
-        futureTitleTextField.inputAccessoryView = toolbar
         futureContentTextView.inputAccessoryView = toolbar
     }
     
@@ -155,5 +155,14 @@ final class FutureDiaryController: UIViewController, UITextViewDelegate {
 extension FutureDiaryController  {
     func textViewDidChange(_ textView: UITextView) {
         placeholderLabel.isHidden = !textView.text.isEmpty
+    }
+}
+
+extension FutureDiaryController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == futureTitleTextField {
+            futureContentTextView.becomeFirstResponder()
+        }
+        return true
     }
 }
