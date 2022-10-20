@@ -8,9 +8,7 @@
 import UIKit
 import MessageUI
 
-import RealmSwift
 import Toast
-import Zip
 
 final class SettingViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
@@ -22,6 +20,8 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
                                "settingList_license".localized,
                                "settingList_copyright".localized,
                                "settingList_version".localized]
+    
+    private let viewModel = SettingViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,6 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
     }
     
     private func setConstraints() {
-        
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
@@ -89,7 +88,6 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
         @unknown default:
             return
         }
-        
         controller.dismiss(animated: true)
     }
     
@@ -104,11 +102,10 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
     }
     
     private func showActivityViewController() {
-        guard let path = documentDirectoryPath() else {
+        guard let path = viewModel.documentDirectoryPath() else {
             showAlert(title: "documentAlertError".localized)
             return
         }
-        
         let backUpFileURL = path.appendingPathComponent("Fury.zip")
         
         let vc = UIActivityViewController(activityItems: [backUpFileURL], applicationActivities: [])
@@ -121,29 +118,17 @@ final class SettingViewController: UIViewController, MFMailComposeViewController
     }
     
     private func backupButtonClicked() {
-        var urlPaths = [URL]()
-        guard let path = documentDirectoryPath() else {
-            showAlert(title: "documentAlertError".localized)
-            return
-        }
-        let realmFile = path.appendingPathComponent("default.realm")
-        guard FileManager.default.fileExists(atPath: realmFile.path) else {
-            showAlert(title: "cant_search_file".localized)
-            return
-        }
-        
-        urlPaths.append(URL(string: realmFile.path)!)
-        
-        do {
-            let _ = try Zip.quickZipFiles(urlPaths, fileName: "Fury")
-            showActivityViewController()
-        } catch {
-            showAlert(title: "fail_Uncompress".localized)
+        viewModel.showBackupAlertOrActivityVC { data in
+            guard let data = data else {
+                showActivityViewController()
+                return
+            }
+            showAlert(title: data)
         }
     }
     
     private func restoreButtonClicked() {
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.archive], asCopy:  true)
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.archive], asCopy: true)
         documentPicker.delegate = self
         documentPicker.allowsMultipleSelection = false
         self.present(documentPicker, animated: true)
@@ -202,7 +187,6 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
     }
     private func showRestoreCompleteAlert() {
         let alert =  UIAlertController(title: "restore_complete_alert".localized, message: nil, preferredStyle: .alert)
-        
         let ok = UIAlertAction(title: "okAlert_title".localized, style:.destructive, handler: { _ in
             exit(1)
         })
@@ -218,42 +202,13 @@ extension SettingViewController: UIDocumentPickerDelegate{
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let selectedFileURL = urls.first else {
-            showAlert(title: "cant_searchfile".localized)
-            return
-        }
-        
-        guard let path = documentDirectoryPath() else {
-            showAlert(title: "documentAlertError".localized)
-            return
-        }
-        
-        let sandboxFileURL = path.appendingPathComponent(selectedFileURL.lastPathComponent)
-        
-        if FileManager.default.fileExists(atPath: sandboxFileURL.path) {
-            let fileURL = path.appendingPathComponent("Fury.zip")
-            do {
-                try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { _ in
-                    
-                }, fileOutputHandler: { _ in
-                    self.showRestoreCompleteAlert()
-                })
-            } catch {
-                showAlert(title: "fail_restore".localized)
-            }
-        } else {
-            do {
-                try FileManager.default.copyItem(at: selectedFileURL, to: sandboxFileURL)
-                let fileURL = path.appendingPathComponent("Fury.zip")
-                
-                try Zip.unzipFile(fileURL, destination: path, overwrite: true, password: nil, progress: { _ in
-                }, fileOutputHandler: { _ in
-                    self.showRestoreCompleteAlert()
-                })
-                
-            } catch {
-                showAlert(title: "fail_restore".localized)
-            }
+        viewModel.showRestoreAlert(urls: urls) { [weak self] data in
+            self?.viewModel.showRestoreAlert(urls: urls, handler: { data in
+                guard let data = data else {
+                    self?.showRestoreCompleteAlert()
+                    return }
+                self?.showAlert(title: data)
+            })
         }
     }
 }

@@ -80,11 +80,6 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func documentDirectoryPath() -> URL? {
-        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return nil }
-        return documentDirectory
-    }
-    
     func setCustomFont(size: CGFloat) -> UIFont? {
         let font = UIFont(name: "NanumNaEuiANaeSonGeurSsi", size: size)
         return font
