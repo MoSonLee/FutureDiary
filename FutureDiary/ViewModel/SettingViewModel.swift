@@ -7,7 +7,6 @@
 
 import Foundation
 
-import RealmSwift
 import Zip
 
 class SettingViewModel {
@@ -76,4 +75,3 @@ class SettingViewModel {
         return documentDirectory
     }
 }
-

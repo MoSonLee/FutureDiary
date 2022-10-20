@@ -7,12 +7,11 @@
 
 import UIKit
 
-import RealmSwift
 import SideMenu
 
 final class HomeViewController: UIViewController {
     
-    private let repository = RealmRepository()
+    private let viewModel = HomeViewModel()
     private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout.init())
     private let writeDiaryButton = UIButton()
     private let calendarView = UIView()
@@ -20,13 +19,7 @@ final class HomeViewController: UIViewController {
     private let dateLabel = UILabel()
     private var isChecked: Bool = false
     private let notificationCenter = UNUserNotificationCenter.current()
-    private var diarys: Results<Diary>! {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
     
-    private var futureDiary: Results<Diary>!
     private var futureDiaryTime: [Date] = []
     
     override func viewWillAppear(_ animated: Bool) {
@@ -83,12 +76,12 @@ final class HomeViewController: UIViewController {
     
     func fetchRealm() {
         if datePicker.date < Date().toStartOfDay {
-            diarys = repository.dateFilteredFetch(todayStartTime: datePicker.date.toStartOfDay, currentDate: datePicker.date.toEndOfDay)
+            viewModel.diarys = viewModel.repository.dateFilteredFetch(todayStartTime: datePicker.date.toStartOfDay, currentDate: datePicker.date.toEndOfDay)
         } else {
-            diarys = repository.dateFilteredFetch(todayStartTime: datePicker.date.toStartOfDay, currentDate: Date())
+            viewModel.diarys = viewModel.repository.dateFilteredFetch(todayStartTime: datePicker.date.toStartOfDay, currentDate: Date())
         }
-        futureDiary = repository.filterFuture(date: Date())
-        futureDiary.forEach {
+        viewModel.futureDiary = viewModel.repository.filterFuture(date: Date())
+        viewModel.futureDiary.forEach {
             futureDiaryTime.append($0.diaryDate)
         }
         collectionView.reloadData()
@@ -177,9 +170,9 @@ final class HomeViewController: UIViewController {
     
     private func moveToEditDiary(indexPath: IndexPath) {
         let vc = CurrentDiaryViewController()
-        vc.currentTitleTextField.text = diarys[indexPath.row].diaryTitle
-        vc.currentContentTextView.text = diarys[indexPath.row].diaryContent
-        vc.viewModel.diaryTask = diarys[indexPath.row]
+        vc.currentTitleTextField.text = viewModel.diarys[indexPath.row].diaryTitle
+        vc.currentContentTextView.text = viewModel.diarys[indexPath.row].diaryContent
+        vc.viewModel.diaryTask = viewModel.diarys[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -258,7 +251,7 @@ final class HomeViewController: UIViewController {
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        diarys.count
+        viewModel.getDiaryCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -267,7 +260,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifider, for: indexPath) as? HomeCollectionViewCell else { return UICollectionViewCell()}
-        cell.configureHomeCollectionViewCell(diarys: diarys, indexPath: indexPath)
+        cell.configureHomeCollectionViewCell(diarys: viewModel.diarys, indexPath: indexPath)
         return cell
     }
     

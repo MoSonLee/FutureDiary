@@ -43,6 +43,7 @@
 		779DA61C28CA62BC00561000 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 779DA61B28CA62BC00561000 /* Assets.xcassets */; };
 		779DA61F28CA62BC00561000 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 779DA61D28CA62BC00561000 /* LaunchScreen.storyboard */; };
 		77BE65C029018A0000E2AE87 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BE65BF29018A0000E2AE87 /* SettingViewModel.swift */; };
+		77BE65C229019F4200E2AE87 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BE65C129019F4200E2AE87 /* HomeViewModel.swift */; };
 		77FFCD1628E07B9B00E25C0B /* SideMenu in Frameworks */ = {isa = PBXBuildFile; productRef = 77FFCD1528E07B9B00E25C0B /* SideMenu */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		779DA61B28CA62BC00561000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		779DA62028CA62BC00561000 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		77BE65BF29018A0000E2AE87 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		77BE65C129019F4200E2AE87 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +135,6 @@
 				776DF96928CF980400809EA2 /* SearchViewController.swift */,
 				776DF96728CF95B000809EA2 /* CollectionViewController.swift */,
 				770DF6E028CA68FB00349D55 /* SettingViewController.swift */,
-				77BE65BF29018A0000E2AE87 /* SettingViewModel.swift */,
 				77260C9A28D6228E007453E7 /* LicenseViewController.swift */,
 				7766CF1928D8DCF900F89B11 /* CopyrightViewViewController.swift */,
 				770DF6E828CA6BC600349D55 /* Resuable */,
@@ -223,8 +224,10 @@
 		779DA62928CA633100561000 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				77BE65C129019F4200E2AE87 /* HomeViewModel.swift */,
 				770DF6E228CA6A1900349D55 /* CurrentDiaryViewModel.swift */,
 				770DF6E428CA6A2700349D55 /* FutureDiaryViewModel.swift */,
+				77BE65BF29018A0000E2AE87 /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				776DF96828CF95B000809EA2 /* CollectionViewController.swift in Sources */,
 				773A6E3D28CC74D500452D68 /* UIView+Extension.swift in Sources */,
 				779DA61728CA62BB00561000 /* HomeViewController.swift in Sources */,
+				77BE65C229019F4200E2AE87 /* HomeViewModel.swift in Sources */,
 				770DF6DF28CA68BE00349D55 /* FutureDiaryController.swift in Sources */,
 				776DF96A28CF980400809EA2 /* SearchViewController.swift in Sources */,
 				77260C9428D5F199007453E7 /* ReusableTableViewCell.swift in Sources */,
