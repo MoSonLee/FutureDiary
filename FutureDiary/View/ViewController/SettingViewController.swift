@@ -206,7 +206,8 @@ extension SettingViewController: UIDocumentPickerDelegate{
             self?.viewModel.showRestoreAlert(urls: urls, handler: { data in
                 guard let data = data else {
                     self?.showRestoreCompleteAlert()
-                    return }
+                    return
+                }
                 self?.showAlert(title: data)
             })
         }
