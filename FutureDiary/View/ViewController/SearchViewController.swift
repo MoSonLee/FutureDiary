@@ -12,7 +12,6 @@ import Toast
 
 final class SearchViewController: UIViewController {
     
-    private var datePickerView = UIPickerView()
     private var diaryAllTask: Results<Diary>!
     private var diaryTask: Results<Diary>!
     private lazy var searchedDiary = Array(diaryTask)
