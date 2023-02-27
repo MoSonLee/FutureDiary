@@ -154,7 +154,7 @@ extension SettingViewController: UITableViewDelegate, UITableViewDataSource {
         cell.settingTextLabel.textColor = CustomColor.shared.blackAndWhite
         
         if indexPath.row == 6 {
-            cell.textLabel?.text = "1.0.0"
+            cell.textLabel?.text = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0.0"
             cell.textLabel?.textAlignment = .right
         }
         return cell

@@ -266,7 +266,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: nil) {  _ in
+        coordinator.animate(alongsideTransition: nil) { _ in
             self.collectionView.collectionViewLayout = self.setHomeCollectionViewLayout()
         }
     }
