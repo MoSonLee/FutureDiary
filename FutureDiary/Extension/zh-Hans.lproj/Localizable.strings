@@ -1,0 +1,90 @@
+/* 
+  Localizable.strings
+  FutureDiary
+
+  Created by 이승후 on 2022/09/21.
+  
+*/
+
+"Home_navigation_title" = "未来日记";
+
+"notification_title" = "日记来了！";
+
+"notification_body" = "查一下过去的来信";
+
+"writebutton_alertTitle" = "请选择你想写的日记类型";
+
+"current_title" = "今日";
+
+"future_title" = "未来";
+
+"cancel_title" = "取消";
+
+"moveToDiaryCollectionButton_title" = "所有储存器";
+
+"storage" = "保管箱";
+
+"moveToSearchDiaryButton_title" = "搜寻";
+
+"moveToSettingButton_title" = "设定";
+
+"placeholderLabel_text" = "请输入内容";
+
+"title_placeholderLabel_text" = "请输入标题";
+
+"complete" = "完成";
+
+
+"deleteAlert_title" = "你确定要删除它吗？";
+
+"deleteAlert_message" = "如果你删除了它，你就无法恢复它！";
+
+"okAlert_title" = "确认";
+
+"doneButton_title" = "好了";
+
+"settingList_backup" = "支援";
+
+"settingList_restore" = "还原";
+
+"settingList_contact" = "联系开发人员";
+
+"settingList_review" = "创建评论";
+
+"settingList_license" = "开放式许可证";
+
+"settingList_copyright" = "版权";
+
+"settingList_version" = "版本";
+
+"Question" = "问题";
+
+"register_mail" = "请登记你的邮件。";
+
+"mail_cancel" = "取消";
+
+"mail_store" = "已保存";
+
+"mail_send" = "发送";
+
+"mail_error" = "发送失败。 请再试一次";
+
+"documentAlertError" = "文档位置有错误。";
+
+"backupFile_name" = "Fury.zip";
+
+"cant_search_file" = "找不到选定的文件。";
+
+"restore_complete_alert" = "复原完毕 请重新启动应用程序！";
+
+"fail_Uncompress" = "解压缩失败";
+
+"fail_restore" = "解压缩失败";
+
+"error_occured_try_again" = "发生了错误。 请再试一次";
+
+"send_to_future" = "被派往未来！";
+
+"collection_toast_head" = "预计寄来的信是 %1d 就是这些";
+
+"show_future_alert" = "请选择未来的时间！";

@@ -1,0 +1,89 @@
+/* 
+  Localizable.strings
+  FutureDiary
+
+  Created by 이승후 on 2022/09/21.
+  
+*/
+
+"Home_navigation_title" = "FURY";
+
+"notification_title" = "The diary has arrived!";
+
+"notification_body" = "Check out the letters from the past";
+
+"writebutton_alertTitle" = "Please choose the type of diary you want to write";
+
+"current_title" = "Today";
+
+"future_title" = "Future";
+
+"cancel_title" = "Cancel";
+
+"moveToDiaryCollectionButton_title" = "All Storage";
+
+"storage" = "Storage";
+
+"moveToSearchDiaryButton_title" = "Search";
+
+"moveToSettingButton_title" = "Setting";
+
+"placeholderLabel_text" = "Please enter the content";
+
+"title_placeholderLabel_text" = "Please enter a title";
+
+"complete" = "Complete";
+
+"deleteAlert_title" = "Are you sure you want to delete it?";
+
+"deleteAlert_message" = "If you delete it, you can't recover it!";
+
+"okAlert_title" = "Confirm";
+
+"doneButton_title" = "Done";
+
+"settingList_backup" = "Backup";
+
+"settingList_restore" = "Restore";
+
+"settingList_contact" = "Contact Developer";
+
+"settingList_review" = "Create a Review";
+
+"settingList_license" = "Open License";
+
+"settingList_copyright" = "Copyright";
+
+"settingList_version" = "Version";
+
+"Question" = "Question";
+
+"register_mail" = "Please register your mail";
+
+"mail_cancel" = "Canceled";
+
+"mail_store" = "Saved";
+
+"mail_send" = "Sent";
+
+"mail_error" = "Send failed. Please try again";
+
+"documentAlertError" = "There is an error in the document location.";
+
+"backupFile_name" = "Fury.zip";
+
+"cant_search_file" = "The selected file could not be found.";
+
+"restore_complete_alert" = "Restore completed. Please restart the app!";
+
+"fail_Uncompress" = "Uncompress failed";
+
+"fail_restore" = "Decompression failed";
+
+"error_occured_try_again" = "An error has occurred. Please try again";
+
+"send_to_future" = "Sent to the future!";
+
+"collection_toast_head" = "The letter that is expected to arrive is %1d";
+
+"show_future_alert" = "Please choose the future time!";

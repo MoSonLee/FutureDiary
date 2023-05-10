@@ -1,0 +1,90 @@
+/* 
+  Localizable.strings
+  FutureDiary
+
+  Created by 이승후 on 2022/09/21.
+  
+*/
+
+"Home_navigation_title" = "未来日記";
+
+"notification_title" = "日記が届きました！";
+
+"notification_body" = "過去の手紙をチェックする";
+
+"writebutton_alertTitle" = "書きたい日記の種類を選択してください";
+
+"current_title" = "今日";
+
+"future_title" = "フューチャー";
+
+"cancel_title" = "キャンセル";
+
+"moveToDiaryCollectionButton_title" = "保管箱";
+
+"moveToSearchDiaryButton_title" = "検索";
+
+"storage" = "保管箱";
+
+"moveToSettingButton_title" = "設定";
+
+"placeholderLabel_text" = "内容を入力してください";
+
+"title_placeholderLabel_text" = "タイトルを入力してください";
+
+"complete" = "完了";
+
+
+"deleteAlert_title" = "削除してもよろしいですか?";
+
+"deleteAlert_message" = "削除すると復旧できません!";
+
+"okAlert_title" = "確認する";
+
+"doneButton_title" = "完了";
+
+"settingList_backup" = "バックアップ";
+
+"settingList_restore" = "復元";
+
+"settingList_contact" = "開発者へのお問い合わせ";
+
+"settingList_review" = "レビューの作成";
+
+"settingList_license" = "オープンライセンス";
+
+"settingList_copyright" = "著作権";
+
+"settingList_version" = "バージョン";
+
+"Question" = "お問い合わせ";
+
+"register_mail" = "メールを登録してください";
+
+"mail_cancel" = "キャンセル済み";
+
+"mail_store" = "保存済み";
+
+"mail_send" = "送信済み";
+
+"mail_error" = "送信に失敗しました。 もう一度お試しください";
+
+"documentAlertError" = "文書の場所にエラーがあります。";
+
+"backupFile_name" = "Fury.zip";
+
+"cant_search_file" = "選択したファイルを見つけることができません。";
+
+"restore_complete_alert" = "復元が完了しました。アプリを再始動してください！";
+
+"fail_Uncompress" = "解凍に失敗しました";
+
+"fail_restore" = "圧縮解除に失敗しました";
+
+"error_occured_try_again" = "エラーが発生しました。 もう一度お試しください";
+
+"send_to_future" = "未来へ！";
+
+"collection_toast_head" = "届く予定の手紙は %1d 本数となります。";
+
+"show_future_alert" = "今後の時間をお選びください!";
