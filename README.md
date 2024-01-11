@@ -1,8 +1,6 @@
 # FutureDiary
 </br>
 
-[프로젝트 회고 및 사용 기술 스택 정리](https://s2ung.tistory.com/34)</br>
-
 ## 9/13 
    - 완료된 기능
       - 미래일기, 현재 일기 realm filter로 구분해 현재 시간에 맞는 것만 표시해주기
